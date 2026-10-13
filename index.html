@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Bee — Доставка подгузников и эко-товаров в г. Шемонаиха</title>
+  <meta name="description" content="Интернет-витрина подгузников и детских товаров Baby Bee в г. Шемонаиха. Трусики «Мама знает», Baybee, Baby Shark, Softcare, эко-гели для стирки. Быстрая доставка до двери!">
+  
+  <!-- Favicon / Logo -->
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+  
+  <!-- Google Fonts: Montserrat + Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar__content">
+      <div class="top-bar__tag">
+        <span class="pulse-dot"></span>
+        <span>г. Шемонаиха • Экспресс-доставка до двери в день заказа</span>
+      </div>
+      <div class="top-bar__links">
+        <a href="https://instagram.com/baby_bee_shemonaikha" target="_blank" rel="noopener" class="top-bar__link">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <span>@baby_bee_shemonaikha</span>
+        </a>
+        <a href="tel:+77779805639" class="top-bar__link">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>+7 (777) 980-56-39</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <div class="container header__container">
+      <a href="#" class="brand-logo">
+        <img src="images/logo.jpg" alt="Baby Bee Шемонаиха" class="brand-logo__img">
+        <div class="brand-logo__text">
+          <span class="brand-logo__title">Baby Bee 🐝</span>
+          <span class="brand-logo__sub">Шемонаиха • Подгузники & Эко-дом</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="#catalog" class="nav__link active">Каталог</a>
+        <a href="#advantages" class="nav__link">Преимущества</a>
+        <a href="#delivery" class="nav__link">Доставка и оплата</a>
+        <a href="#faq" class="nav__link">Вопросы</a>
+      </nav>
+
+      <div class="header__actions">
+        <a href="https://wa.me/77779805639?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B4%D0%B3%D1%83%D0%B7%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC%20%F0%9F%90%9D" target="_blank" rel="noopener" class="btn btn--whatsapp-outline">
+          <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
+          <span>Консультация</span>
+        </a>
+        
+        <button id="cartBtn" class="cart-trigger-btn" aria-label="Открыть корзину">
+          <svg class="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-trigger-btn__text">Корзина</span>
+          <span id="cartCountBadge" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="container hero__container">
+      <div class="hero__content">
+        <div class="hero__pill">
+          <span class="hero__pill-emoji">🐝</span>
+          <span>Официальная продукция в г. Шемонаиха</span>
+        </div>
+        <h1 class="hero__title">
+          Сухие ночи и счастливые малыши с <span class="gradient-text">Baby Bee</span>
+        </h1>
+        <p class="hero__desc">
+          Трусики-подгузники японского качества «Мама знает», Baybee, Baby Shark и Softcare, а также гипоаллергенная эко-химия для чистоты вашего дома. Доставим прямо до двери в Шемонаихе!
+        </p>
+
+        <div class="hero__actions">
+          <a href="#catalog" class="btn btn--primary">
+            <span>Выбрать подгузники</span>
+            <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="https://wa.me/77779805639?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%80%20%D0%BF%D0%BE%D0%B4%D0%B3%D1%83%D0%B7%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D0%B2%D0%B5%D1%81%D1%83%20%D0%BC%D0%B0%D0%BB%D1%8B%D1%88%D0%B0%20%F0%9F%91%B6" target="_blank" rel="noopener" class="btn btn--secondary">
+            <span>Подобрать размер</span>
+          </a>
+        </div>
+
+        <!-- Quick Stats / Highlights -->
+        <div class="hero__stats">
+          <div class="stat-card">
+            <span class="stat-card__number">12 ч</span>
+            <span class="stat-card__label">Сухости и защиты</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">0+</span>
+            <span class="stat-card__label">Гипоаллергенно</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">1 день</span>
+            <span class="stat-card__label">Доставка по городу</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">Kaspi</span>
+            <span class="stat-card__label">QR / При получении</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__media">
+        <div class="hero-card-preview">
+          <div class="hero-badge">Хит продаж в Шемонаихе ⭐</div>
+          <img src="images/products/mama_znaet_pants.webp" alt="Мама знает трусики" class="hero-card-preview__img">
+          <div class="hero-card-preview__caption">
+            <div class="hero-card-preview__name">Мама знает — Трусики</div>
+            <div class="hero-card-preview__price">6 800 ₸</div>
+          </div>
+          <div class="hero-floating-badge hero-floating-badge--1">
+            <span class="emoji">🚚</span>
+            <div>
+              <strong>До двери</strong>
+              <small>в Шемонаихе</small>
+            </div>
+          </div>
+          <div class="hero-floating-badge hero-floating-badge--2">
+            <span class="emoji">🌿</span>
+            <div>
+              <strong>Японский гель</strong>
+              <small>Без опрелостей</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages Section -->
+  <section id="advantages" class="advantages-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Почему мамы Шемонаихи выбирают нас?</h2>
+        <p class="section-subtitle">Забота о нежной коже малыша и комфорт родителей без лишних переплат</p>
+      </div>
+
+      <div class="advantages-grid">
+        <div class="adv-card">
+          <div class="adv-card__icon adv-card__icon--yellow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <h3 class="adv-card__title">Доставка прямо до квартиры</h3>
+          <p class="adv-card__text">Не нужно тащить тяжелые пачки подгузников и бутыли гелей с коляской на руках. Привезем аккуратно и вовремя.</p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-card__icon adv-card__icon--blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h3 class="adv-card__title">100% Оригинальное качество</h3>
+          <p class="adv-card__text">Прямые поставки от официальных дистрибьюторов брендов «Мама знает», Baybee, Baby Shark и Softcare.</p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-card__icon adv-card__icon--green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+          </div>
+          <h3 class="adv-card__title">Сухость до 12 часов</h3>
+          <p class="adv-card__text">Дышащие микропоры и суперабсорбент сохраняют кожу сухой всю ночь, предотвращая раздражения и опрелости.</p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-card__icon adv-card__icon--purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          </div>
+          <h3 class="adv-card__title">Удобная оплата Kaspi</h3>
+          <p class="adv-card__text">Оплачивайте удобным для вас способом: Kaspi QR, Kaspi Gold, Halyk или наличными курьеру при проверке заказа.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <section id="catalog" class="catalog-section">
+    <div class="container">
+      <div class="catalog-head">
+        <div>
+          <h2 class="section-title">Каталог товаров</h2>
+          <p class="section-subtitle">В наличии на складе в г. Шемонаиха — выберите товар и размер</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="catalog-search">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" placeholder="Поиск по названию или бренду..." aria-label="Поиск товаров">
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-categories">
+        <button class="filter-btn active" data-category="all">
+          <span>✨ Все товары</span>
+          <span class="filter-count" id="countAll">14</span>
+        </button>
+        <button class="filter-btn" data-category="diapers">
+          <span>👶 Подгузники и трусики</span>
+          <span class="filter-count" id="countDiapers">4</span>
+        </button>
+        <button class="filter-btn" data-category="care">
+          <span>🌿 Эко-бытовая химия</span>
+          <span class="filter-count" id="countCare">7</span>
+        </button>
+        <button class="filter-btn" data-category="wipes">
+          <span>🧻 Влажные салфетки</span>
+          <span class="filter-count" id="countWipes">3</span>
+        </button>
+      </div>
+
+      <!-- Brand Filter Tabs -->
+      <div class="filter-brands">
+        <span class="brand-label">Бренд:</span>
+        <button class="brand-pill active" data-brand="all">Все бренды</button>
+        <button class="brand-pill" data-brand="Мама знает">Мама знает</button>
+        <button class="brand-pill" data-brand="Baybee">Baybee</button>
+        <button class="brand-pill" data-brand="Baby Shark">Baby Shark</button>
+        <button class="brand-pill" data-brand="Softcare">Softcare</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="products-grid">
+        <!-- Rendered dynamically via app.js -->
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Загрузка каталога товаров...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery & Payment Section -->
+  <section id="delivery" class="delivery-section">
+    <div class="container">
+      <div class="delivery-card">
+        <div class="delivery-card__col">
+          <div class="badge-sub">Прозрачные условия</div>
+          <h2 class="delivery-title">Как получить и оплатить заказ?</h2>
+          <p class="delivery-text">Мы ценим время мам, поэтому сделали процесс заказа максимально простым и быстрым — буквально в пару кликов.</p>
+
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-item__num">1</div>
+              <div class="step-item__info">
+                <h4>Выберите товары в каталоге</h4>
+                <p>Добавьте нужные размеры подгузников или эко-средства в корзину.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-item__num">2</div>
+              <div class="step-item__info">
+                <h4>Оформите в 1 клик через WhatsApp</h4>
+                <p>Корзина автоматически сформирует текст заявки с суммами и размерами.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-item__num">3</div>
+              <div class="step-item__info">
+                <h4>Быстрая доставка до вашей двери</h4>
+                <p>Курьер привезет заказ по г. Шемонаиха в удобное для вас время.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-item__num">4</div>
+              <div class="step-item__info">
+                <h4>Оплата при получении</h4>
+                <p>Kaspi QR, Kaspi Gold, Halyk перевод или наличными курьеру.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="delivery-card__col delivery-card__col--accent">
+          <div class="order-box">
+            <div class="order-box__header">
+              <span class="order-box__icon">🐝</span>
+              <div>
+                <h3>Быстрый контакт в Шемонаихе</h3>
+                <p>Отвечаем за 5-10 минут</p>
+              </div>
+            </div>
+
+            <div class="order-box__item">
+              <span class="label">Город:</span>
+              <span class="value">Шемонаиха (ВКО, Казахстан)</span>
+            </div>
+            <div class="order-box__item">
+              <span class="label">Телефон / WhatsApp:</span>
+              <a href="https://wa.me/77779805639" class="value link">+7 (777) 980-56-39</a>
+            </div>
+            <div class="order-box__item">
+              <span class="label">Instagram:</span>
+              <a href="https://instagram.com/baby_bee_shemonaikha" target="_blank" class="value link">@baby_bee_shemonaikha</a>
+            </div>
+            <div class="order-box__item">
+              <span class="label">Способы оплаты:</span>
+              <span class="value">Kaspi QR / Gold, Halyk, Наличные</span>
+            </div>
+
+            <a href="https://wa.me/77779805639?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D0%B8%D0%B7%20%D0%A8%D0%B5%D0%BC%D0%BE%D0%BD%D0%B0%D0%B8%D1%85%D0%B8%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%20%F0%9F%9B%92" target="_blank" rel="noopener" class="btn btn--whatsapp-solid">
+              <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
+              <span>Написать прямо в WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+        <p class="section-subtitle">Ответы на популярные вопросы мам о подгузниках и доставке</p>
+      </div>
+
+      <div class="faq-accordion">
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>Как правильно подобрать размер подгузников-трусиков?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Ориентируйтесь в первую очередь на реальный вес малыша и его телосложение. Если вес находится на верхней границе (например, 10.5 кг при диапазоне M 6–11 кг), рекомендуем брать размер с запасом — размер L (9–14 кг), чтобы поясок сидел свободно и не оставлял следов.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>Сколько стоит доставка по Шемонаихе и как быстро привозите?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Доставляем заказы в день оформления прямо до вашей квартиры или дома. Точные детали и время согласовываются индивидуально в WhatsApp для вашего максимального удобства.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>В чем отличие трусиков «Мама знает», «Baybee» и «Baby Shark»?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>«Мама знает»</strong> — флагманский казахстанско-японский бренд с высочайшей мягкостью и анатомическим кроем. <strong>«Baybee»</strong> — премиальная серия с шелковистым слоем для чувствительной кожи. <strong>«Baby Shark»</strong> — практичные, ультратонкие и яркие трусики на каждый день. Все три бренда используют премиальный японский абсорбент без хлора и отдушек.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            <span>Безопасна ли эко-химия для новорожденных?</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>Да! ЭКО-гель для стирки «Мама знает» имеет маркировку 0+ с первых дней жизни, изготовлен на основе мягких ПАВ на немецких компонентах, полностью выполаскивается из волокон ткани и гипоаллергенен.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__container">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <img src="images/logo.jpg" alt="Baby Bee Шемонаиха" class="footer__logo-img">
+          <div>
+            <div class="footer__brand-title">Baby Bee 🐝</div>
+            <div class="footer__brand-desc">Забота и комфорт для вашего малыша в г. Шемонаиха</div>
+          </div>
+        </div>
+        <p class="footer__copy">© 2026 Baby Bee Шемонаиха. Все права защищены. Доставка подгузников и эко-товаров.</p>
+      </div>
+
+      <div class="footer__links">
+        <h4>Контакты</h4>
+        <p>г. Шемонаиха, Восточно-Казахстанская область</p>
+        <p>Телефон: <a href="tel:+77779805639">+7 (777) 980-56-39</a></p>
+        <p>WhatsApp: <a href="https://wa.me/77779805639">+7 (777) 980-56-39</a></p>
+        <p>Instagram: <a href="https://instagram.com/baby_bee_shemonaikha" target="_blank">@baby_bee_shemonaikha</a></p>
+      </div>
+
+      <div class="footer__payment">
+        <h4>Оплата и сервис</h4>
+        <div class="payment-badges">
+          <span class="pay-badge">Kaspi QR</span>
+          <span class="pay-badge">Kaspi Gold</span>
+          <span class="pay-badge">Halyk</span>
+          <span class="pay-badge">Наличными</span>
+        </div>
+        <p class="footer__note">Доставка курьером до двери в день заказа</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-out Cart Drawer & Backdrop -->
+  <div id="cartBackdrop" class="cart-backdrop"></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Корзина покупок">
+    <div class="cart-drawer__header">
+      <div class="cart-drawer__title">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span>Ваш заказ</span>
+        <span id="drawerItemsCount" class="badge-count">0</span>
+      </div>
+      <button id="closeCartBtn" class="close-cart-btn" aria-label="Закрыть корзину">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!-- Cart Items List -->
+    <div id="cartItemsList" class="cart-drawer__items">
+      <!-- Empty state or items rendered via app.js -->
+    </div>
+
+    <!-- Cart Drawer Footer -->
+    <div class="cart-drawer__footer">
+      <!-- Order details input fields -->
+      <div class="checkout-inputs">
+        <div class="input-group">
+          <label for="orderName">Ваше имя:</label>
+          <input type="text" id="orderName" placeholder="Например: Алина" class="form-control">
+        </div>
+        <div class="input-group">
+          <label for="orderAddress">Адрес в Шемонаихе:</label>
+          <input type="text" id="orderAddress" placeholder="Улица, дом, квартира (или самовывоз)" class="form-control">
+        </div>
+        <div class="input-group">
+          <label for="orderPayment">Способ оплаты:</label>
+          <select id="orderPayment" class="form-control">
+            <option value="Kaspi QR / Kaspi Gold">Kaspi QR / Kaspi Gold</option>
+            <option value="Halyk Bank">Halyk Bank перевод</option>
+            <option value="Наличными курьеру">Наличными при получении</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cart-total-bar">
+        <span>Итого к оплате:</span>
+        <span id="cartTotalPrice" class="cart-total-price">0 ₸</span>
+      </div>
+
+      <button id="checkoutWhatsAppBtn" class="btn btn--whatsapp-checkout">
+        <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
+        <span>Отправить заказ в WhatsApp</span>
+      </button>
+
+      <p class="cart-disclaimer">Нажимая кнопку, вы перейдете в WhatsApp с готовым списком товаров для подтверждения</p>
+    </div>
+  </aside>
+
+  <!-- Floating Sticky Cart Button (Mobile & Desktop) -->
+  <button id="floatingCartBtn" class="floating-cart" aria-label="Открыть корзину">
+    <div class="floating-cart__badge" id="floatingBadge">0</div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+    <span class="floating-cart__label" id="floatingTotal">0 ₸</span>
+  </button>
+
+  <!-- JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
