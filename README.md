@@ -2,7 +2,7 @@
 
 Официальная интернет-витрина и каталог товаров для молодых мам в г. Шемонаиха (Восточно-Казахстанская область, Казахстан).
 
-🔗 **Сайт онлайн:** [https://minimalist-style.github.io/babybee-shemonaikha/](https://minimalist-style.github.io/babybee-shemonaikha/)  
+🔗 **Сайт онлайн:** [https://minimalist-style.github.io/baby/](https://minimalist-style.github.io/baby/)  
 📱 **Instagram:** [@baby_bee_shemonaikha](https://instagram.com/baby_bee_shemonaikha)  
 📲 **WhatsApp / Заказы:** `+7 (777) 980-56-39`  
 
