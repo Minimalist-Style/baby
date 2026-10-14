@@ -438,9 +438,13 @@ document.addEventListener('DOMContentLoaded', () => {
         text += `${index + 1}. *${item.name}*\n   [${item.spec}] × ${item.qty} шт = ${formatPrice(itemSum)}\n`;
       });
 
+      const silentDeliveryCheck = document.getElementById('silentDeliveryCheck');
+      const isSilent = silentDeliveryCheck ? silentDeliveryCheck.checked : true;
+
       text += `\n💰 *Итого к оплате:* ${formatPrice(total)}\n`;
       text += `📍 *Адрес доставки:* ${clientAddress}\n`;
       text += `💳 *Оплата:* ${paymentMethod}\n`;
+      text += `🤫 *Режим доставки:* ${isSilent ? 'Тихая доставка (не звонить в дверь, написать в WhatsApp)' : 'Обычная доставка'}\n`;
       text += `👤 *Имя:* ${clientName}\n\n`;
       text += `Пожалуйста, подтвердите наличие и время доставки! 🙏`;
 
@@ -809,31 +813,58 @@ document.addEventListener('DOMContentLoaded', () => {
     return { open: openCelebrationModal, close: closeCelebrationModal };
   }
 
-  // 11. Stitch Storefront: Smart Size Finder by Baby Weight
+  // 11. Stitch Storefront: Smart Size Finder by Baby Weight (Argon Matrix Enhanced)
   function initSmartSizeFinder() {
     const weightSlider = document.getElementById('weightSlider');
     const currentWeightVal = document.getElementById('currentWeightVal');
     const recSizeName = document.getElementById('recSizeName');
     const recSizeDesc = document.getElementById('recSizeDesc');
+    const recAccuracyBadge = document.getElementById('recAccuracyBadge');
+    const recSubnote = document.getElementById('recSubnote');
+    const chubbyBuildCheckbox = document.getElementById('chubbyBuildCheckbox');
     const applySizeFilterBtn = document.getElementById('applySizeFilterBtn');
     const pills = document.querySelectorAll('#weightPillsContainer .weight-pill');
 
     if (!weightSlider || !currentWeightVal) return;
 
-    const sizeTiers = [
-      { max: 5.0, sizeName: 'Размер 1 (NB / 3–5 кг)', desc: 'Идеально для новорожденных. Ультрамягкий слой с вырезом для пупочной ранки.' },
-      { max: 7.9, sizeName: 'Размер 2 (Mini / 4–8 кг)', desc: 'Для первых месяцев. Мгновенно впитывает жидкий стул и бережет кожу от опрелостей.' },
-      { max: 11.9, sizeName: 'Размер 3 (Midi / 6–11 кг)', desc: 'Оптимально на вес 6–11 кг. Мягкий анатомический поясок не сдавливает животик после еды.' },
-      { max: 14.9, sizeName: 'Размер 4 (Maxi / 9–14 кг)', desc: 'Свобода движений для активных ползунков. Двойные бортики надёжно защищают от боковых протеканий.' },
-      { max: 17.9, sizeName: 'Размер 5 (Junior / 12–18 кг)', desc: 'Повышенная вместимость для подросших малышей. До 12 часов сухого спокойного сна.' },
-      { max: 99.0, sizeName: 'Размер 6/7 (Extra / 15–25 кг)', desc: 'Максимальный комфорт для самых рослых малышей и приучения к горшку.' }
+    const BABYBEE_SIZE_MATRIX = [
+      { size: 'Размер 1 (NB / 2–5 кг)', min: 2.0, max: 5.0, borderStart: 4.3, nextSize: 'Размер 2 (Mini / 4–8 кг)' },
+      { size: 'Размер 2 (Mini / 4–8 кг)', min: 4.0, max: 8.0, borderStart: 6.8, nextSize: 'Размер 3 (Midi / 6–11 кг)' },
+      { size: 'Размер 3 (Midi / 6–11 кг)', min: 6.0, max: 11.0, borderStart: 9.5, nextSize: 'Размер 4 (Maxi / 9–14 кг)' },
+      { size: 'Размер 4 (Maxi / 9–14 кг)', min: 9.0, max: 14.0, borderStart: 12.5, nextSize: 'Размер 5 (Junior / 12–18 кг)' },
+      { size: 'Размер 5 (Junior / 12–18 кг)', min: 12.0, max: 18.0, borderStart: 15.5, nextSize: 'Размер 6/7 (Extra / 15–25 кг)' },
+      { size: 'Размер 6/7 (Extra / 15–25 кг)', min: 15.0, max: 30.0, borderStart: 25.0, nextSize: 'Размер 7 (XXXL)' }
     ];
 
     function updateRecommendation(weight) {
+      const isChubby = chubbyBuildCheckbox && chubbyBuildCheckbox.checked;
+      const effectiveWeight = isChubby ? weight + 0.8 : weight;
       currentWeightVal.textContent = weight.toFixed(1);
-      const tier = sizeTiers.find(t => weight <= t.max) || sizeTiers[sizeTiers.length - 1];
-      if (recSizeName) recSizeName.textContent = tier.sizeName;
-      if (recSizeDesc) recSizeDesc.textContent = tier.desc;
+
+      const match = BABYBEE_SIZE_MATRIX.find(s => effectiveWeight >= s.min && effectiveWeight <= s.max) 
+                    || BABYBEE_SIZE_MATRIX[BABYBEE_SIZE_MATRIX.length - 1];
+      
+      const isBorderline = effectiveWeight >= match.borderStart;
+      const recommended = isBorderline ? match.nextSize : match.size;
+
+      if (recSizeName) recSizeName.textContent = recommended;
+
+      if (recAccuracyBadge) {
+        recAccuracyBadge.textContent = isBorderline ? 'Советуем на вырост' : '99% точность посадки';
+        recAccuracyBadge.style.background = isBorderline ? '#D97706' : '#16A34A';
+      }
+
+      if (recSizeDesc) {
+        if (isBorderline) {
+          recSizeDesc.textContent = `Малыш близко к границе размера (${weight.toFixed(1)} кг${isChubby ? ' + плотное телосложение' : ''}). Рекомендуем ${match.nextSize}, чтобы эластичный поясок не сдавливал животик и пачки хватило на дольше.`;
+        } else {
+          recSizeDesc.textContent = `Идеальная анатомическая посадка для веса ${weight.toFixed(1)} кг. Шелковистый дышащий слой и японский гель защищают до 12 часов без опрелостей.`;
+        }
+      }
+
+      if (recSubnote) {
+        recSubnote.textContent = '🛡️ Если пачка не подойдёт — бесплатно обменяем закрытую упаковку прямо у вашей двери в Шемонаихе.';
+      }
 
       // Update active pill
       pills.forEach(pill => {
@@ -847,9 +878,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     weightSlider.addEventListener('input', (e) => {
-      const val = parseFloat(e.target.value);
-      updateRecommendation(val);
+      updateRecommendation(parseFloat(e.target.value));
     });
+
+    if (chubbyBuildCheckbox) {
+      chubbyBuildCheckbox.addEventListener('change', () => {
+        updateRecommendation(parseFloat(weightSlider.value));
+      });
+    }
 
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
@@ -861,7 +897,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (applySizeFilterBtn) {
       applySizeFilterBtn.addEventListener('click', () => {
-        // Switch category to diapers
         state.category = 'diapers';
         filterBtns.forEach(btn => {
           if (btn.getAttribute('data-category') === 'diapers') {
@@ -872,7 +907,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         renderProducts();
 
-        // Scroll to catalog smoothly
         const catalogEl = document.getElementById('catalog');
         if (catalogEl) {
           catalogEl.scrollIntoView({ behavior: 'smooth' });

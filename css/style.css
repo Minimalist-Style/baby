@@ -2939,3 +2939,143 @@ button {
     font-size: 13px;
   }
 }
+
+/* 4. Chubby Build Toggle & Subnote */
+.build-toggle-wrap {
+  margin-bottom: 20px;
+}
+
+.build-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FEF3C7;
+  border: 1.5px dashed #F59E0B;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.build-toggle-label:hover {
+  background: #FDE68A;
+}
+
+.build-toggle-input {
+  width: 20px;
+  height: 20px;
+  accent-color: #D97706;
+  cursor: pointer;
+}
+
+.build-toggle-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.build-toggle-text strong {
+  font-size: 14px;
+  color: #92400E;
+}
+
+.build-toggle-text small {
+  font-size: 12px;
+  color: #B45309;
+}
+
+.size-recommendation__subnote {
+  margin-top: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #15803D;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+/* 5. Local Trust Triggers Grid (Argon Strategy) */
+.trust-triggers-local {
+  padding: 10px 0 35px;
+}
+
+.trust-triggers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.trust-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.03);
+  transition: all 0.25s ease;
+}
+
+.trust-card:hover {
+  transform: translateY(-2px);
+  border-color: #F5B738;
+  box-shadow: 0 8px 20px rgba(245, 183, 56, 0.12);
+}
+
+.trust-icon {
+  font-size: 26px;
+  line-height: 1;
+  background: #FEF3C7;
+  padding: 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.trust-content strong {
+  display: block;
+  font-family: var(--font-plus-jakarta);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--nordic-slate);
+  margin-bottom: 4px;
+}
+
+.trust-content p {
+  font-size: 12.5px;
+  color: var(--ink-500);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.combo-card__badge--eco {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
+}
+
+/* 6. Silent Delivery Checkbox in Cart */
+.silent-delivery-group {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+}
+
+.checkbox-silent-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.checkbox-silent-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #10B981;
+  cursor: pointer;
+}
+

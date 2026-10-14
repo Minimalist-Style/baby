@@ -231,16 +231,31 @@
           <button type="button" class="weight-pill" data-weight="18">15+ кг (Extra / 6)</button>
         </div>
 
+        <!-- Chubby Build / Extra Comfort Toggle -->
+        <div class="build-toggle-wrap">
+          <label class="build-toggle-label" for="chubbyBuildCheckbox">
+            <input type="checkbox" id="chubbyBuildCheckbox" class="build-toggle-input">
+            <span class="build-toggle-custom"></span>
+            <span class="build-toggle-text">
+              <strong>👶 Пухленькие ножки / животик (+1 к комфорту)</strong>
+              <small>Рекомендуем взять с запасом, чтобы резиночки гарантированно не сдавливали</small>
+            </span>
+          </label>
+        </div>
+
         <!-- Live Recommendation Box -->
         <div class="size-recommendation" id="sizeRecommendationBox">
           <div class="size-recommendation__icon">✨</div>
           <div class="size-recommendation__content">
             <div class="size-recommendation__headline">
               Рекомендуем: <span class="highlight-size" id="recSizeName">Размер M (3)</span>
-              <span class="accuracy-badge">99% точность посадки</span>
+              <span class="accuracy-badge" id="recAccuracyBadge">99% точность посадки</span>
             </div>
             <div class="size-recommendation__text" id="recSizeDesc">
               Оптимально на вес 6–11 кг. Мягкий анатомический поясок не сдавливает животик после кормления и надежно держит влагу.
+            </div>
+            <div class="size-recommendation__subnote" id="recSubnote">
+              🛡️ Если пачка не подойдёт — бесплатно обменяем закрытую упаковку прямо у вашей двери в Шемонаихе.
             </div>
           </div>
           <button type="button" id="applySizeFilterBtn" class="btn btn--apply-size">
@@ -252,39 +267,68 @@
     </div>
   </section>
 
+  <!-- Local Trust Triggers (Гарантии сервиса BabyBee в Шемонаихе) -->
+  <section class="trust-triggers-local" aria-label="Гарантии сервиса BabyBee в Шемонаихе">
+    <div class="container">
+      <div class="trust-triggers-grid">
+        <div class="trust-card">
+          <span class="trust-icon">🤫</span>
+          <div class="trust-content">
+            <strong>Тихая доставка за 40 минут до двери</strong>
+            <p>Склад прямо в Шемонаихе. Курьер не звонит в домофон и звонок, если малыш спит — просто напишет в WhatsApp у двери.</p>
+          </div>
+        </div>
+        <div class="trust-card">
+          <span class="trust-icon">🔄</span>
+          <div class="trust-content">
+            <strong>Гарантия обмена размера</strong>
+            <p>Малыш резко подрос? Бесплатно обменяем закрытую пачку на размер больше прямо при следующем визите курьера.</p>
+          </div>
+        </div>
+        <div class="trust-card">
+          <span class="trust-icon">💳</span>
+          <div class="trust-content">
+            <strong>Оплата через Kaspi QR при получении</strong>
+            <p>Никаких предоплат на незнакомых сайтах — проверяете заказ у двери и оплачиваете привычным Kaspi QR или наличными.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Value Combos Section (Boutique Bundles) -->
   <section id="combos" class="combos-section">
     <div class="container">
       <div class="section-header">
         <div class="combos-pill">
-          <span>🎁 Максимальная выгода</span>
+          <span>🎁 Максимальная выгода для семьи</span>
         </div>
         <h2 class="section-title">Выгодные комбо-наборы с бесплатной доставкой</h2>
-        <p class="section-subtitle">Готовые комплекты для комфорта малыша и спокойствия мамы — экономия до 15%</p>
+        <p class="section-subtitle">Готовые комплекты для комфорта малыша и экономии семейного бюджета в Шемонаихе</p>
       </div>
 
       <div class="combos-grid">
         <!-- Combo 1 -->
         <div class="combo-card">
-          <div class="combo-card__badge combo-card__badge--savings">-15% выгода</div>
+          <div class="combo-card__badge combo-card__badge--savings">Выбор 7 из 10 мам ⭐</div>
           <div class="combo-card__image-wrap">
-            <img src="images/products/mama_znaet_pants.webp" alt="Набор Спокойная ночь" class="combo-card__img">
-            <span class="combo-card__sticker">🌙 12 часов сухости</span>
+            <img src="images/products/mama_znaet_pants.webp" alt="Набор Спокойный месяц" class="combo-card__img">
+            <span class="combo-card__sticker">📦 Запас на 3–4 недели</span>
           </div>
           <div class="combo-card__body">
-            <div class="combo-card__tag">Хит для крепкого сна</div>
-            <h3 class="combo-card__title">Набор «Спокойная ночь»</h3>
+            <div class="combo-card__tag">Хит продаж • Якорь экономии</div>
+            <h3 class="combo-card__title">Комбо «Спокойный месяц»</h3>
             <p class="combo-card__items">
-              • 1 пачка трусиков «Мама знает» (выберите размер)<br>
-              • 1 пачка ночных дышащих трусиков Baybee<br>
-              • 3 упаковки мягких салфеток с ромашкой
+              • 2 большие пачки трусиков «Мама знает» (выберите размер)<br>
+              • 3 пачки влажных салфеток с крышкой (в подарок)<br>
+              • Бесплатная экспресс-доставка до двери за 40 мин
             </p>
             <div class="combo-card__pricing">
               <div>
-                <span class="combo-old-price">16 000 ₸</span>
-                <span class="combo-price">13 600 ₸</span>
+                <span class="combo-old-price">17 500 ₸</span>
+                <span class="combo-price">15 200 ₸</span>
               </div>
-              <button type="button" class="btn btn--add-combo" data-combo-id="combo_night" data-combo-name="Набор «Спокойная ночь»" data-combo-price="13600" data-combo-img="images/products/mama_znaet_pants.webp">
+              <button type="button" class="btn btn--add-combo" data-combo-id="combo_month" data-combo-name="Комбо «Спокойный месяц»" data-combo-price="15200" data-combo-img="images/products/mama_znaet_pants.webp">
                 <span>+ В корзину</span>
               </button>
             </div>
@@ -293,25 +337,52 @@
 
         <!-- Combo 2 -->
         <div class="combo-card">
-          <div class="combo-card__badge combo-card__badge--hit">Хит для выписки ⭐</div>
+          <div class="combo-card__badge combo-card__badge--hit">Без риска 2 размера 🌱</div>
           <div class="combo-card__image-wrap">
-            <img src="images/products/softcare.jpg" alt="Набор Первый месяц новорожденного" class="combo-card__img">
-            <span class="combo-card__sticker">👶 0+ Нежная кожа</span>
+            <img src="images/products/baybee_pants.jpg" alt="Набор На вырост без риска" class="combo-card__img">
+            <span class="combo-card__sticker">👶 Для растущих малышей</span>
           </div>
           <div class="combo-card__body">
-            <div class="combo-card__tag">Идеально в роддом</div>
-            <h3 class="combo-card__title">Набор «Первый месяц малыша»</h3>
+            <div class="combo-card__tag">Для пограничного веса</div>
+            <h3 class="combo-card__title">Комбо «На вырост без риска»</h3>
             <p class="combo-card__items">
-              • 2 упаковки подгузников Softcare S (3–6 кг)<br>
-              • Эко-гель для стирки детского белья 1.5 л<br>
-              • 2 пачки органических влажных салфеток
+              • 1 пачка текущего размера (например, M)<br>
+              • 1 пачка следующего размера (например, L)<br>
+              • 1 пачка салфеток Softcare Organic Cotton
             </p>
             <div class="combo-card__pricing">
               <div>
-                <span class="combo-old-price">13 500 ₸</span>
-                <span class="combo-price">11 500 ₸</span>
+                <span class="combo-old-price">16 200 ₸</span>
+                <span class="combo-price">14 500 ₸</span>
               </div>
-              <button type="button" class="btn btn--add-combo" data-combo-id="combo_first_month" data-combo-name="Набор «Первый месяц малыша»" data-combo-price="11500" data-combo-img="images/products/softcare.jpg">
+              <button type="button" class="btn btn--add-combo" data-combo-id="combo_growth" data-combo-name="Комбо «На вырост без риска»" data-combo-price="14500" data-combo-img="images/products/baybee_pants.jpg">
+                <span>+ В корзину</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combo 3 -->
+        <div class="combo-card">
+          <div class="combo-card__badge combo-card__badge--eco">0% фосфатов и отдушек 🌿</div>
+          <div class="combo-card__image-wrap">
+            <img src="images/products/softcare.jpg" alt="Набор Чистый дом и забота о коже" class="combo-card__img">
+            <span class="combo-card__sticker">✨ Эко-забота 0+</span>
+          </div>
+          <div class="combo-card__body">
+            <div class="combo-card__tag">Кросс-сейл гигиены</div>
+            <h3 class="combo-card__title">Комбо «Чистый дом и нежная кожа»</h3>
+            <p class="combo-card__items">
+              • 1 пачка премиальных подгузников Softcare<br>
+              • Гипоаллергенный гель для стирки детского белья 1.5 л<br>
+              • Эко-пенка для мытья детской посуды и бутылочек
+            </p>
+            <div class="combo-card__pricing">
+              <div>
+                <span class="combo-old-price">13 400 ₸</span>
+                <span class="combo-price">11 800 ₸</span>
+              </div>
+              <button type="button" class="btn btn--add-combo" data-combo-id="combo_clean" data-combo-name="Комбо «Чистый дом и нежная кожа»" data-combo-price="11800" data-combo-img="images/products/softcare.jpg">
                 <span>+ В корзину</span>
               </button>
             </div>
@@ -584,6 +655,13 @@
             <option value="Halyk Bank">Halyk Bank перевод</option>
             <option value="Наличными курьеру">Наличными при получении</option>
           </select>
+        </div>
+        <div class="input-group silent-delivery-group">
+          <label class="checkbox-silent-label" for="silentDeliveryCheck">
+            <input type="checkbox" id="silentDeliveryCheck" checked>
+            <span class="custom-checkbox"></span>
+            <span>🤫 <strong>Тихая доставка</strong> (не звонить в дверь, написать в WhatsApp, малыш спит)</span>
+          </label>
         </div>
       </div>
 
