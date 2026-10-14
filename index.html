@@ -74,6 +74,7 @@
 
   <!-- Hero Banner -->
   <section class="hero">
+    <canvas id="heroMeshCanvas" class="hero__mesh-canvas"></canvas>
     <div class="container hero__container">
       <div class="hero__content">
         <div class="hero__pill">
@@ -475,6 +476,103 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
     <span class="floating-cart__label" id="floatingTotal">0 ₸</span>
   </button>
+
+  <!-- Fullscreen Confetti Canvas -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <!-- Stitch-Inspired Celebratory Order Modal -->
+  <div id="celebrationBackdrop" class="celebration-backdrop" aria-hidden="true">
+    <div class="celebration-modal" id="celebrationModal" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle">
+      <button class="celebration-modal__close" id="closeCelebrationBtn" aria-label="Закрыть окно">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <!-- Honey Mascot Badge -->
+      <div class="celebration-mascot-wrap">
+        <div class="celebration-mascot-glow"></div>
+        <div class="celebration-mascot-ring">
+          <img src="images/mascot.png" alt="Baby Bee Маскот" class="celebration-mascot-img">
+        </div>
+        <div class="celebration-check-badge">✓</div>
+      </div>
+
+      <h2 class="celebration-title" id="celebrationTitle">Ура! Заказ сформирован! 🎉</h2>
+      <p class="celebration-subtitle">
+        Спасибо за доверие Baby Bee! Заказ бережно передается на сборку в г. Шемонаиха.
+      </p>
+
+      <!-- Order Code & Live Status -->
+      <div class="celebration-chips">
+        <div class="celebration-chip">
+          <span class="chip-label">Номер заказа:</span>
+          <strong class="chip-code" id="celebrationOrderId">#BB-84920</strong>
+          <button type="button" id="copyCelebrationOrderBtn" class="copy-order-btn" title="Скопировать номер заказа">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+        <div class="celebration-status-pill">
+          <span class="pulse-dot"></span>
+          <span>Ожидает отправки в WhatsApp</span>
+        </div>
+      </div>
+
+      <!-- Express Delivery Pipeline -->
+      <div class="celebration-delivery-card">
+        <div class="delivery-card-header">
+          <div class="delivery-icon-wrap">🚚</div>
+          <div>
+            <div class="delivery-card-title">Быстрая доставка до двери</div>
+            <div class="delivery-card-city">г. Шемонаиха • Сегодня в день заказа</div>
+          </div>
+        </div>
+
+        <div class="delivery-pipeline">
+          <div class="pipeline-step active">
+            <span class="pipeline-dot">✓</span>
+            <span class="pipeline-text">Принят</span>
+          </div>
+          <div class="pipeline-line active"></div>
+          <div class="pipeline-step current">
+            <span class="pipeline-dot">●</span>
+            <span class="pipeline-text">Сборка</span>
+          </div>
+          <div class="pipeline-line"></div>
+          <div class="pipeline-step">
+            <span class="pipeline-dot">3</span>
+            <span class="pipeline-text">Доставка</span>
+          </div>
+        </div>
+
+        <div class="delivery-address-row" id="celebrationAddressRow">
+          📍 Адрес: <strong id="celebrationAddressVal">г. Шемонаиха</strong>
+        </div>
+      </div>
+
+      <!-- Order Cost & Free Delivery Highlight -->
+      <div class="celebration-summary">
+        <div class="summary-row">
+          <span>Доставка по Шемонаихе:</span>
+          <span class="free-delivery-tag">Бесплатно</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Итого к оплате:</span>
+          <span class="total-highlight" id="celebrationTotalVal">0 ₸</span>
+        </div>
+        <div class="summary-note">Оплата при получении курьеру: Kaspi QR / Наличными</div>
+      </div>
+
+      <!-- Main Action Buttons -->
+      <div class="celebration-actions">
+        <a id="celebrationWhatsAppLink" href="#" target="_blank" rel="noopener" class="btn btn--celebration-wa">
+          <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
+          <span>Перейти в WhatsApp и отправить</span>
+        </a>
+        <button type="button" id="continueShoppingBtn" class="btn btn--subtle-back">
+          Вернуться к покупкам
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- JavaScript -->
   <script src="js/app.js"></script>

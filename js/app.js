@@ -210,6 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCart(prodId, e.currentTarget);
       });
     });
+
+    // Initialize 3D Card Tilt Parallax
+    initProductCardTilt();
   }
 
   // 5. Add to Cart Logic
@@ -381,7 +384,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 10. WhatsApp Checkout Link Generator
+  // Initialize Celebration Modal & WOW effects
+  const celebrationModalController = initCelebrationModal();
+  initHeroMeshCanvas();
+  initConfettiSystem();
+
+  // 10. WhatsApp Checkout Link Generator with Celebratory Modal
   if (checkoutWhatsAppBtn) {
     checkoutWhatsAppBtn.addEventListener('click', () => {
       if (state.cart.length === 0) {
@@ -397,8 +405,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (orderName) localStorage.setItem('babybee_name', orderName.value);
       if (orderAddress) localStorage.setItem('babybee_address', orderAddress.value);
 
+      // Generate Unique Order Code
+      const orderCode = `#BB-${Math.floor(10000 + Math.random() * 90000)}`;
+
       // Build Message Text
-      let text = `Здравствуйте! Хочу сделать заказ в Baby Bee (г. Шемонаиха) 🐝:\n\n`;
+      let text = `Здравствуйте! Хочу сделать заказ в Baby Bee (г. Шемонаиха) 🐝:\n`;
+      text += `📦 *Заказ:* ${orderCode}\n\n`;
       text += `🛒 *Состав заказа:*\n`;
 
       let total = 0;
@@ -417,8 +429,365 @@ document.addEventListener('DOMContentLoaded', () => {
       const encodedText = encodeURIComponent(text);
       const waUrl = `https://wa.me/77779805639?text=${encodedText}`;
 
-      // Open WhatsApp
-      window.open(waUrl, '_blank');
+      // 1. Close cart drawer
+      closeCart();
+
+      // 2. Open celebratory modal & fire confetti
+      if (celebrationModalController) {
+        celebrationModalController.open(orderCode, total, clientAddress, waUrl);
+      }
     });
+  }
+
+  // =========================================================================
+  // 11. Hero Interactive Canvas Wave Mesh
+  // =========================================================================
+  function initHeroMeshCanvas() {
+    const canvas = document.getElementById('heroMeshCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const heroSection = document.querySelector('.hero');
+    if (!heroSection) return;
+
+    let width = 0;
+    let height = 0;
+    let dpr = window.devicePixelRatio || 1;
+    let cols = 12;
+    let rows = 7;
+    let points = [];
+    let mouse = { x: -1000, y: -1000, active: false };
+    let animFrame = null;
+    let isVisible = true;
+    let time = 0;
+
+    function resize() {
+      const rect = heroSection.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      if (width === 0 || height === 0) return;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Create grid of points
+      points = [];
+      const colStep = width / (cols - 1);
+      const rowStep = height / (rows - 1);
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const originX = c * colStep;
+          const originY = r * rowStep;
+          points.push({
+            originX,
+            originY,
+            x: originX,
+            y: originY,
+            vx: 0,
+            vy: 0,
+            col: c,
+            row: r
+          });
+        }
+      }
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      mouse.active = false;
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animFrame) {
+            animFrame = requestAnimationFrame(renderMesh);
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(heroSection);
+    }
+
+    function renderMesh() {
+      if (!isVisible) {
+        animFrame = null;
+        return;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+      time += 0.02;
+
+      // Update points with wave + mouse repulsion physics
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        const waveX = Math.sin(time + p.row * 0.45) * 4;
+        const waveY = Math.cos(time + p.col * 0.45) * 6;
+        const targetX = p.originX + waveX;
+        const targetY = p.originY + waveY;
+
+        if (mouse.active) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 180;
+          if (dist < maxDist && dist > 0) {
+            const force = (1 - dist / maxDist) * 35;
+            p.vx -= (dx / dist) * force * 0.2;
+            p.vy -= (dy / dist) * force * 0.2;
+          }
+        }
+
+        p.vx += (targetX - p.x) * 0.08;
+        p.vy += (targetY - p.y) * 0.08;
+        p.vx *= 0.85;
+        p.vy *= 0.85;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+
+      // Draw horizontal lines
+      for (let r = 0; r < rows; r++) {
+        ctx.beginPath();
+        for (let c = 0; c < cols; c++) {
+          const p = points[r * cols + c];
+          if (c === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        }
+        ctx.strokeStyle = 'rgba(245, 166, 35, 0.12)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Draw vertical lines
+      for (let c = 0; c < cols; c++) {
+        ctx.beginPath();
+        for (let r = 0; r < rows; r++) {
+          const p = points[r * cols + c];
+          if (r === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        }
+        ctx.strokeStyle = 'rgba(13, 162, 231, 0.07)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Draw subtle glowing honey dots
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(245, 166, 35, 0.35)';
+        ctx.fill();
+      }
+
+      animFrame = requestAnimationFrame(renderMesh);
+    }
+
+    animFrame = requestAnimationFrame(renderMesh);
+  }
+
+  // =========================================================================
+  // 12. 3D Card Tilt & Specular Parallax
+  // =========================================================================
+  function initProductCardTilt() {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      if (card.dataset.tiltInitialized) return;
+      card.dataset.tiltInitialized = 'true';
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = -((y - centerY) / centerY) * 6.5;
+        const rotateY = ((x - centerX) / centerX) * 6.5;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px) scale3d(1.02, 1.02, 1.02)`;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
+        card.style.removeProperty('--mouse-x');
+        card.style.removeProperty('--mouse-y');
+      });
+    });
+  }
+
+  // =========================================================================
+  // 13. Confetti Cannon Particle System
+  // =========================================================================
+  function initConfettiSystem() {
+    const canvas = document.getElementById('confettiCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animId = null;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const colors = ['#F59E0B', '#FBBF24', '#10B981', '#34D399', '#FDE68A', '#0284C7', '#FFFFFF', '#EC4899'];
+
+    fireCelebrationConfetti = function() {
+      resize();
+      particles = [];
+      const count = 90;
+      const startX = window.innerWidth / 2;
+      const startY = window.innerHeight * 0.45;
+
+      for (let i = 0; i < count; i++) {
+        const angle = Math.PI * 2 * Math.random();
+        const speed = 4 + Math.random() * 12;
+        particles.push({
+          x: startX,
+          y: startY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: 6 + Math.random() * 8,
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          gravity: 0.32,
+          drag: 0.98,
+          opacity: 1,
+          shape: Math.random() > 0.4 ? 'rect' : 'circle'
+        });
+      }
+
+      if (!animId) {
+        animId = requestAnimationFrame(updateConfetti);
+      }
+    };
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let aliveCount = 0;
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.vx *= p.drag;
+        p.vy *= p.drag;
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotationSpeed;
+        p.opacity -= 0.007;
+
+        if (p.opacity > 0 && p.y < canvas.height + 20) {
+          aliveCount++;
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === 'rect') {
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      if (aliveCount > 0) {
+        animId = requestAnimationFrame(updateConfetti);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        animId = null;
+      }
+    }
+  }
+
+  // =========================================================================
+  // 14. Stitch-Inspired Celebration Modal Logic
+  // =========================================================================
+  function initCelebrationModal() {
+    const celebrationBackdrop = document.getElementById('celebrationBackdrop');
+    const closeCelebrationBtn = document.getElementById('closeCelebrationBtn');
+    const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+    const copyCelebrationOrderBtn = document.getElementById('copyCelebrationOrderBtn');
+    const celebrationOrderId = document.getElementById('celebrationOrderId');
+    const celebrationAddressVal = document.getElementById('celebrationAddressVal');
+    const celebrationTotalVal = document.getElementById('celebrationTotalVal');
+    const celebrationWhatsAppLink = document.getElementById('celebrationWhatsAppLink');
+
+    if (!celebrationBackdrop) return null;
+
+    function openCelebrationModal(orderCode, total, address, waUrl) {
+      if (celebrationOrderId) celebrationOrderId.textContent = orderCode;
+      if (celebrationTotalVal) celebrationTotalVal.textContent = formatPrice(total);
+      if (celebrationAddressVal) celebrationAddressVal.textContent = address;
+      if (celebrationWhatsAppLink) celebrationWhatsAppLink.href = waUrl;
+
+      celebrationBackdrop.classList.add('open');
+      celebrationBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Launch golden confetti celebration!
+      if (typeof fireCelebrationConfetti === 'function') {
+        fireCelebrationConfetti();
+      }
+    }
+
+    function closeCelebrationModal() {
+      celebrationBackdrop.classList.remove('open');
+      celebrationBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (closeCelebrationBtn) closeCelebrationBtn.addEventListener('click', closeCelebrationModal);
+    if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeCelebrationModal);
+    celebrationBackdrop.addEventListener('click', (e) => {
+      if (e.target === celebrationBackdrop) closeCelebrationModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && celebrationBackdrop.classList.contains('open')) {
+        closeCelebrationModal();
+      }
+    });
+
+    if (copyCelebrationOrderBtn && celebrationOrderId) {
+      copyCelebrationOrderBtn.addEventListener('click', () => {
+        const text = celebrationOrderId.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const originalHTML = copyCelebrationOrderBtn.innerHTML;
+          copyCelebrationOrderBtn.innerHTML = `<span style="color:#10B981; font-weight:800; font-size:12px;">✓</span>`;
+          setTimeout(() => {
+            copyCelebrationOrderBtn.innerHTML = originalHTML;
+          }, 2000);
+        });
+      });
+    }
+
+    return { open: openCelebrationModal, close: closeCelebrationModal };
   }
 });
