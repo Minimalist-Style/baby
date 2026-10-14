@@ -282,6 +282,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (floatingTotal) floatingTotal.textContent = formatPrice(totalPrice);
     if (cartTotalPrice) cartTotalPrice.textContent = formatPrice(totalPrice);
 
+    // Sticky Floating Order Bar Sync
+    const stickyOrderBar = document.getElementById('stickyOrderBar');
+    const stickyBarCount = document.getElementById('stickyBarCount');
+    const stickyBarTotal = document.getElementById('stickyBarTotal');
+    if (stickyBarCount) {
+      stickyBarCount.textContent = `${totalItems} ${totalItems === 1 ? 'товар' : (totalItems < 5 ? 'товара' : 'товаров')}`;
+    }
+    if (stickyBarTotal) {
+      stickyBarTotal.textContent = formatPrice(totalPrice);
+    }
+    if (stickyOrderBar) {
+      if (totalItems > 0) {
+        stickyOrderBar.classList.add('visible');
+      } else {
+        stickyOrderBar.classList.remove('visible');
+      }
+    }
+
     // Render Items in Drawer
     if (!cartItemsList) return;
 
@@ -790,4 +808,135 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return { open: openCelebrationModal, close: closeCelebrationModal };
   }
+
+  // 11. Stitch Storefront: Smart Size Finder by Baby Weight
+  function initSmartSizeFinder() {
+    const weightSlider = document.getElementById('weightSlider');
+    const currentWeightVal = document.getElementById('currentWeightVal');
+    const recSizeName = document.getElementById('recSizeName');
+    const recSizeDesc = document.getElementById('recSizeDesc');
+    const applySizeFilterBtn = document.getElementById('applySizeFilterBtn');
+    const pills = document.querySelectorAll('#weightPillsContainer .weight-pill');
+
+    if (!weightSlider || !currentWeightVal) return;
+
+    const sizeTiers = [
+      { max: 5.0, sizeName: 'Размер 1 (NB / 3–5 кг)', desc: 'Идеально для новорожденных. Ультрамягкий слой с вырезом для пупочной ранки.' },
+      { max: 7.9, sizeName: 'Размер 2 (Mini / 4–8 кг)', desc: 'Для первых месяцев. Мгновенно впитывает жидкий стул и бережет кожу от опрелостей.' },
+      { max: 11.9, sizeName: 'Размер 3 (Midi / 6–11 кг)', desc: 'Оптимально на вес 6–11 кг. Мягкий анатомический поясок не сдавливает животик после еды.' },
+      { max: 14.9, sizeName: 'Размер 4 (Maxi / 9–14 кг)', desc: 'Свобода движений для активных ползунков. Двойные бортики надёжно защищают от боковых протеканий.' },
+      { max: 17.9, sizeName: 'Размер 5 (Junior / 12–18 кг)', desc: 'Повышенная вместимость для подросших малышей. До 12 часов сухого спокойного сна.' },
+      { max: 99.0, sizeName: 'Размер 6/7 (Extra / 15–25 кг)', desc: 'Максимальный комфорт для самых рослых малышей и приучения к горшку.' }
+    ];
+
+    function updateRecommendation(weight) {
+      currentWeightVal.textContent = weight.toFixed(1);
+      const tier = sizeTiers.find(t => weight <= t.max) || sizeTiers[sizeTiers.length - 1];
+      if (recSizeName) recSizeName.textContent = tier.sizeName;
+      if (recSizeDesc) recSizeDesc.textContent = tier.desc;
+
+      // Update active pill
+      pills.forEach(pill => {
+        const pillWeight = parseFloat(pill.getAttribute('data-weight'));
+        if (Math.abs(pillWeight - weight) < 1.5) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+    }
+
+    weightSlider.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      updateRecommendation(val);
+    });
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const val = parseFloat(pill.getAttribute('data-weight'));
+        weightSlider.value = val;
+        updateRecommendation(val);
+      });
+    });
+
+    if (applySizeFilterBtn) {
+      applySizeFilterBtn.addEventListener('click', () => {
+        // Switch category to diapers
+        state.category = 'diapers';
+        filterBtns.forEach(btn => {
+          if (btn.getAttribute('data-category') === 'diapers') {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+        renderProducts();
+
+        // Scroll to catalog smoothly
+        const catalogEl = document.getElementById('catalog');
+        if (catalogEl) {
+          catalogEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Initial run
+    updateRecommendation(parseFloat(weightSlider.value || 7.5));
+  }
+
+  // 12. Stitch Storefront: Value Bundles / Combos
+  function initCombosSection() {
+    const addComboBtns = document.querySelectorAll('.btn--add-combo');
+    addComboBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-combo-id');
+        const name = btn.getAttribute('data-combo-name');
+        const price = parseInt(btn.getAttribute('data-combo-price'), 10);
+        const image = btn.getAttribute('data-combo-img');
+
+        const existing = state.cart.find(i => i.id === id);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          state.cart.push({
+            id: id,
+            name: name,
+            brand: 'Baby Bee Набор',
+            image: image,
+            price: price,
+            spec: 'Выгодный комплект (акция)',
+            qty: 1
+          });
+        }
+
+        saveCart();
+        updateCartUI();
+
+        // Tactile feedback
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = `<span>✓ Добавлено!</span>`;
+        btn.style.background = '#10B981';
+        btn.style.color = '#FFFFFF';
+        setTimeout(() => {
+          btn.innerHTML = origHTML;
+          btn.style.background = '';
+          btn.style.color = '';
+        }, 1500);
+      });
+    });
+  }
+
+  // Sticky Bar Checkout Button Trigger
+  const stickyCheckoutBtn = document.getElementById('stickyCheckoutBtn');
+  if (stickyCheckoutBtn && cartDrawer && cartBackdrop) {
+    stickyCheckoutBtn.addEventListener('click', () => {
+      cartDrawer.classList.add('open');
+      cartBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  // Initialize new storefront modules
+  initSmartSizeFinder();
+  initCombosSection();
 });

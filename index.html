@@ -9,10 +9,10 @@
   <!-- Favicon / Logo -->
   <link rel="icon" type="image/jpeg" href="images/logo.jpg">
   
-  <!-- Google Fonts: Montserrat + Outfit -->
+  <!-- Google Fonts: Plus Jakarta Sans + Outfit + Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
@@ -185,6 +185,137 @@
           </div>
           <h3 class="adv-card__title">Удобная оплата Kaspi</h3>
           <p class="adv-card__text">Оплачивайте удобным для вас способом: Kaspi QR, Kaspi Gold, Halyk или наличными курьеру при проверке заказа.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Smart Size Finder Section (Nordic Honeycomb Interactive Tool) -->
+  <section id="smartSizeFinder" class="size-finder-section">
+    <div class="container">
+      <div class="size-finder-card">
+        <div class="size-finder-card__badge">
+          <span class="pulse-dot-amber"></span>
+          <span>Интерактивный помощник мамы</span>
+        </div>
+        <h2 class="size-finder-card__title">
+          Умный подбор размера по весу малыша
+        </h2>
+        <p class="size-finder-card__desc">
+          Двигайте ползунок или выберите вес — система мгновенно подскажет идеальный размер трусиков с защитой от натирания и протеканий.
+        </p>
+
+        <div class="weight-slider-wrap">
+          <div class="weight-display">
+            <span class="weight-display__label">Вес малыша:</span>
+            <span class="weight-display__value"><strong id="currentWeightVal">7.5</strong> кг</span>
+          </div>
+          <input type="range" id="weightSlider" class="weight-slider" min="3" max="22" step="0.5" value="7.5" aria-label="Ползунок веса ребенка в килограммах">
+          <div class="slider-marks">
+            <span>3 кг (NB)</span>
+            <span>6 кг</span>
+            <span>9 кг</span>
+            <span>12 кг</span>
+            <span>15 кг</span>
+            <span>22 кг (XXXL)</span>
+          </div>
+        </div>
+
+        <!-- Quick Weight Pills -->
+        <div class="weight-pills" id="weightPillsContainer">
+          <button type="button" class="weight-pill" data-weight="4">3–5 кг (NB / 1)</button>
+          <button type="button" class="weight-pill" data-weight="6">4–8 кг (Mini / 2)</button>
+          <button type="button" class="weight-pill active" data-weight="7.5">6–11 кг (Midi / 3)</button>
+          <button type="button" class="weight-pill" data-weight="11">9–14 кг (Maxi / 4)</button>
+          <button type="button" class="weight-pill" data-weight="14">12–18 кг (Junior / 5)</button>
+          <button type="button" class="weight-pill" data-weight="18">15+ кг (Extra / 6)</button>
+        </div>
+
+        <!-- Live Recommendation Box -->
+        <div class="size-recommendation" id="sizeRecommendationBox">
+          <div class="size-recommendation__icon">✨</div>
+          <div class="size-recommendation__content">
+            <div class="size-recommendation__headline">
+              Рекомендуем: <span class="highlight-size" id="recSizeName">Размер M (3)</span>
+              <span class="accuracy-badge">99% точность посадки</span>
+            </div>
+            <div class="size-recommendation__text" id="recSizeDesc">
+              Оптимально на вес 6–11 кг. Мягкий анатомический поясок не сдавливает животик после кормления и надежно держит влагу.
+            </div>
+          </div>
+          <button type="button" id="applySizeFilterBtn" class="btn btn--apply-size">
+            <span>Показать подходящие товары</span>
+            <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Combos Section (Boutique Bundles) -->
+  <section id="combos" class="combos-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="combos-pill">
+          <span>🎁 Максимальная выгода</span>
+        </div>
+        <h2 class="section-title">Выгодные комбо-наборы с бесплатной доставкой</h2>
+        <p class="section-subtitle">Готовые комплекты для комфорта малыша и спокойствия мамы — экономия до 15%</p>
+      </div>
+
+      <div class="combos-grid">
+        <!-- Combo 1 -->
+        <div class="combo-card">
+          <div class="combo-card__badge combo-card__badge--savings">-15% выгода</div>
+          <div class="combo-card__image-wrap">
+            <img src="images/products/mama_znaet_pants.webp" alt="Набор Спокойная ночь" class="combo-card__img">
+            <span class="combo-card__sticker">🌙 12 часов сухости</span>
+          </div>
+          <div class="combo-card__body">
+            <div class="combo-card__tag">Хит для крепкого сна</div>
+            <h3 class="combo-card__title">Набор «Спокойная ночь»</h3>
+            <p class="combo-card__items">
+              • 1 пачка трусиков «Мама знает» (выберите размер)<br>
+              • 1 пачка ночных дышащих трусиков Baybee<br>
+              • 3 упаковки мягких салфеток с ромашкой
+            </p>
+            <div class="combo-card__pricing">
+              <div>
+                <span class="combo-old-price">16 000 ₸</span>
+                <span class="combo-price">13 600 ₸</span>
+              </div>
+              <button type="button" class="btn btn--add-combo" data-combo-id="combo_night" data-combo-name="Набор «Спокойная ночь»" data-combo-price="13600" data-combo-img="images/products/mama_znaet_pants.webp">
+                <span>+ В корзину</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Combo 2 -->
+        <div class="combo-card">
+          <div class="combo-card__badge combo-card__badge--hit">Хит для выписки ⭐</div>
+          <div class="combo-card__image-wrap">
+            <img src="images/products/softcare.jpg" alt="Набор Первый месяц новорожденного" class="combo-card__img">
+            <span class="combo-card__sticker">👶 0+ Нежная кожа</span>
+          </div>
+          <div class="combo-card__body">
+            <div class="combo-card__tag">Идеально в роддом</div>
+            <h3 class="combo-card__title">Набор «Первый месяц малыша»</h3>
+            <p class="combo-card__items">
+              • 2 упаковки подгузников Softcare S (3–6 кг)<br>
+              • Эко-гель для стирки детского белья 1.5 л<br>
+              • 2 пачки органических влажных салфеток
+            </p>
+            <div class="combo-card__pricing">
+              <div>
+                <span class="combo-old-price">13 500 ₸</span>
+                <span class="combo-price">11 500 ₸</span>
+              </div>
+              <button type="button" class="btn btn--add-combo" data-combo-id="combo_first_month" data-combo-name="Набор «Первый месяц малыша»" data-combo-price="11500" data-combo-img="images/products/softcare.jpg">
+                <span>+ В корзину</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -573,6 +704,23 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Sticky Frosted Glass Order Bar (Mobile/Desktop) -->
+  <aside id="stickyOrderBar" class="sticky-order-bar" aria-label="Быстрый заказ">
+    <div class="sticky-order-bar__inner">
+      <div class="sticky-order-bar__info">
+        <div class="sticky-cart-icon">🛒</div>
+        <div>
+          <div class="sticky-order-bar__title">В корзине: <strong id="stickyBarCount">0 товаров</strong></div>
+          <div class="sticky-order-bar__price"><span id="stickyBarTotal">0 ₸</span> • <span class="free-pill">Доставка 0 ₸</span></div>
+        </div>
+      </div>
+      <button type="button" id="stickyCheckoutBtn" class="btn btn--sticky-checkout">
+        <span>Оформить заказ</span>
+        <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </div>
+  </aside>
 
   <!-- JavaScript -->
   <script src="js/app.js"></script>
