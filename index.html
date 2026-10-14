@@ -1,806 +1,2158 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baby Bee — Доставка подгузников и эко-товаров в г. Шемонаиха</title>
-  <meta name="description" content="Интернет-витрина подгузников и детских товаров Baby Bee в г. Шемонаиха. Трусики «Мама знает», Baybee, Baby Shark, Softcare, эко-гели для стирки. Быстрая доставка до двери!">
-  
-  <!-- Favicon / Logo -->
-  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
-  
-  <!-- Google Fonts: Plus Jakarta Sans + Outfit + Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FDFBF7" />
+  <meta name="description" content="BabyBee Шемонаиха — флагманская витрина экспресс-доставки подгузников и безопасной эко-химии «Мама знает» до двери за 40 минут. Оплата Kaspi QR при получении." />
+  <title>BabyBee Шемонаиха — Экспресс-доставка подгузников и эко-средств за 40 минут</title>
+
+  <style>
+    /* ==========================================================================
+       1. NORDIC HONEYCOMB DESIGN TOKENS & SILICON VALLEY TIER SYSTEM
+       ========================================================================== */
+    :root {
+      /* Core Palette: Nordic Honeycomb */
+      --bg-cream: #FDFBF7;
+      --bg-surface: #FFFFFF;
+      --bg-elevated: rgba(255, 255, 255, 0.78);
+      --bg-warm-tint: #F7F2E7;
+      --amber-honey: #F5B738;
+      --amber-honey-hover: #E5A420;
+      --amber-honey-soft: rgba(245, 183, 56, 0.16);
+      --emerald-mint: #10B981;
+      --emerald-mint-dark: #059669;
+      --emerald-mint-soft: rgba(16, 185, 129, 0.12);
+      --graphite-deep: #1F2937;
+      --graphite-muted: #4B5563;
+      --graphite-subtle: #6B7280;
+      --border-hairline: rgba(31, 41, 55, 0.08);
+      --border-amber: rgba(245, 183, 56, 0.45);
+
+      /* Physics & Elevation */
+      --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
+      --glass-blur: blur(24px) saturate(180%);
+      --shadow-subtle: 0 2px 10px -2px rgba(31, 41, 55, 0.05);
+      --shadow-card: 0 12px 32px -8px rgba(31, 41, 55, 0.07), 0 2px 6px -1px rgba(31, 41, 55, 0.04);
+      --shadow-float: 0 24px 48px -12px rgba(31, 41, 55, 0.16);
+
+      /* Radii & Spacing */
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-pill: 9999px;
+      --container-max: 1200px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-cream);
+      color: var(--graphite-deep);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+      line-height: 1.5;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(245, 183, 56, 0.12), transparent 36%),
+        radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.08), transparent 32%);
+      min-height: 100dvh;
+      padding-bottom: 112px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--container-max));
+      margin-inline: auto;
+    }
+
+    /* ==========================================================================
+       2. STICKY SUPER-GLASS HEADER (CSS Nesting)
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(253, 251, 247, 0.82);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--border-hairline);
+      transition: transform 0.35s var(--spring-easing), box-shadow 0.35s var(--spring-easing);
+
+      & .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.85rem;
+      }
+
+      & .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--graphite-deep);
+
+        & .brand-mark {
+          width: 42px;
+          height: 42px;
+          border-radius: 13px;
+          background: linear-gradient(135deg, var(--amber-honey), #FDE68A);
+          display: grid;
+          place-items: center;
+          font-size: 1.35rem;
+          box-shadow: 0 6px 16px rgba(245, 183, 56, 0.32);
+          transition: transform 0.4s var(--spring-easing);
+        }
+
+        &:hover .brand-mark {
+          transform: scale(1.06) rotate(-4deg);
+        }
+
+        & .brand-text {
+          display: flex;
+          flex-direction: column;
+
+          & strong {
+            font-size: 1.125rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+          }
+
+          & span {
+            font-size: 0.75rem;
+            color: var(--graphite-muted);
+            font-weight: 500;
+          }
+        }
+      }
+
+      & .header-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        & .live-sla-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0.4rem 0.85rem;
+          border-radius: var(--radius-pill);
+          background: var(--emerald-mint-soft);
+          color: var(--emerald-mint-dark);
+          font-size: 0.8rem;
+          font-weight: 600;
+
+          & .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald-mint);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+            animation: pulseGlow 2s infinite var(--spring-easing);
+          }
+
+          @media (max-width: 680px) {
+            display: none;
+          }
+        }
+
+        & .cart-trigger-btn {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.55rem;
+          padding: 0.55rem 1rem;
+          border-radius: var(--radius-pill);
+          border: 1px solid var(--border-hairline);
+          background: var(--graphite-deep);
+          color: #FFFFFF;
+          font-size: 0.875rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: transform 0.35s var(--spring-easing), background-color 0.25s ease;
+
+          &:hover {
+            transform: translateY(-1px);
+            background: #111827;
+          }
+
+          &:active {
+            transform: scale(0.96);
+          }
+
+          & .cart-count-badge {
+            display: inline-grid;
+            place-items: center;
+            min-width: 22px;
+            height: 22px;
+            padding-inline: 6px;
+            border-radius: var(--radius-pill);
+            background: var(--amber-honey);
+            color: var(--graphite-deep);
+            font-size: 0.75rem;
+            font-weight: 800;
+          }
+        }
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.22); opacity: 0.75; }
+    }
+
+    /* ==========================================================================
+       3. HERO & LOCAL TRUST TRIGGERS (SHEMONAIKHA HYPERLOCAL)
+       ========================================================================== */
+    .hero-section {
+      padding-block: 2.25rem 1.5rem;
+
+      & .hero-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(135deg, #FFFFFF 0%, #FAF5E8 100%);
+        border: 1px solid var(--border-amber);
+        box-shadow: var(--shadow-card);
+        padding: clamp(1.5rem, 4vw, 3rem);
+        display: grid;
+        grid-template-columns: 1.25fr 0.95fr;
+        gap: 2rem;
+        align-items: center;
+
+        @media (max-width: 860px) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      & .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: var(--radius-pill);
+        background: var(--amber-honey-soft);
+        color: #92400E;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      & h1 {
+        font-size: clamp(1.85rem, 3.8vw, 2.85rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.12;
+        color: var(--graphite-deep);
+        margin-bottom: 1rem;
+
+        & .highlight-emerald {
+          color: var(--emerald-mint-dark);
+        }
+      }
+
+      & .hero-lead {
+        font-size: clamp(0.98rem, 1.4vw, 1.125rem);
+        color: var(--graphite-muted);
+        max-width: 58ch;
+        margin-bottom: 1.5rem;
+      }
+
+      & .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      & .trust-grid {
+        display: grid;
+        gap: 0.75rem;
+
+        & .trust-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.85rem;
+          padding: 0.95rem 1.1rem;
+          border-radius: var(--radius-md);
+          background: rgba(255, 255, 255, 0.86);
+          backdrop-filter: var(--glass-blur);
+          -webkit-backdrop-filter: var(--glass-blur);
+          border: 1px solid var(--border-hairline);
+          transition: transform 0.35s var(--spring-easing), border-color 0.25s ease;
+
+          &:hover {
+            transform: translateX(4px);
+            border-color: var(--border-amber);
+          }
+
+          & .trust-icon {
+            font-size: 1.35rem;
+            line-height: 1;
+            padding: 0.5rem;
+            border-radius: 12px;
+            background: var(--bg-warm-tint);
+          }
+
+          & strong {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--graphite-deep);
+          }
+
+          & p {
+            font-size: 0.8rem;
+            color: var(--graphite-muted);
+            margin-top: 0.15rem;
+          }
+        }
+      }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: var(--amber-honey);
+      color: var(--graphite-deep);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px -4px rgba(245, 183, 56, 0.45);
+      transition: transform 0.35s var(--spring-easing), background-color 0.2s ease, box-shadow 0.25s ease;
+
+      &:hover {
+        background: var(--amber-honey-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px -4px rgba(245, 183, 56, 0.55);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-hairline);
+      background: #FFFFFF;
+      color: var(--graphite-deep);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.35s var(--spring-easing), border-color 0.2s ease;
+
+      &:hover {
+        border-color: var(--graphite-deep);
+        transform: translateY(-1px);
+      }
+    }
+
+    /* ==========================================================================
+       4. SMART WEIGHT SIZE FINDER (#smartSizeFinder)
+       ========================================================================== */
+    .size-finder-section {
+      padding-block: 1.5rem;
+
+      & .finder-shell {
+        border-radius: var(--radius-xl);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-hairline);
+        box-shadow: var(--shadow-card);
+        padding: clamp(1.25rem, 3.5vw, 2.25rem);
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1.75rem;
+        align-items: center;
+
+        @media (max-width: 860px) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      & .finder-header {
+        margin-bottom: 1.25rem;
+
+        & .section-tag {
+          display: inline-block;
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--emerald-mint-dark);
+          margin-bottom: 0.35rem;
+        }
+
+        & h2 {
+          font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+          font-weight: 800;
+          letter-spacing: -0.02em;
+        }
+
+        & p {
+          font-size: 0.9rem;
+          color: var(--graphite-muted);
+          margin-top: 0.25rem;
+        }
+      }
+
+      & .weight-control-box {
+        background: var(--bg-cream);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-lg);
+        padding: 1.25rem;
+
+        & .weight-readout-row {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          margin-bottom: 0.85rem;
+
+          & label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--graphite-muted);
+          }
+
+          & output {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--graphite-deep);
+            font-variant-numeric: tabular-nums;
+            background: var(--amber-honey-soft);
+            padding: 0.15rem 0.75rem;
+            border-radius: var(--radius-sm);
+          }
+        }
+
+        & input[type="range"] {
+          width: 100%;
+          height: 8px;
+          border-radius: var(--radius-pill);
+          background: #E5E7EB;
+          accent-color: var(--amber-honey);
+          cursor: pointer;
+          margin-bottom: 0.65rem;
+        }
+
+        & .scale-ticks {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.75rem;
+          color: var(--graphite-subtle);
+          margin-bottom: 1rem;
+        }
+
+        & .chubby-toggle {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          padding-top: 0.85rem;
+          border-top: 1px dashed var(--border-hairline);
+          cursor: pointer;
+          user-select: none;
+
+          & input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--emerald-mint);
+            cursor: pointer;
+          }
+
+          & span {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--graphite-deep);
+          }
+        }
+      }
+
+      & .finder-result-card {
+        border-radius: var(--radius-lg);
+        background: linear-gradient(145deg, #1F2937 0%, #111827 100%);
+        color: #FFFFFF;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        box-shadow: var(--shadow-float);
+
+        & .result-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+
+          & .rec-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #9CA3AF;
+            font-weight: 600;
+          }
+
+          & .rec-size-badge {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: var(--amber-honey);
+            line-height: 1.1;
+          }
+
+          & .rec-meta-pill {
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-pill);
+            background: rgba(16, 185, 129, 0.2);
+            color: #6EE7B7;
+            font-size: 0.78rem;
+            font-weight: 700;
+          }
+        }
+
+        & .borderline-alert {
+          padding: 0.75rem 0.9rem;
+          border-radius: var(--radius-sm);
+          background: rgba(245, 183, 56, 0.14);
+          border-left: 3px solid var(--amber-honey);
+          font-size: 0.82rem;
+          color: #FDE68A;
+          line-height: 1.45;
+        }
+
+        & .result-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.65rem;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 0.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+          & .apply-size-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-pill);
+            border: none;
+            background: var(--emerald-mint);
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: transform 0.3s var(--spring-easing), background-color 0.2s ease;
+
+            &:hover {
+              background: var(--emerald-mint-dark);
+              transform: translateY(-1px);
+            }
+          }
+        }
+      }
+    }
+
+    /* ==========================================================================
+       5. COMBO BUNDLES SECTION (#comboBundles)
+       ========================================================================== */
+    .bundles-section {
+      padding-block: 1.75rem;
+
+      & .section-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+
+        & h2 {
+          font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+          font-weight: 800;
+          letter-spacing: -0.02em;
+        }
+
+        & p {
+          font-size: 0.9rem;
+          color: var(--graphite-muted);
+        }
+      }
+
+      & .bundles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.25rem;
+      }
+
+      & .bundle-card {
+        position: relative;
+        border-radius: var(--radius-lg);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-amber);
+        box-shadow: var(--shadow-card);
+        padding: 1.35rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        transition: transform 0.4s var(--spring-easing), box-shadow 0.4s var(--spring-easing);
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-float);
+        }
+
+        & .bundle-badge {
+          display: inline-flex;
+          align-self: flex-start;
+          padding: 0.3rem 0.75rem;
+          border-radius: var(--radius-pill);
+          background: var(--amber-honey-soft);
+          color: #92400E;
+          font-size: 0.75rem;
+          font-weight: 800;
+        }
+
+        & h3 {
+          font-size: 1.15rem;
+          font-weight: 800;
+          color: var(--graphite-deep);
+        }
+
+        & .bundle-desc {
+          font-size: 0.85rem;
+          color: var(--graphite-muted);
+        }
+
+        & .bundle-items-list {
+          list-style: none;
+          display: grid;
+          gap: 0.45rem;
+          padding: 0.85rem;
+          border-radius: var(--radius-sm);
+          background: var(--bg-cream);
+          font-size: 0.82rem;
+
+          & li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+          }
+        }
+
+        & .bundle-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          padding-top: 0.75rem;
+          border-top: 1px solid var(--border-hairline);
+
+          & .price-stack {
+            display: flex;
+            flex-direction: column;
+
+            & .old-price {
+              font-size: 0.78rem;
+              color: var(--graphite-subtle);
+              text-decoration: line-through;
+            }
+
+            & .new-price {
+              font-size: 1.3rem;
+              font-weight: 900;
+              color: var(--graphite-deep);
+            }
+
+            & .save-pill {
+              font-size: 0.72rem;
+              font-weight: 700;
+              color: var(--emerald-mint-dark);
+            }
+          }
+        }
+      }
+    }
+
+    /* ==========================================================================
+       6. CATALOG & PRODUCT CARDS WITH CSS CONTAINER QUERIES
+       ========================================================================== */
+    .catalog-section {
+      padding-block: 1.5rem 2.5rem;
+
+      & .catalog-controls {
+        position: sticky;
+        top: 66px;
+        z-index: 35;
+        background: rgba(253, 251, 247, 0.88);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        padding-block: 0.85rem;
+        margin-bottom: 1.25rem;
+        border-bottom: 1px solid var(--border-hairline);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.85rem;
+
+        & .category-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+
+          & .cat-pill {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-hairline);
+            background: var(--bg-surface);
+            color: var(--graphite-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--spring-easing);
+
+            &[aria-pressed="true"] {
+              background: var(--graphite-deep);
+              color: #FFFFFF;
+              border-color: var(--graphite-deep);
+              transform: scale(1.03);
+            }
+          }
+        }
+
+        & .search-and-filter {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          flex-wrap: wrap;
+
+          & .search-input {
+            padding: 0.5rem 0.9rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-hairline);
+            background: var(--bg-surface);
+            font-size: 0.85rem;
+            color: var(--graphite-deep);
+            min-width: 210px;
+
+            &:focus {
+              outline: 2px solid var(--amber-honey);
+              border-color: transparent;
+            }
+          }
+
+          & .size-filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.48rem 0.85rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--emerald-mint);
+            background: var(--emerald-mint-soft);
+            color: var(--emerald-mint-dark);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s var(--spring-easing);
+
+            &[aria-pressed="true"] {
+              background: var(--emerald-mint);
+              color: #FFFFFF;
+            }
+          }
+        }
+      }
+
+      & .catalog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+        gap: 1.25rem;
+      }
+    }
+
+    /* Container Query Host */
+    .product-card-host {
+      container-type: inline-size;
+      container-name: product-card;
+    }
+
+    .product-card {
+      height: 100%;
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.4s var(--spring-easing), box-shadow 0.4s var(--spring-easing), border-color 0.25s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-card);
+        border-color: var(--border-amber);
+      }
+
+      & .card-media {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(180deg, #FAF6EC 0%, #F3EFE4 100%);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        padding: 1rem;
+
+        & img {
+          max-width: 100%;
+          max-height: 165px;
+          object-fit: contain;
+          transition: transform 0.5s var(--spring-easing);
+        }
+
+        & .product-badge {
+          position: absolute;
+          top: 0.75rem;
+          left: 0.75rem;
+          padding: 0.3rem 0.65rem;
+          border-radius: var(--radius-pill);
+          background: rgba(255, 255, 255, 0.92);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid var(--border-hairline);
+          font-size: 0.73rem;
+          font-weight: 700;
+          color: var(--graphite-deep);
+        }
+
+        & .spec-pill {
+          position: absolute;
+          bottom: 0.65rem;
+          right: 0.65rem;
+          padding: 0.22rem 0.6rem;
+          border-radius: var(--radius-pill);
+          background: rgba(31, 41, 55, 0.78);
+          color: #FFFFFF;
+          font-size: 0.72rem;
+          font-weight: 600;
+        }
+      }
+
+      &:hover .card-media img {
+        transform: scale(1.06);
+      }
+
+      & .card-body {
+        padding: 1.15rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: space-between;
+        gap: 0.9rem;
+
+        & .product-title {
+          font-size: 1.02rem;
+          font-weight: 800;
+          color: var(--graphite-deep);
+          line-height: 1.3;
+        }
+
+        & .size-selector-block {
+          display: flex;
+          flex-direction: column;
+          gap: 0.45rem;
+
+          & .size-label-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--graphite-muted);
+            font-weight: 600;
+
+            & .fit-match-tag {
+              color: var(--emerald-mint-dark);
+              font-weight: 700;
+            }
+          }
+
+          & .size-pills-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+
+            & .size-btn {
+              padding: 0.32rem 0.58rem;
+              border-radius: 8px;
+              border: 1px solid var(--border-hairline);
+              background: var(--bg-cream);
+              color: var(--graphite-deep);
+              font-size: 0.75rem;
+              font-weight: 700;
+              cursor: pointer;
+              transition: all 0.25s var(--spring-easing);
+
+              &[aria-pressed="true"] {
+                background: var(--graphite-deep);
+                color: #FFFFFF;
+                border-color: var(--graphite-deep);
+              }
+
+              &.is-recommended {
+                border-color: var(--emerald-mint);
+                box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.18);
+              }
+            }
+          }
+        }
+
+        & .card-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+          padding-top: 0.65rem;
+          border-top: 1px solid var(--border-hairline);
+
+          & .product-price {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--graphite-deep);
+            font-variant-numeric: tabular-nums;
+          }
+
+          & .add-btn {
+            padding: 0.58rem 1rem;
+            border-radius: var(--radius-pill);
+            border: none;
+            background: var(--amber-honey);
+            color: var(--graphite-deep);
+            font-size: 0.84rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.3s var(--spring-easing), background-color 0.2s ease;
+
+            &:hover {
+              background: var(--amber-honey-hover);
+              transform: translateY(-1px);
+            }
+
+            &:active {
+              transform: scale(0.95);
+            }
+          }
+        }
+      }
+    }
+
+    @container product-card (min-width: 310px) {
+      .product-card .card-body .product-title {
+        font-size: 1.1rem;
+      }
+      .product-card .card-body .add-btn {
+        padding: 0.65rem 1.15rem;
+      }
+    }
+
+    /* ==========================================================================
+       7. FLOATING SUPER-GLASS BOTTOM BAR & NATIVE <dialog> CART
+       ========================================================================== */
+    .floating-cart-bar {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(140%);
+      width: min(100% - 1.5rem, 680px);
+      z-index: 60;
+      padding: 0.85rem 1.15rem;
+      border-radius: var(--radius-pill);
+      background: rgba(31, 41, 55, 0.92);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-float);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: transform 0.45s var(--spring-easing);
+
+      &.is-visible {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      & .bar-info {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0.5rem;
+
+        & strong {
+          font-size: 0.95rem;
+          font-weight: 800;
+        }
+
+        & span {
+          font-size: 0.76rem;
+          color: #6EE7B7;
+        }
+      }
+
+      & .bar-checkout-btn {
+        padding: 0.68rem 1.25rem;
+        border-radius: var(--radius-pill);
+        border: none;
+        background: var(--amber-honey);
+        color: var(--graphite-deep);
+        font-weight: 800;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition: transform 0.3s var(--spring-easing);
+
+        &:hover {
+          transform: scale(1.03);
+        }
+      }
+    }
+
+    dialog.checkout-dialog {
+      margin: auto;
+      width: min(100% - 1.5rem, 560px);
+      max-height: 90dvh;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-xl);
+      background: var(--bg-surface);
+      color: var(--graphite-deep);
+      box-shadow: var(--shadow-float);
+      padding: 0;
+      overflow: hidden;
+
+      &::backdrop {
+        background: rgba(17, 24, 39, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      & .dialog-inner {
+        display: flex;
+        flex-direction: column;
+        max-height: 90dvh;
+      }
+
+      & .dialog-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.15rem 1.35rem;
+        border-bottom: 1px solid var(--border-hairline);
+        background: var(--bg-cream);
+
+        & h2 {
+          font-size: 1.15rem;
+          font-weight: 800;
+        }
+
+        & .close-dialog-btn {
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+          border: 1px solid var(--border-hairline);
+          background: #FFFFFF;
+          cursor: pointer;
+          font-size: 1rem;
+          display: grid;
+          place-items: center;
+        }
+      }
+
+      & .dialog-body {
+        padding: 1.25rem 1.35rem;
+        overflow-y: auto;
+        display: grid;
+        gap: 1.15rem;
+      }
+
+      & .cart-items-list {
+        display: grid;
+        gap: 0.65rem;
+
+        & .cart-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          padding: 0.75rem;
+          border-radius: var(--radius-md);
+          background: var(--bg-cream);
+          border: 1px solid var(--border-hairline);
+
+          & .cart-row-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+          }
+
+          & .cart-row-sub {
+            font-size: 0.76rem;
+            color: var(--graphite-muted);
+          }
+
+          & .qty-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+
+            & button {
+              width: 28px;
+              height: 28px;
+              border-radius: 8px;
+              border: 1px solid var(--border-hairline);
+              background: #FFFFFF;
+              font-weight: 800;
+              cursor: pointer;
+            }
+
+            & span {
+              font-size: 0.85rem;
+              font-weight: 700;
+              min-width: 18px;
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      & .checkout-form {
+        display: grid;
+        gap: 0.85rem;
+
+        & .field-group {
+          display: grid;
+          gap: 0.35rem;
+
+          & label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--graphite-muted);
+          }
+
+          & input, & select {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-hairline);
+            background: var(--bg-cream);
+            font-size: 0.9rem;
+            color: var(--graphite-deep);
+          }
+        }
+
+        & .silent-delivery-box {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.65rem;
+          padding: 0.85rem;
+          border-radius: var(--radius-md);
+          background: var(--emerald-mint-soft);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          cursor: pointer;
+
+          & input {
+            margin-top: 0.2rem;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--emerald-mint);
+          }
+
+          & div {
+            font-size: 0.82rem;
+
+            & strong {
+              display: block;
+              color: var(--graphite-deep);
+            }
+
+            & span {
+              color: var(--graphite-muted);
+            }
+          }
+        }
+
+        & .whatsapp-submit-btn {
+          width: 100%;
+          padding: 0.95rem 1.25rem;
+          border-radius: var(--radius-pill);
+          border: none;
+          background: var(--emerald-mint);
+          color: #FFFFFF;
+          font-size: 0.98rem;
+          font-weight: 800;
+          cursor: pointer;
+          box-shadow: 0 10px 24px -6px rgba(16, 185, 129, 0.5);
+          transition: transform 0.3s var(--spring-easing), background-color 0.2s ease;
+
+          &:hover {
+            background: var(--emerald-mint-dark);
+            transform: translateY(-1px);
+          }
+        }
+      }
+    }
+
+    .site-footer {
+      padding-block: 2rem;
+      border-top: 1px solid var(--border-hairline);
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--graphite-muted);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
-  <div class="top-bar">
-    <div class="container top-bar__content">
-      <div class="top-bar__tag">
-        <span class="pulse-dot"></span>
-        <span>г. Шемонаиха • Экспресс-доставка до двери в день заказа</span>
-      </div>
-      <div class="top-bar__links">
-        <a href="https://instagram.com/baby_bee_shemonaiha" target="_blank" rel="noopener" class="top-bar__link">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          <span>@baby_bee_shemonaiha</span>
-        </a>
-        <a href="tel:+77779805639" class="top-bar__link">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>+7 (777) 980-56-39</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header / Navigation -->
-  <header class="header">
-    <div class="container header__container">
-      <a href="#" class="brand-logo">
-        <img src="images/logo.jpg" alt="Baby Bee Шемонаиха" class="brand-logo__img">
-        <div class="brand-logo__text">
-          <span class="brand-logo__title">Baby Bee 🐝</span>
-          <span class="brand-logo__sub">Шемонаиха • Подгузники & Эко-дом</span>
+  <!-- ========================================================================
+       HEADER
+       ======================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="BabyBee Шемонаиха — На главную">
+        <div class="brand-mark" aria-hidden="true">🐝</div>
+        <div class="brand-text">
+          <strong>BabyBee • Шемонаиха</strong>
+          <span>Забота о малышах и чистоте дома</span>
         </div>
       </a>
 
-      <nav class="nav">
-        <a href="#catalog" class="nav__link active">Каталог</a>
-        <a href="#advantages" class="nav__link">Преимущества</a>
-        <a href="#delivery" class="nav__link">Доставка и оплата</a>
-        <a href="#faq" class="nav__link">Вопросы</a>
-      </nav>
+      <div class="header-meta">
+        <div class="live-sla-pill" role="status">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>Склад в Шемонаихе • Курьер за 40 мин</span>
+        </div>
 
-      <div class="header__actions">
-        <a href="https://wa.me/77779805639?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BF%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B4%D0%B3%D1%83%D0%B7%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC%20%F0%9F%90%9D" target="_blank" rel="noopener" class="btn btn--whatsapp-outline">
-          <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
-          <span>Консультация</span>
-        </a>
-        
-        <button id="cartBtn" class="cart-trigger-btn" aria-label="Открыть корзину">
-          <svg class="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          <span class="cart-trigger-btn__text">Корзина</span>
-          <span id="cartCountBadge" class="cart-badge">0</span>
+        <button type="button" class="cart-trigger-btn" id="openCartBtn" aria-label="Открыть корзину заказа">
+          <span>Корзина</span>
+          <span class="cart-count-badge" id="headerCartCount" aria-live="polite">0</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero Banner -->
-  <section class="hero">
-    <canvas id="heroMeshCanvas" class="hero__mesh-canvas"></canvas>
-    <div class="container hero__container">
-      <div class="hero__content">
-        <div class="hero__pill">
-          <span class="hero__pill-emoji">🐝</span>
-          <span>Официальная продукция в г. Шемонаиха</span>
-        </div>
-        <h1 class="hero__title">
-          Сухие ночи и счастливые малыши с <span class="gradient-text">Baby Bee</span>
-        </h1>
-        <p class="hero__desc">
-          Трусики-подгузники японского качества «Мама знает», Baybee, Baby Shark и Softcare, а также гипоаллергенная эко-химия для чистоты вашего дома. Доставим прямо до двери в Шемонаихе!
-        </p>
-
-        <div class="hero__actions">
-          <a href="#catalog" class="btn btn--primary">
-            <span>Выбрать подгузники</span>
-            <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-          <a href="https://wa.me/77779805639?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9F%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%D1%82%D0%B5%20%D0%BF%D0%BE%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D1%8C%20%D1%80%D0%B0%D0%B7%D0%BC%D0%B5%D1%80%20%D0%BF%D0%BE%D0%B4%D0%B3%D1%83%D0%B7%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%20%D0%BF%D0%BE%20%D0%B2%D0%B5%D1%81%D1%83%20%D0%BC%D0%B0%D0%BB%D1%8B%D1%88%D0%B0%20%F0%9F%91%B6" target="_blank" rel="noopener" class="btn btn--secondary">
-            <span>Подобрать размер</span>
-          </a>
-        </div>
-
-        <!-- Quick Stats / Highlights -->
-        <div class="hero__stats">
-          <div class="stat-card">
-            <span class="stat-card__number">12 ч</span>
-            <span class="stat-card__label">Сухости и защиты</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-card__number">0+</span>
-            <span class="stat-card__label">Гипоаллергенно</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-card__number">1 день</span>
-            <span class="stat-card__label">Доставка по городу</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-card__number">Kaspi</span>
-            <span class="stat-card__label">QR / При получении</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__media">
-        <div class="hero-card-preview">
-          <div class="hero-badge">Хит продаж в Шемонаихе ⭐</div>
-          <img src="images/products/mama_znaet_pants.webp" alt="Мама знает трусики" class="hero-card-preview__img">
-          <div class="hero-card-preview__caption">
-            <div class="hero-card-preview__name">Мама знает — Трусики</div>
-            <div class="hero-card-preview__price">6 800 ₸</div>
-          </div>
-          <div class="hero-floating-badge hero-floating-badge--1">
-            <span class="emoji">🚚</span>
-            <div>
-              <strong>До двери</strong>
-              <small>в Шемонаихе</small>
-            </div>
-          </div>
-          <div class="hero-floating-badge hero-floating-badge--2">
-            <span class="emoji">🌿</span>
-            <div>
-              <strong>Японский гель</strong>
-              <small>Без опрелостей</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Advantages Section -->
-  <section id="advantages" class="advantages-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Почему мамы Шемонаихи выбирают нас?</h2>
-        <p class="section-subtitle">Забота о нежной коже малыша и комфорт родителей без лишних переплат</p>
-      </div>
-
-      <div class="advantages-grid">
-        <div class="adv-card">
-          <div class="adv-card__icon adv-card__icon--yellow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-          </div>
-          <h3 class="adv-card__title">Доставка прямо до квартиры</h3>
-          <p class="adv-card__text">Не нужно тащить тяжелые пачки подгузников и бутыли гелей с коляской на руках. Привезем аккуратно и вовремя.</p>
-        </div>
-
-        <div class="adv-card">
-          <div class="adv-card__icon adv-card__icon--blue">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          </div>
-          <h3 class="adv-card__title">100% Оригинальное качество</h3>
-          <p class="adv-card__text">Прямые поставки от официальных дистрибьюторов брендов «Мама знает», Baybee, Baby Shark и Softcare.</p>
-        </div>
-
-        <div class="adv-card">
-          <div class="adv-card__icon adv-card__icon--green">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
-          </div>
-          <h3 class="adv-card__title">Сухость до 12 часов</h3>
-          <p class="adv-card__text">Дышащие микропоры и суперабсорбент сохраняют кожу сухой всю ночь, предотвращая раздражения и опрелости.</p>
-        </div>
-
-        <div class="adv-card">
-          <div class="adv-card__icon adv-card__icon--purple">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-          </div>
-          <h3 class="adv-card__title">Удобная оплата Kaspi</h3>
-          <p class="adv-card__text">Оплачивайте удобным для вас способом: Kaspi QR, Kaspi Gold, Halyk или наличными курьеру при проверке заказа.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Smart Size Finder Section (Nordic Honeycomb Interactive Tool) -->
-  <section id="smartSizeFinder" class="size-finder-section">
-    <div class="container">
-      <div class="size-finder-card">
-        <div class="size-finder-card__badge">
-          <span class="pulse-dot-amber"></span>
-          <span>Интерактивный помощник мамы</span>
-        </div>
-        <h2 class="size-finder-card__title">
-          Умный подбор размера по весу малыша
-        </h2>
-        <p class="size-finder-card__desc">
-          Двигайте ползунок или выберите вес — система мгновенно подскажет идеальный размер трусиков с защитой от натирания и протеканий.
-        </p>
-
-        <div class="weight-slider-wrap">
-          <div class="weight-display">
-            <span class="weight-display__label">Вес малыша:</span>
-            <span class="weight-display__value"><strong id="currentWeightVal">7.5</strong> кг</span>
-          </div>
-          <input type="range" id="weightSlider" class="weight-slider" min="3" max="22" step="0.5" value="7.5" aria-label="Ползунок веса ребенка в килограммах">
-          <div class="slider-marks">
-            <span>3 кг (NB)</span>
-            <span>6 кг</span>
-            <span>9 кг</span>
-            <span>12 кг</span>
-            <span>15 кг</span>
-            <span>22 кг (XXXL)</span>
-          </div>
-        </div>
-
-        <!-- Quick Weight Pills -->
-        <div class="weight-pills" id="weightPillsContainer">
-          <button type="button" class="weight-pill" data-weight="4">3–5 кг (NB / 1)</button>
-          <button type="button" class="weight-pill" data-weight="6">4–8 кг (Mini / 2)</button>
-          <button type="button" class="weight-pill active" data-weight="7.5">6–11 кг (Midi / 3)</button>
-          <button type="button" class="weight-pill" data-weight="11">9–14 кг (Maxi / 4)</button>
-          <button type="button" class="weight-pill" data-weight="14">12–18 кг (Junior / 5)</button>
-          <button type="button" class="weight-pill" data-weight="18">15+ кг (Extra / 6)</button>
-        </div>
-
-        <!-- Chubby Build / Extra Comfort Toggle -->
-        <div class="build-toggle-wrap">
-          <label class="build-toggle-label" for="chubbyBuildCheckbox">
-            <input type="checkbox" id="chubbyBuildCheckbox" class="build-toggle-input">
-            <span class="build-toggle-custom"></span>
-            <span class="build-toggle-text">
-              <strong>👶 Пухленькие ножки / животик (+1 к комфорту)</strong>
-              <small>Рекомендуем взять с запасом, чтобы резиночки гарантированно не сдавливали</small>
-            </span>
-          </label>
-        </div>
-
-        <!-- Live Recommendation Box -->
-        <div class="size-recommendation" id="sizeRecommendationBox">
-          <div class="size-recommendation__icon">✨</div>
-          <div class="size-recommendation__content">
-            <div class="size-recommendation__headline">
-              Рекомендуем: <span class="highlight-size" id="recSizeName">Размер M (3)</span>
-              <span class="accuracy-badge" id="recAccuracyBadge">99% точность посадки</span>
-            </div>
-            <div class="size-recommendation__text" id="recSizeDesc">
-              Оптимально на вес 6–11 кг. Мягкий анатомический поясок не сдавливает животик после кормления и надежно держит влагу.
-            </div>
-            <div class="size-recommendation__subnote" id="recSubnote">
-              🛡️ Если пачка не подойдёт — бесплатно обменяем закрытую упаковку прямо у вашей двери в Шемонаихе.
-            </div>
-          </div>
-          <button type="button" id="applySizeFilterBtn" class="btn btn--apply-size">
-            <span>Показать подходящие товары</span>
-            <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Local Trust Triggers (Гарантии сервиса BabyBee в Шемонаихе) -->
-  <section class="trust-triggers-local" aria-label="Гарантии сервиса BabyBee в Шемонаихе">
-    <div class="container">
-      <div class="trust-triggers-grid">
-        <div class="trust-card">
-          <span class="trust-icon">🤫</span>
-          <div class="trust-content">
-            <strong>Тихая доставка за 40 минут до двери</strong>
-            <p>Склад прямо в Шемонаихе. Курьер не звонит в домофон и звонок, если малыш спит — просто напишет в WhatsApp у двери.</p>
-          </div>
-        </div>
-        <div class="trust-card">
-          <span class="trust-icon">🔄</span>
-          <div class="trust-content">
-            <strong>Гарантия обмена размера</strong>
-            <p>Малыш резко подрос? Бесплатно обменяем закрытую пачку на размер больше прямо при следующем визите курьера.</p>
-          </div>
-        </div>
-        <div class="trust-card">
-          <span class="trust-icon">💳</span>
-          <div class="trust-content">
-            <strong>Оплата через Kaspi QR при получении</strong>
-            <p>Никаких предоплат на незнакомых сайтах — проверяете заказ у двери и оплачиваете привычным Kaspi QR или наличными.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Value Combos Section (Boutique Bundles) -->
-  <section id="combos" class="combos-section">
-    <div class="container">
-      <div class="section-header">
-        <div class="combos-pill">
-          <span>🎁 Максимальная выгода для семьи</span>
-        </div>
-        <h2 class="section-title">Выгодные комбо-наборы с бесплатной доставкой</h2>
-        <p class="section-subtitle">Готовые комплекты для комфорта малыша и экономии семейного бюджета в Шемонаихе</p>
-      </div>
-
-      <div class="combos-grid">
-        <!-- Combo 1 -->
-        <div class="combo-card">
-          <div class="combo-card__badge combo-card__badge--savings">Выбор 7 из 10 мам ⭐</div>
-          <div class="combo-card__image-wrap">
-            <img src="images/products/mama_znaet_pants.webp" alt="Набор Спокойный месяц" class="combo-card__img">
-            <span class="combo-card__sticker">📦 Запас на 3–4 недели</span>
-          </div>
-          <div class="combo-card__body">
-            <div class="combo-card__tag">Хит продаж • Якорь экономии</div>
-            <h3 class="combo-card__title">Комбо «Спокойный месяц»</h3>
-            <p class="combo-card__items">
-              • 2 большие пачки трусиков «Мама знает» (выберите размер)<br>
-              • 3 пачки влажных салфеток с крышкой (в подарок)<br>
-              • Бесплатная экспресс-доставка до двери за 40 мин
-            </p>
-            <div class="combo-card__pricing">
-              <div>
-                <span class="combo-old-price">17 500 ₸</span>
-                <span class="combo-price">15 200 ₸</span>
-              </div>
-              <button type="button" class="btn btn--add-combo" data-combo-id="combo_month" data-combo-name="Комбо «Спокойный месяц»" data-combo-price="15200" data-combo-img="images/products/mama_znaet_pants.webp">
-                <span>+ В корзину</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Combo 2 -->
-        <div class="combo-card">
-          <div class="combo-card__badge combo-card__badge--hit">Без риска 2 размера 🌱</div>
-          <div class="combo-card__image-wrap">
-            <img src="images/products/baybee_pants.jpg" alt="Набор На вырост без риска" class="combo-card__img">
-            <span class="combo-card__sticker">👶 Для растущих малышей</span>
-          </div>
-          <div class="combo-card__body">
-            <div class="combo-card__tag">Для пограничного веса</div>
-            <h3 class="combo-card__title">Комбо «На вырост без риска»</h3>
-            <p class="combo-card__items">
-              • 1 пачка текущего размера (например, M)<br>
-              • 1 пачка следующего размера (например, L)<br>
-              • 1 пачка салфеток Softcare Organic Cotton
-            </p>
-            <div class="combo-card__pricing">
-              <div>
-                <span class="combo-old-price">16 200 ₸</span>
-                <span class="combo-price">14 500 ₸</span>
-              </div>
-              <button type="button" class="btn btn--add-combo" data-combo-id="combo_growth" data-combo-name="Комбо «На вырост без риска»" data-combo-price="14500" data-combo-img="images/products/baybee_pants.jpg">
-                <span>+ В корзину</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Combo 3 -->
-        <div class="combo-card">
-          <div class="combo-card__badge combo-card__badge--eco">0% фосфатов и отдушек 🌿</div>
-          <div class="combo-card__image-wrap">
-            <img src="images/products/softcare.jpg" alt="Набор Чистый дом и забота о коже" class="combo-card__img">
-            <span class="combo-card__sticker">✨ Эко-забота 0+</span>
-          </div>
-          <div class="combo-card__body">
-            <div class="combo-card__tag">Кросс-сейл гигиены</div>
-            <h3 class="combo-card__title">Комбо «Чистый дом и нежная кожа»</h3>
-            <p class="combo-card__items">
-              • 1 пачка премиальных подгузников Softcare<br>
-              • Гипоаллергенный гель для стирки детского белья 1.5 л<br>
-              • Эко-пенка для мытья детской посуды и бутылочек
-            </p>
-            <div class="combo-card__pricing">
-              <div>
-                <span class="combo-old-price">13 400 ₸</span>
-                <span class="combo-price">11 800 ₸</span>
-              </div>
-              <button type="button" class="btn btn--add-combo" data-combo-id="combo_clean" data-combo-name="Комбо «Чистый дом и нежная кожа»" data-combo-price="11800" data-combo-img="images/products/softcare.jpg">
-                <span>+ В корзину</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Catalog Section -->
-  <section id="catalog" class="catalog-section">
-    <div class="container">
-      <div class="catalog-head">
-        <div>
-          <h2 class="section-title">Каталог товаров</h2>
-          <p class="section-subtitle">В наличии на складе в г. Шемонаиха — выберите товар и размер</p>
-        </div>
-
-        <!-- Search Bar -->
-        <div class="catalog-search">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="searchInput" placeholder="Поиск по названию или бренду..." aria-label="Поиск товаров">
-        </div>
-      </div>
-
-      <!-- Category Filter Pills -->
-      <div class="filter-categories">
-        <button class="filter-btn active" data-category="all">
-          <span>✨ Все товары</span>
-          <span class="filter-count" id="countAll">14</span>
-        </button>
-        <button class="filter-btn" data-category="diapers">
-          <span>👶 Подгузники и трусики</span>
-          <span class="filter-count" id="countDiapers">4</span>
-        </button>
-        <button class="filter-btn" data-category="care">
-          <span>🌿 Эко-бытовая химия</span>
-          <span class="filter-count" id="countCare">7</span>
-        </button>
-        <button class="filter-btn" data-category="wipes">
-          <span>🧻 Влажные салфетки</span>
-          <span class="filter-count" id="countWipes">3</span>
-        </button>
-      </div>
-
-      <!-- Brand Filter Tabs -->
-      <div class="filter-brands">
-        <span class="brand-label">Бренд:</span>
-        <button class="brand-pill active" data-brand="all">Все бренды</button>
-        <button class="brand-pill" data-brand="Мама знает">Мама знает</button>
-        <button class="brand-pill" data-brand="Baybee">Baybee</button>
-        <button class="brand-pill" data-brand="Baby Shark">Baby Shark</button>
-        <button class="brand-pill" data-brand="Softcare">Softcare</button>
-      </div>
-
-      <!-- Products Grid -->
-      <div id="productsGrid" class="products-grid">
-        <!-- Rendered dynamically via app.js -->
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>Загрузка каталога товаров...</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Delivery & Payment Section -->
-  <section id="delivery" class="delivery-section">
-    <div class="container">
-      <div class="delivery-card">
-        <div class="delivery-card__col">
-          <div class="badge-sub">Прозрачные условия</div>
-          <h2 class="delivery-title">Как получить и оплатить заказ?</h2>
-          <p class="delivery-text">Мы ценим время мам, поэтому сделали процесс заказа максимально простым и быстрым — буквально в пару кликов.</p>
-
-          <div class="steps-list">
-            <div class="step-item">
-              <div class="step-item__num">1</div>
-              <div class="step-item__info">
-                <h4>Выберите товары в каталоге</h4>
-                <p>Добавьте нужные размеры подгузников или эко-средства в корзину.</p>
-              </div>
-            </div>
-
-            <div class="step-item">
-              <div class="step-item__num">2</div>
-              <div class="step-item__info">
-                <h4>Оформите в 1 клик через WhatsApp</h4>
-                <p>Корзина автоматически сформирует текст заявки с суммами и размерами.</p>
-              </div>
-            </div>
-
-            <div class="step-item">
-              <div class="step-item__num">3</div>
-              <div class="step-item__info">
-                <h4>Быстрая доставка до вашей двери</h4>
-                <p>Курьер привезет заказ по г. Шемонаиха в удобное для вас время.</p>
-              </div>
-            </div>
-
-            <div class="step-item">
-              <div class="step-item__num">4</div>
-              <div class="step-item__info">
-                <h4>Оплата при получении</h4>
-                <p>Kaspi QR, Kaspi Gold, Halyk перевод или наличными курьеру.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="delivery-card__col delivery-card__col--accent">
-          <div class="order-box">
-            <div class="order-box__header">
-              <span class="order-box__icon">🐝</span>
-              <div>
-                <h3>Быстрый контакт в Шемонаихе</h3>
-                <p>Отвечаем за 5-10 минут</p>
-              </div>
-            </div>
-
-            <div class="order-box__item">
-              <span class="label">Город:</span>
-              <span class="value">Шемонаиха (ВКО, Казахстан)</span>
-            </div>
-            <div class="order-box__item">
-              <span class="label">Телефон / WhatsApp:</span>
-              <a href="https://wa.me/77779805639" class="value link">+7 (777) 980-56-39</a>
-            </div>
-            <div class="order-box__item">
-              <span class="label">Instagram:</span>
-              <a href="https://instagram.com/baby_bee_shemonaiha" target="_blank" class="value link">@baby_bee_shemonaiha</a>
-            </div>
-            <div class="order-box__item">
-              <span class="label">Способы оплаты:</span>
-              <span class="value">Kaspi QR / Gold, Halyk, Наличные</span>
-            </div>
-
-            <a href="https://wa.me/77779805639?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%AF%20%D0%B8%D0%B7%20%D0%A8%D0%B5%D0%BC%D0%BE%D0%BD%D0%B0%D0%B8%D1%85%D0%B8%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%20%F0%9F%9B%92" target="_blank" rel="noopener" class="btn btn--whatsapp-solid">
-              <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
-              <span>Написать прямо в WhatsApp</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="faq-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Часто задаваемые вопросы</h2>
-        <p class="section-subtitle">Ответы на популярные вопросы мам о подгузниках и доставке</p>
-      </div>
-
-      <div class="faq-accordion">
-        <details class="faq-item">
-          <summary class="faq-question">
-            <span>Как правильно подобрать размер подгузников-трусиков?</span>
-            <span class="faq-icon">+</span>
-          </summary>
-          <div class="faq-answer">
-            <p>Ориентируйтесь в первую очередь на реальный вес малыша и его телосложение. Если вес находится на верхней границе (например, 10.5 кг при диапазоне M 6–11 кг), рекомендуем брать размер с запасом — размер L (9–14 кг), чтобы поясок сидел свободно и не оставлял следов.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">
-            <span>Сколько стоит доставка по Шемонаихе и как быстро привозите?</span>
-            <span class="faq-icon">+</span>
-          </summary>
-          <div class="faq-answer">
-            <p>Доставляем заказы в день оформления прямо до вашей квартиры или дома. Точные детали и время согласовываются индивидуально в WhatsApp для вашего максимального удобства.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">
-            <span>В чем отличие трусиков «Мама знает», «Baybee» и «Baby Shark»?</span>
-            <span class="faq-icon">+</span>
-          </summary>
-          <div class="faq-answer">
-            <p><strong>«Мама знает»</strong> — флагманский казахстанско-японский бренд с высочайшей мягкостью и анатомическим кроем. <strong>«Baybee»</strong> — премиальная серия с шелковистым слоем для чувствительной кожи. <strong>«Baby Shark»</strong> — практичные, ультратонкие и яркие трусики на каждый день. Все три бренда используют премиальный японский абсорбент без хлора и отдушек.</p>
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary class="faq-question">
-            <span>Безопасна ли эко-химия для новорожденных?</span>
-            <span class="faq-icon">+</span>
-          </summary>
-          <div class="faq-answer">
-            <p>Да! ЭКО-гель для стирки «Мама знает» имеет маркировку 0+ с первых дней жизни, изготовлен на основе мягких ПАВ на немецких компонентах, полностью выполаскивается из волокон ткани и гипоаллергенен.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer__container">
-      <div class="footer__brand">
-        <div class="footer__logo">
-          <img src="images/logo.jpg" alt="Baby Bee Шемонаиха" class="footer__logo-img">
+  <main id="top">
+    <!-- ======================================================================
+         HERO & HYPERLOCAL TRUST TRIGGERS
+         ====================================================================== -->
+    <section class="hero-section" aria-labelledby="heroHeading">
+      <div class="container">
+        <div class="hero-card">
           <div>
-            <div class="footer__brand-title">Baby Bee 🐝</div>
-            <div class="footer__brand-desc">Забота и комфорт для вашего малыша в г. Шемонаиха</div>
+            <span class="hero-eyebrow">⚡ Экспресс-доставка по г. Шемонаиха за 40 минут</span>
+            <h1 id="heroHeading">
+              Сухие ночи малыша и <span class="highlight-emerald">безопасная чистота дома</span> без похода в магазин
+            </h1>
+            <p class="hero-lead">
+              Подберите точный размер подгузников по весу ребёнка за 5 секунд. Привезём прямо до двери квартиры с оплатой через Kaspi QR при получении.
+            </p>
+            <div class="hero-actions">
+              <a href="#smartSizeFinder" class="btn-primary">👶 Подобрать размер по весу</a>
+              <a href="#catalogSection" class="btn-secondary">Смотреть каталог (12)</a>
+            </div>
+          </div>
+
+          <div class="trust-grid" aria-label="Гарантии сервиса BabyBee в Шемонаихе">
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">🤫</span>
+              <div>
+                <strong>Тихая доставка за 40 минут до двери</strong>
+                <p>Курьер не звонит в домофон, если малыш спит — бережно напишет в WhatsApp у двери.</p>
+              </div>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">🔄</span>
+              <div>
+                <strong>Бесплатный обмен закрытой пачки</strong>
+                <p>Малыш резко вырос? Обменяем запечатанную пачку на размер больше без лишних вопросов.</p>
+              </div>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">💳</span>
+              <div>
+                <strong>Kaspi QR / Kaspi Gold при получении</strong>
+                <p>Никаких предоплат — проверяете заказ у двери и оплачиваете удобным способом.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <p class="footer__copy">© 2026 Baby Bee Шемонаиха. Все права защищены. Доставка подгузников и эко-товаров.</p>
       </div>
+    </section>
 
-      <div class="footer__links">
-        <h4>Контакты</h4>
-        <p>г. Шемонаиха, Восточно-Казахстанская область</p>
-        <p>Телефон: <a href="tel:+77779805639">+7 (777) 980-56-39</a></p>
-        <p>WhatsApp: <a href="https://wa.me/77779805639">+7 (777) 980-56-39</a></p>
-        <p>Instagram: <a href="https://instagram.com/baby_bee_shemonaiha" target="_blank">@baby_bee_shemonaiha</a></p>
-      </div>
+    <!-- ======================================================================
+         SMART WEIGHT SIZE FINDER (#smartSizeFinder)
+         ====================================================================== -->
+    <section id="smartSizeFinder" class="size-finder-section" aria-labelledby="finderTitle">
+      <div class="container">
+        <div class="finder-shell">
+          <div>
+            <div class="finder-header">
+              <span class="section-tag">Умный подбор посадки</span>
+              <h2 id="finderTitle">Калькулятор размера по весу малыша</h2>
+              <p>Учитываем переходные зоны веса и комплекцию, чтобы резиночки не натирали ножки.</p>
+            </div>
 
-      <div class="footer__payment">
-        <h4>Оплата и сервис</h4>
-        <div class="payment-badges">
-          <span class="pay-badge">Kaspi QR</span>
-          <span class="pay-badge">Kaspi Gold</span>
-          <span class="pay-badge">Halyk</span>
-          <span class="pay-badge">Наличными</span>
+            <div class="weight-control-box">
+              <div class="weight-readout-row">
+                <label for="weightRangeInput">Текущий вес ребёнка:</label>
+                <output id="weightOutput" for="weightRangeInput">9.5 кг</output>
+              </div>
+
+              <input
+                type="range"
+                id="weightRangeInput"
+                min="5"
+                max="25"
+                step="0.5"
+                value="9.5"
+                aria-label="Выберите вес малыша в килограммах"
+              />
+
+              <div class="scale-ticks" aria-hidden="true">
+                <span>5 кг</span>
+                <span>10 кг</span>
+                <span>15 кг</span>
+                <span>20 кг</span>
+                <span>25 кг</span>
+              </div>
+
+              <label class="chubby-toggle" for="chubbyBuildCheckbox">
+                <input type="checkbox" id="chubbyBuildCheckbox" />
+                <span>Пухленькие ножки или животик (+0.8 кг к запасу комфорта)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="finder-result-card" aria-live="polite">
+            <div class="result-top">
+              <div>
+                <div class="rec-label">Рекомендуемый размер</div>
+                <div class="rec-size-badge" id="recSizeDisplay">L (4)</div>
+              </div>
+              <span class="rec-meta-pill" id="recDailyUsage">~6 шт / сутки</span>
+            </div>
+
+            <div class="borderline-alert" id="recAdviceText">
+              Оптимальная посадка для веса 9.5 кг. Во всех карточках подгузников ниже автоматически выбран размер L (4).
+            </div>
+
+            <div class="result-actions">
+              <button type="button" class="apply-size-btn" id="applySizeFilterBtn">
+                Показать подгузники размера L (4) в каталоге ↓
+              </button>
+            </div>
+          </div>
         </div>
-        <p class="footer__note">Доставка курьером до двери в день заказа</p>
       </div>
+    </section>
+
+    <!-- ======================================================================
+         COMBO BUNDLES (#comboBundles)
+         ====================================================================== -->
+    <section id="comboBundles" class="bundles-section" aria-labelledby="bundlesHeading">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="bundlesHeading">Выгодные комбо-наборы для мам Шемонаихи</h2>
+            <p>Размер подгузников в наборах автоматически синхронизирован с калькулятором веса</p>
+          </div>
+        </div>
+
+        <div class="bundles-grid" id="bundlesGrid"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FULL 12-ITEM PRODUCT CATALOG (#catalogSection)
+         ====================================================================== -->
+    <section id="catalogSection" class="catalog-section" aria-labelledby="catalogHeading">
+      <div class="container">
+        <div class="catalog-controls" role="region" aria-label="Фильтры каталога">
+          <div class="category-pills" id="categoryPills">
+            <button type="button" class="cat-pill" data-category="all" aria-pressed="true">Все товары (12)</button>
+            <button type="button" class="cat-pill" data-category="diapers" aria-pressed="false">Подгузники и трусики (4)</button>
+            <button type="button" class="cat-pill" data-category="care" aria-pressed="false">Эко-стирка и дом (6)</button>
+            <button type="button" class="cat-pill" data-category="wipes" aria-pressed="false">Влажные салфетки (2)</button>
+          </div>
+
+          <div class="search-and-filter">
+            <button type="button" class="size-filter-chip" id="toggleSizeMatchBtn" aria-pressed="false">
+              <span>✓ Только мой размер:</span>
+              <strong id="chipSizeLabel">L (4)</strong>
+            </button>
+            <input
+              type="search"
+              id="catalogSearchInput"
+              class="search-input"
+              placeholder="Поиск: трусики, гель 0+, мыло..."
+              aria-label="Поиск товаров по названию"
+            />
+          </div>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FLOATING SUPER-GLASS CART BAR
+       ======================================================================== -->
+  <aside class="floating-cart-bar" id="floatingCartBar" aria-label="Быстрая панель заказа">
+    <div class="bar-info">
+      <strong id="floatingCartSummary">В корзине: 0 товаров • 0 ₸</strong>
+      <span>Бесплатная доставка по Шемонаихе за 40 минут</span>
+    </div>
+    <button type="button" class="bar-checkout-btn" id="floatingCheckoutBtn">
+      Оформить в WhatsApp →
+    </button>
+  </aside>
+
+  <!-- ========================================================================
+       NATIVE <dialog> CART & WHATSAPP CHECKOUT
+       ======================================================================== -->
+  <dialog class="checkout-dialog" id="cartDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-inner">
+      <div class="dialog-header">
+        <h2 id="dialogTitle">Ваш заказ • BabyBee Шемонаиха</h2>
+        <button type="button" class="close-dialog-btn" id="closeDialogBtn" aria-label="Закрыть окно корзины">✕</button>
+      </div>
+
+      <div class="dialog-body">
+        <div class="cart-items-list" id="dialogCartItems"></div>
+
+        <form class="checkout-form" id="whatsappCheckoutForm">
+          <div class="field-group">
+            <label for="customerAddress">Адрес доставки в Шемонаихе (улица, дом, кв.):</label>
+            <input
+              type="text"
+              id="customerAddress"
+              name="address"
+              required
+              placeholder="Например: ул. Вокзальная 14, кв. 25"
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="paymentMethodSelect">Удобный способ оплаты у двери:</label>
+            <select id="paymentMethodSelect" name="paymentMethod">
+              <option value="Kaspi QR при получении">Kaspi QR при получении</option>
+              <option value="Перевод на Kaspi Gold при получении">Перевод на Kaspi Gold при получении</option>
+              <option value="Наличными курьеру">Наличными курьеру</option>
+            </select>
+          </div>
+
+          <label class="silent-delivery-box" for="silentDeliveryCheck">
+            <input type="checkbox" id="silentDeliveryCheck" checked />
+            <div>
+              <strong>🤫 Тихая доставка (малыш спит)</strong>
+              <span>Курьер не позвонит в домофон или звонок — напишет в WhatsApp, когда будет у двери.</span>
+            </div>
+          </label>
+
+          <button type="submit" class="whatsapp-submit-btn" id="submitWhatsAppOrderBtn">
+            Отправить заказ в WhatsApp (0 ₸)
+          </button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>🐝 <strong>BabyBee Шемонаиха</strong> • Экспресс-доставка подгузников и эко-средств «Мама знает» за 40 минут • Оплата Kaspi QR</p>
     </div>
   </footer>
 
-  <!-- Slide-out Cart Drawer & Backdrop -->
-  <div id="cartBackdrop" class="cart-backdrop"></div>
-  <aside id="cartDrawer" class="cart-drawer" aria-label="Корзина покупок">
-    <div class="cart-drawer__header">
-      <div class="cart-drawer__title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-        <span>Ваш заказ</span>
-        <span id="drawerItemsCount" class="badge-count">0</span>
-      </div>
-      <button id="closeCartBtn" class="close-cart-btn" aria-label="Закрыть корзину">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-    </div>
+  <!-- ========================================================================
+       VANILLA ES2024+ REACTIVE STORE & APPLICATION ENGINE
+       ======================================================================== -->
+  <script type="module">
+    /**
+     * 1. REAL 12-PRODUCT CATALOG DATA
+     */
+    const PRODUCTS_CATALOG = [
+      {
+        id: "mama_znaet_pants",
+        name: "Мама знает — Трусики-подгузники",
+        category: "diapers",
+        badge: "Хит продаж ⭐",
+        price: 6800,
+        image: "images/products/mama_znaet_pants.webp",
+        sizes: [
+          { size: "M (3)", weight: "6–11 кг", code: "M" },
+          { size: "L (4)", weight: "9–14 кг", code: "L" },
+          { size: "XL (5)", weight: "12–18 кг", code: "XL" },
+          { size: "XXL (6)", weight: "15–22 кг", code: "XXL" },
+          { size: "XXXL (7)", weight: "20–30 кг", code: "XXXL" }
+        ]
+      },
+      {
+        id: "baybee_pants",
+        name: "Baybee — Премиальные трусики",
+        category: "diapers",
+        badge: "Премиум качество 👑",
+        price: 6600,
+        image: "images/products/baybee_pants.jpg",
+        sizes: [
+          { size: "M (3)", weight: "6–11 кг", code: "M" },
+          { size: "L (4)", weight: "9–14 кг", code: "L" },
+          { size: "XL (5)", weight: "12–18 кг", code: "XL" },
+          { size: "XXL (6)", weight: "15–20 кг", code: "XXL" },
+          { size: "XXXL (7)", weight: "20–25 кг", code: "XXXL" }
+        ]
+      },
+      {
+        id: "baby_shark_pants",
+        name: "Baby Shark — Трусики-подгузники",
+        category: "diapers",
+        badge: "Любимец малышей 🦈",
+        price: 6600,
+        image: "images/products/baby_shark.jpg",
+        sizes: [
+          { size: "M", weight: "6–11 кг", code: "M" },
+          { size: "L", weight: "9–14 кг", code: "L" },
+          { size: "XL", weight: "12–20 кг", code: "XL" },
+          { size: "XXL", weight: "от 15 кг", code: "XXL" },
+          { size: "XXXL", weight: "от 19 кг", code: "XXXL" }
+        ]
+      },
+      {
+        id: "softcare_diapers",
+        name: "Softcare — Подгузники на липучках",
+        category: "diapers",
+        badge: "Выгодная цена 💥",
+        price: 3800,
+        image: "images/products/softcare.jpg",
+        sizes: [
+          { size: "M (3)", weight: "6–11 кг", code: "M" },
+          { size: "L (4)", weight: "9–14 кг", code: "L" }
+        ]
+      },
+      {
+        id: "mama_znaet_eco_baby_gel",
+        name: "ЭКО-гель для стирки детского белья 0+",
+        category: "care",
+        badge: "С первых дней 0+ 🌿",
+        price: 5700,
+        volume: "2 литра",
+        image: "images/products/eco_baby_gel.webp"
+      },
+      {
+        id: "mama_znaet_laundry_gel",
+        name: "Гель для стирки «Горная свежесть»",
+        category: "care",
+        badge: "30 стирок 🏔️",
+        price: 2800,
+        volume: "2 литра",
+        image: "images/products/laundry_gel.webp"
+      },
+      {
+        id: "mama_znaet_laundry_sheets",
+        name: "Концентрированные салфетки для стирки",
+        category: "care",
+        badge: "Инновация ✨",
+        price: 2100,
+        count: "30 шт",
+        image: "images/products/laundry_sheets.webp"
+      },
+      {
+        id: "mama_znaet_cleaning_gel",
+        name: "ЭКО-гель для уборки детских комнат",
+        category: "care",
+        badge: "0+ Безопасно 🐢",
+        price: 2600,
+        volume: "1 литр",
+        image: "images/products/cleaning_gel.webp"
+      },
+      {
+        id: "mama_znaet_soap",
+        name: "Хозяйственное жидкое мыло",
+        category: "care",
+        badge: "Универсальное 🧼",
+        price: 1300,
+        volume: "1 литр",
+        image: "images/products/soap.webp"
+      },
+      {
+        id: "mama_znaet_antifat",
+        name: "Спрей «Антижир» для кухни",
+        category: "care",
+        badge: "Мощная чистота 🔥",
+        price: 1600,
+        volume: "750 мл",
+        image: "images/products/antifat.webp"
+      },
+      {
+        id: "mama_znaet_wipes_15",
+        name: "Детские влажные салфетки (мини)",
+        category: "wipes",
+        badge: "В сумочку 🐨",
+        price: 250,
+        count: "15 шт",
+        image: "images/products/wipes_15.webp"
+      },
+      {
+        id: "mama_znaet_kitchen_wipes",
+        name: "Влажные салфетки для кухни и дома",
+        category: "wipes",
+        badge: "Для кухни 🍽️",
+        price: 1450,
+        count: "80 шт",
+        image: "images/products/kitchen_wipes.webp"
+      }
+    ];
 
-    <!-- Cart Items List -->
-    <div id="cartItemsList" class="cart-drawer__items">
-      <!-- Empty state or items rendered via app.js -->
-    </div>
+    /**
+     * 2. CURATED COMBO BUNDLES (Built from real catalog items)
+     */
+    const COMBO_BUNDLES = [
+      {
+        id: "bundle_calm_month",
+        title: "Комбо «Спокойный месяц»",
+        badge: "Выбор 7 из 10 мам Шемонаихи ⭐",
+        description: "Двойной запас трусиков «Мама знает» + 2 пачки детских салфеток в сумочку.",
+        items: ["2 × Мама знает — Трусики-подгузники", "2 × Детские влажные салфетки (15 шт)"],
+        oldPrice: 14100,
+        price: 12900,
+        usesDynamicSize: true
+      },
+      {
+        id: "bundle_baby_eco_home",
+        title: "Комбо «Малыш 0+ и Эко-Стирка»",
+        badge: "Гипоаллергенно 0+ 🌿",
+        description: "Премиальные трусики Baybee + 2 л ЭКО-геля для детского белья 0+ + жидкое мыло 1 л.",
+        items: ["1 × Baybee — Премиальные трусики", "1 × ЭКО-гель для стирки 0+ (2 л)", "1 × Хозяйственное жидкое мыло (1 л)"],
+        oldPrice: 13600,
+        price: 12400,
+        usesDynamicSize: true
+      },
+      {
+        id: "bundle_clean_house",
+        title: "Комбо «Чистый дом без химии»",
+        badge: "Экономия 1 150 ₸ ✨",
+        description: "Полный набор «Мама знает» для детской комнаты и кухни.",
+        items: [
+          "1 × ЭКО-гель для детских комнат (1 л)",
+          "1 × Спрей «Антижир» (750 мл)",
+          "1 × Хозяйственное жидкое мыло (1 л)",
+          "1 × Салфетки для кухни (80 шт)"
+        ],
+        oldPrice: 6950,
+        price: 5800,
+        usesDynamicSize: false
+      }
+    ];
 
-    <!-- Cart Drawer Footer -->
-    <div class="cart-drawer__footer">
-      <!-- Order details input fields -->
-      <div class="checkout-inputs">
-        <div class="input-group">
-          <label for="orderName">Ваше имя:</label>
-          <input type="text" id="orderName" placeholder="Например: Алина" class="form-control">
-        </div>
-        <div class="input-group">
-          <label for="orderAddress">Адрес в Шемонаихе:</label>
-          <input type="text" id="orderAddress" placeholder="Улица, дом, квартира (или самовывоз)" class="form-control">
-        </div>
-        <div class="input-group">
-          <label for="orderPayment">Способ оплаты:</label>
-          <select id="orderPayment" class="form-control">
-            <option value="Kaspi QR / Kaspi Gold">Kaspi QR / Kaspi Gold</option>
-            <option value="Halyk Bank">Halyk Bank перевод</option>
-            <option value="Наличными курьеру">Наличными при получении</option>
-          </select>
-        </div>
-        <div class="input-group silent-delivery-group">
-          <label class="checkbox-silent-label" for="silentDeliveryCheck">
-            <input type="checkbox" id="silentDeliveryCheck" checked>
-            <span class="custom-checkbox"></span>
-            <span>🤫 <strong>Тихая доставка</strong> (не звонить в дверь, написать в WhatsApp, малыш спит)</span>
-          </label>
-        </div>
-      </div>
+    /**
+     * 3. SMART WEIGHT CALCULATOR ENGINE (With Borderline Overlap Logic)
+     */
+    const SIZE_MATRIX = [
+      { code: "M", label: "M (3)", min: 5.0, max: 11.0, borderStart: 9.2, nextCode: "L", nextLabel: "L (4)", pcsPerDay: 7 },
+      { code: "L", label: "L (4)", min: 9.0, max: 14.0, borderStart: 12.2, nextCode: "XL", nextLabel: "XL (5)", pcsPerDay: 6 },
+      { code: "XL", label: "XL (5)", min: 12.0, max: 18.0, borderStart: 15.8, nextCode: "XXL", nextLabel: "XXL (6)", pcsPerDay: 5 },
+      { code: "XXL", label: "XXL (6)", min: 15.0, max: 22.0, borderStart: 19.5, nextCode: "XXXL", nextLabel: "XXXL (7)", pcsPerDay: 4 },
+      { code: "XXXL", label: "XXXL (7)", min: 19.0, max: 30.0, borderStart: 28.0, nextCode: "XXXL", nextLabel: "XXXL (7)", pcsPerDay: 4 }
+    ];
 
-      <div class="cart-total-bar">
-        <span>Итого к оплате:</span>
-        <span id="cartTotalPrice" class="cart-total-price">0 ₸</span>
-      </div>
+    function evaluateBabySize(weightKg, isChubby) {
+      const effectiveWeight = isChubby ? weightKg + 0.8 : weightKg;
+      const tier = SIZE_MATRIX.find(t => effectiveWeight >= t.min && effectiveWeight <= t.max) || SIZE_MATRIX.at(-1);
+      const isBorderline = effectiveWeight >= tier.borderStart && tier.code !== "XXXL";
 
-      <button id="checkoutWhatsAppBtn" class="btn btn--whatsapp-checkout">
-        <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
-        <span>Отправить заказ в WhatsApp</span>
-      </button>
+      const recommendedCode = isBorderline ? tier.nextCode : tier.code;
+      const recommendedLabel = isBorderline ? tier.nextLabel : tier.label;
 
-      <p class="cart-disclaimer">Нажимая кнопку, вы перейдете в WhatsApp с готовым списком товаров для подтверждения</p>
-    </div>
-  </aside>
+      const advice = isBorderline
+        ? `Вес ${weightKg} кг находится на границе размеров ${tier.label} и ${tier.nextLabel}. Рекомендуем взять ${tier.nextLabel} «на вырост», чтобы резиночки не давили. Закрытую пачку всегда обменяем бесплатно!`
+        : `Идеальная посадка для веса ${weightKg} кг${isChubby ? " (с учётом запаса на животик/ножки)" : ""}. Если закрытая пачка не подойдёт — бесплатно обменяем у двери.`;
 
-  <!-- Floating Sticky Cart Button (Mobile & Desktop) -->
-  <button id="floatingCartBtn" class="floating-cart" aria-label="Открыть корзину">
-    <div class="floating-cart__badge" id="floatingBadge">0</div>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-    <span class="floating-cart__label" id="floatingTotal">0 ₸</span>
-  </button>
+      return {
+        code: recommendedCode,
+        label: recommendedLabel,
+        pcsPerDay: tier.pcsPerDay,
+        isBorderline,
+        advice
+      };
+    }
 
-  <!-- Fullscreen Confetti Canvas -->
-  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+    /**
+     * 4. REACTIVE VANILLA ES2024+ STATE STORE
+     */
+    function createStore(initialState) {
+      let state = structuredClone(initialState);
+      const listeners = new Set();
 
-  <!-- Stitch-Inspired Celebratory Order Modal -->
-  <div id="celebrationBackdrop" class="celebration-backdrop" aria-hidden="true">
-    <div class="celebration-modal" id="celebrationModal" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle">
-      <button class="celebration-modal__close" id="closeCelebrationBtn" aria-label="Закрыть окно">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
+      return {
+        getState: () => state,
+        setState(updater) {
+          const nextPartial = typeof updater === "function" ? updater(state) : updater;
+          state = { ...state, ...nextPartial };
+          listeners.forEach(fn => fn(state));
+        },
+        subscribe(fn) {
+          listeners.add(fn);
+          return () => listeners.delete(fn);
+        }
+      };
+    }
 
-      <!-- Honey Mascot Badge -->
-      <div class="celebration-mascot-wrap">
-        <div class="celebration-mascot-glow"></div>
-        <div class="celebration-mascot-ring">
-          <img src="images/mascot.png" alt="Baby Bee Маскот" class="celebration-mascot-img">
-        </div>
-        <div class="celebration-check-badge">✓</div>
-      </div>
+    const initialRec = evaluateBabySize(9.5, false);
 
-      <h2 class="celebration-title" id="celebrationTitle">Ура! Заказ сформирован! 🎉</h2>
-      <p class="celebration-subtitle">
-        Спасибо за доверие Baby Bee! Заказ бережно передается на сборку в г. Шемонаиха.
-      </p>
+    const store = createStore({
+      weightKg: 9.5,
+      isChubby: false,
+      recommendation: initialRec,
+      activeCategory: "all",
+      searchQuery: "",
+      onlyMatchingSize: false,
+      selectedSizesByProduct: {
+        mama_znaet_pants: "L (4)",
+        baybee_pants: "L (4)",
+        baby_shark_pants: "L",
+        softcare_diapers: "L (4)"
+      },
+      cart: []
+    });
 
-      <!-- Order Code & Live Status -->
-      <div class="celebration-chips">
-        <div class="celebration-chip">
-          <span class="chip-label">Номер заказа:</span>
-          <strong class="chip-code" id="celebrationOrderId">#BB-84920</strong>
-          <button type="button" id="copyCelebrationOrderBtn" class="copy-order-btn" title="Скопировать номер заказа">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          </button>
-        </div>
-        <div class="celebration-status-pill">
-          <span class="pulse-dot"></span>
-          <span>Ожидает отправки в WhatsApp</span>
-        </div>
-      </div>
+    /**
+     * 5. HELPERS & FORMATTERS
+     */
+    const formatKzt = (num) => `${Number(num).toLocaleString("ru-RU")} ₸`;
 
-      <!-- Express Delivery Pipeline -->
-      <div class="celebration-delivery-card">
-        <div class="delivery-card-header">
-          <div class="delivery-icon-wrap">🚚</div>
+    function getFallbackSvgDataUri(title, category) {
+      const emoji = category === "diapers" ? "👶" : category === "care" ? "🌿" : "🧻";
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+        <rect width="100%" height="100%" fill="#FAF6EC"/>
+        <circle cx="160" cy="100" r="46" fill="#F5B738" fill-opacity="0.22"/>
+        <text x="160" y="114" font-size="42" text-anchor="middle">${emoji}</text>
+        <text x="160" y="185" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1F2937" text-anchor="middle">${title.slice(0, 28)}</text>
+      </svg>`;
+      return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+    }
+
+    function syncProductSizesWithCode(recCode) {
+      const updated = {};
+      for (const product of PRODUCTS_CATALOG) {
+        if (!product.sizes) continue;
+        const matched = product.sizes.find(s => s.code === recCode) || product.sizes.at(-1);
+        updated[product.id] = matched.size;
+      }
+      return updated;
+    }
+
+    /**
+     * 6. CART ACTIONS
+     */
+    function addToCart({ key, title, subtitle, price }) {
+      store.setState(prev => {
+        const existingIndex = prev.cart.findIndex(item => item.key === key);
+        const nextCart = structuredClone(prev.cart);
+        if (existingIndex > -1) {
+          nextCart[existingIndex].qty += 1;
+        } else {
+          nextCart.push({ key, title, subtitle, price, qty: 1 });
+        }
+        return { cart: nextCart };
+      });
+    }
+
+    function updateCartQty(key, delta) {
+      store.setState(prev => {
+        const nextCart = prev.cart
+          .map(item => (item.key === key ? { ...item, qty: item.qty + delta } : item))
+          .filter(item => item.qty > 0);
+        return { cart: nextCart };
+      });
+    }
+
+    /**
+     * 7. DOM REFERENCES & RENDERERS
+     */
+    const weightRangeInput = document.getElementById("weightRangeInput");
+    const weightOutput = document.getElementById("weightOutput");
+    const chubbyBuildCheckbox = document.getElementById("chubbyBuildCheckbox");
+    const recSizeDisplay = document.getElementById("recSizeDisplay");
+    const recDailyUsage = document.getElementById("recDailyUsage");
+    const recAdviceText = document.getElementById("recAdviceText");
+    const applySizeFilterBtn = document.getElementById("applySizeFilterBtn");
+    const chipSizeLabel = document.getElementById("chipSizeLabel");
+    const toggleSizeMatchBtn = document.getElementById("toggleSizeMatchBtn");
+    const bundlesGrid = document.getElementById("bundlesGrid");
+    const catalogGrid = document.getElementById("catalogGrid");
+    const categoryPills = document.getElementById("categoryPills");
+    const catalogSearchInput = document.getElementById("catalogSearchInput");
+    const headerCartCount = document.getElementById("headerCartCount");
+    const floatingCartBar = document.getElementById("floatingCartBar");
+    const floatingCartSummary = document.getElementById("floatingCartSummary");
+    const cartDialog = document.getElementById("cartDialog");
+    const dialogCartItems = document.getElementById("dialogCartItems");
+    const submitWhatsAppOrderBtn = document.getElementById("submitWhatsAppOrderBtn");
+
+    function renderFinder(state) {
+      const { weightKg, recommendation } = state;
+      weightOutput.textContent = `${weightKg.toFixed(1).replace(".0", "")} кг`;
+      recSizeDisplay.textContent = recommendation.label;
+      recDailyUsage.textContent = `~${recommendation.pcsPerDay} шт / сутки`;
+      recAdviceText.textContent = recommendation.advice;
+      applySizeFilterBtn.textContent = `Показать подгузники размера ${recommendation.label} в каталоге ↓`;
+      chipSizeLabel.textContent = recommendation.label;
+      toggleSizeMatchBtn.setAttribute("aria-pressed", String(state.onlyMatchingSize));
+    }
+
+    function renderBundles(state) {
+      const { recommendation } = state;
+      bundlesGrid.innerHTML = COMBO_BUNDLES.map(bundle => {
+        const savings = bundle.oldPrice - bundle.price;
+        const sizeNote = bundle.usesDynamicSize ? `Размер в наборе: ${recommendation.label}` : "Универсальный эко-набор";
+        return `
+          <article class="bundle-card">
+            <div>
+              <span class="bundle-badge">${bundle.badge}</span>
+              <h3 style="margin-top:0.6rem;">${bundle.title}</h3>
+              <p class="bundle-desc" style="margin-top:0.25rem;">${bundle.description}</p>
+              <ul class="bundle-items-list" style="margin-top:0.85rem;">
+                ${bundle.items.map(item => `<li><span>✓</span><span>${item}</span></li>`).join("")}
+                <li style="color: var(--emerald-mint-dark);"><span>👶</span><span>${sizeNote}</span></li>
+              </ul>
+            </div>
+            <div class="bundle-footer">
+              <div class="price-stack">
+                <span class="old-price">${formatKzt(bundle.oldPrice)}</span>
+                <span class="new-price">${formatKzt(bundle.price)}</span>
+                <span class="save-pill">Выгода ${formatKzt(savings)}</span>
+              </div>
+              <button
+                type="button"
+                class="btn-primary"
+                data-add-bundle="${bundle.id}"
+              >
+                В корзину +
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderCatalog(state) {
+      const { activeCategory, searchQuery, onlyMatchingSize, recommendation, selectedSizesByProduct } = state;
+      const query = searchQuery.trim().toLowerCase();
+
+      const filtered = PRODUCTS_CATALOG.filter(product => {
+        if (activeCategory !== "all" && product.category !== activeCategory) return false;
+        if (query && !product.name.toLowerCase().includes(query) && !product.badge.toLowerCase().includes(query)) return false;
+        if (onlyMatchingSize && product.sizes) {
+          return product.sizes.some(s => s.code === recommendation.code);
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        catalogGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding: 2.5rem; background:#fff; border-radius:24px; border:1px solid var(--border-hairline);">
+            <p style="font-weight:700; font-size:1.05rem;">По вашему запросу ничего не найдено</p>
+            <p style="color:var(--graphite-muted); font-size:0.88rem; margin-top:0.35rem;">Попробуйте сбросить фильтр категории или размера.</p>
+          </div>
+        `;
+        return;
+      }
+
+      catalogGrid.innerHTML = filtered.map(product => {
+        const specText = product.volume || product.count || (product.sizes ? `${product.sizes.length} разм.` : "");
+        const selectedSize = selectedSizesByProduct[product.id];
+        const fallbackUri = getFallbackSvgDataUri(product.name, product.category);
+
+        let sizeSelectorHtml = "";
+        if (product.sizes) {
+          const activeSizeObj = product.sizes.find(s => s.size === selectedSize) || product.sizes[0];
+          const isRecMatch = activeSizeObj.code === recommendation.code;
+          sizeSelectorHtml = `
+            <div class="size-selector-block">
+              <div class="size-label-row">
+                <span>Размер (${activeSizeObj.weight}):</span>${isRecMatch ? `<span class="fit-match-tag">По весу малыша ✓</span>` : ""}
+              </div>
+              <div class="size-pills-row" role="group" aria-label="Выбор размера для ${product.name}">
+                ${product.sizes.map(s => `
+                  <button
+                    type="button"
+                    class="size-btn ${s.code === recommendation.code ? "is-recommended" : ""}"
+                    data-product-id="${product.id}"
+                    data-select-size="${s.size}"
+                    aria-pressed="${s.size === selectedSize}"
+                    title="Вес: ${s.weight}"
+                  >
+                    ${s.size}
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          `;
+        } else {
+          sizeSelectorHtml = `
+            <div class="size-selector-block">
+              <div class="size-label-row">
+                <span>Фасовка: <strong>${specText}</strong></span>
+                <span class="fit-match-tag">В наличии в Шемонаихе ✓</span>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="product-card-host">
+            <article class="product-card">
+              <div class="card-media">
+                <span class="product-badge">${product.badge}</span>
+                <img
+                  src="${product.image}"
+                  alt="${product.name}"
+                  loading="lazy"
+                  onerror="this.onerror=null; this.src='${fallbackUri}';"
+                />
+                ${specText ? `<span class="spec-pill">${specText}</span>` : ""}
+              </div>
+
+              <div class="card-body">
+                <div>
+                  <h3 class="product-title">${product.name}</h3>
+                </div>
+
+                ${sizeSelectorHtml}
+
+                <div class="card-footer">
+                  <span class="product-price">${formatKzt(product.price)}</span>
+                  <button
+                    type="button"
+                    class="add-btn"
+                    data-add-product="${product.id}"
+                  >
+                    В корзину +
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderCartUI(state) {
+      const totalCount = state.cart.reduce((acc, item) => acc + item.qty, 0);
+      const totalSum = state.cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+      headerCartCount.textContent = String(totalCount);
+      floatingCartSummary.textContent = `В корзине: ${totalCount} шт. • ${formatKzt(totalSum)}`;
+      floatingCartBar.classList.toggle("is-visible", totalCount > 0);
+      submitWhatsAppOrderBtn.textContent = `Отправить заказ в WhatsApp (${formatKzt(totalSum)})`;
+
+      if (state.cart.length === 0) {
+        dialogCartItems.innerHTML = `
+          <p style="text-align:center; padding:1.25rem; color:var(--graphite-muted); font-size:0.9rem;">
+            Ваша корзина пока пуста. Выберите подгузники или комбо-набор в каталоге.
+          </p>
+        `;
+        return;
+      }
+
+      dialogCartItems.innerHTML = state.cart.map(item => `
+        <div class="cart-row">
           <div>
-            <div class="delivery-card-title">Быстрая доставка до двери</div>
-            <div class="delivery-card-city">г. Шемонаиха • Сегодня в день заказа</div>
+            <div class="cart-row-title">${item.title}</div>
+            <div class="cart-row-sub">${item.subtitle} • ${formatKzt(item.price)}</div>
+          </div>
+          <div class="qty-controls">
+            <button type="button" data-cart-key="${item.key}" data-qty-delta="-1" aria-label="Уменьшить количество">−</button>
+            <span>${item.qty}</span>
+            <button type="button" data-cart-key="${item.key}" data-qty-delta="1" aria-label="Увеличить количество">+</button>
           </div>
         </div>
+      `).join("");
+    }
 
-        <div class="delivery-pipeline">
-          <div class="pipeline-step active">
-            <span class="pipeline-dot">✓</span>
-            <span class="pipeline-text">Принят</span>
-          </div>
-          <div class="pipeline-line active"></div>
-          <div class="pipeline-step current">
-            <span class="pipeline-dot">●</span>
-            <span class="pipeline-text">Сборка</span>
-          </div>
-          <div class="pipeline-line"></div>
-          <div class="pipeline-step">
-            <span class="pipeline-dot">3</span>
-            <span class="pipeline-text">Доставка</span>
-          </div>
-        </div>
+    /**
+     * 8. EVENT LISTENERS & REACTIVE SUBSCRIPTION
+     */
+    store.subscribe(state => {
+      renderFinder(state);
+      renderBundles(state);
+      renderCatalog(state);
+      renderCartUI(state);
+    });
 
-        <div class="delivery-address-row" id="celebrationAddressRow">
-          📍 Адрес: <strong id="celebrationAddressVal">г. Шемонаиха</strong>
-        </div>
-      </div>
+    // Weight Slider & Chubby Checkbox
+    function handleWeightChange() {
+      const weightKg = parseFloat(weightRangeInput.value);
+      const isChubby = chubbyBuildCheckbox.checked;
+      const recommendation = evaluateBabySize(weightKg, isChubby);
+      const syncedSizes = syncProductSizesWithCode(recommendation.code);
 
-      <!-- Order Cost & Free Delivery Highlight -->
-      <div class="celebration-summary">
-        <div class="summary-row">
-          <span>Доставка по Шемонаихе:</span>
-          <span class="free-delivery-tag">Бесплатно</span>
-        </div>
-        <div class="summary-row total-row">
-          <span>Итого к оплате:</span>
-          <span class="total-highlight" id="celebrationTotalVal">0 ₸</span>
-        </div>
-        <div class="summary-note">Оплата при получении курьеру: Kaspi QR / Наличными</div>
-      </div>
+      store.setState(prev => ({
+        weightKg,
+        isChubby,
+        recommendation,
+        selectedSizesByProduct: { ...prev.selectedSizesByProduct, ...syncedSizes }
+      }));
+    }
 
-      <!-- Main Action Buttons -->
-      <div class="celebration-actions">
-        <a id="celebrationWhatsAppLink" href="#" target="_blank" rel="noopener" class="btn btn--celebration-wa">
-          <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.07-.941.015-1.428-.255-2.587-1.144-3.56-2.115-.976-.97-1.86-2.13-2.114-3.56-.055-.306-.03-.628.016-.941.05-.333.419-1.026.824-1.17.203-.072.434-.072.637 0 .15.053.303.14.417.253.344.341.688.683 1.031 1.025.109.109.176.242.176.388 0 .147-.067.28-.176.389l-.337.337c-.109.109-.109.288 0 .397.432.432.93.811 1.488 1.119.559.309 1.146.541 1.765.688.15.035.303-.027.4-.124l.338-.338c.109-.109.242-.176.389-.176.146 0 .279.067.388.176.342.343.684.687 1.025 1.031.113.114.2.267.253.417.072.203.072.434 0 .637z"/></svg>
-          <span>Перейти в WhatsApp и отправить</span>
-        </a>
-        <button type="button" id="continueShoppingBtn" class="btn btn--subtle-back">
-          Вернуться к покупкам
-        </button>
-      </div>
-    </div>
-  </div>
+    weightRangeInput.addEventListener("input", handleWeightChange);
+    chubbyBuildCheckbox.addEventListener("change", handleWeightChange);
 
-  <!-- Floating Sticky Frosted Glass Order Bar (Mobile/Desktop) -->
-  <aside id="stickyOrderBar" class="sticky-order-bar" aria-label="Быстрый заказ">
-    <div class="sticky-order-bar__inner">
-      <div class="sticky-order-bar__info">
-        <div class="sticky-cart-icon">🛒</div>
-        <div>
-          <div class="sticky-order-bar__title">В корзине: <strong id="stickyBarCount">0 товаров</strong></div>
-          <div class="sticky-order-bar__price"><span id="stickyBarTotal">0 ₸</span> • <span class="free-pill">Доставка 0 ₸</span></div>
-        </div>
-      </div>
-      <button type="button" id="stickyCheckoutBtn" class="btn btn--sticky-checkout">
-        <span>Оформить заказ</span>
-        <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-      </button>
-    </div>
-  </aside>
+    applySizeFilterBtn.addEventListener("click", () => {
+      store.setState({ activeCategory: "diapers", onlyMatchingSize: true });
+      for (const btn of categoryPills.querySelectorAll(".cat-pill")) {
+        btn.setAttribute("aria-pressed", String(btn.dataset.category === "diapers"));
+      }
+      document.getElementById("catalogSection").scrollIntoView({ behavior: "smooth" });
+    });
 
-  <!-- JavaScript -->
-  <script src="js/app.js"></script>
+    toggleSizeMatchBtn.addEventListener("click", () => {
+      store.setState(prev => ({ onlyMatchingSize: !prev.onlyMatchingSize }));
+    });
+
+    categoryPills.addEventListener("click", (e) => {
+      const btn = e.target.closest(".cat-pill");
+      if (!btn) return;
+      const category = btn.dataset.category;
+      for (const pill of categoryPills.querySelectorAll(".cat-pill")) {
+        pill.setAttribute("aria-pressed", String(pill === btn));
+      }
+      store.setState({ activeCategory: category });
+    });
+
+    catalogSearchInput.addEventListener("input", (e) => {
+      store.setState({ searchQuery: e.target.value });
+    });
+
+    // Delegated clicks for Catalog Size Selection & Add to Cart
+    catalogGrid.addEventListener("click", (e) => {
+      const sizeBtn = e.target.closest("[data-select-size]");
+      if (sizeBtn) {
+        const productId = sizeBtn.dataset.productId;
+        const chosenSize = sizeBtn.dataset.selectSize;
+        store.setState(prev => ({
+          selectedSizesByProduct: {
+            ...prev.selectedSizesByProduct,
+            [productId]: chosenSize
+          }
+        }));
+        return;
+      }
+
+      const addBtn = e.target.closest("[data-add-product]");
+      if (addBtn) {
+        const productId = addBtn.dataset.addProduct;
+        const product = PRODUCTS_CATALOG.find(p => p.id === productId);
+        if (!product) return;
+        const chosenSize = store.getState().selectedSizesByProduct[productId];
+        const subtitle = product.sizes
+          ? `Размер: ${chosenSize}`
+          : (product.volume || product.count || "Стандарт");
+        const key = `${product.id}__${chosenSize || "std"}`;
+
+        addToCart({
+          key,
+          title: product.name,
+          subtitle,
+          price: product.price
+        });
+      }
+    });
+
+    // Delegated clicks for Bundles
+    bundlesGrid.addEventListener("click", (e) => {
+      const bundleBtn = e.target.closest("[data-add-bundle]");
+      if (!bundleBtn) return;
+      const bundle = COMBO_BUNDLES.find(b => b.id === bundleBtn.dataset.addBundle);
+      if (!bundle) return;
+      const recLabel = store.getState().recommendation.label;
+      const subtitle = bundle.usesDynamicSize ? `Комбо (размер ${recLabel})` : "Эко-комбо для дома";
+      addToCart({
+        key: `${bundle.id}__${bundle.usesDynamicSize ? recLabel : "std"}`,
+        title: bundle.title,
+        subtitle,
+        price: bundle.price
+      });
+    });
+
+    // Cart Dialog Controls
+    document.getElementById("openCartBtn").addEventListener("click", () => cartDialog.showModal());
+    document.getElementById("floatingCheckoutBtn").addEventListener("click", () => cartDialog.showModal());
+    document.getElementById("closeDialogBtn").addEventListener("click", () => cartDialog.close());
+
+    dialogCartItems.addEventListener("click", (e) => {
+      const qtyBtn = e.target.closest("[data-qty-delta]");
+      if (!qtyBtn) return;
+      updateCartQty(qtyBtn.dataset.cartKey, Number(qtyBtn.dataset.qtyDelta));
+    });
+
+    // WhatsApp Checkout Submission
+    document.getElementById("whatsappCheckoutForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const state = store.getState();
+      if (state.cart.length === 0) return;
+
+      const address = document.getElementById("customerAddress").value.trim();
+      const paymentMethod = document.getElementById("paymentMethodSelect").value;
+      const silentDelivery = document.getElementById("silentDeliveryCheck").checked;
+      const totalSum = state.cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+      const orderLines = state.cart.map(
+        (item, idx) => `${idx + 1}. ${item.title} (${item.subtitle}) — ${item.qty} шт. × ${formatKzt(item.price)}`
+      );
+
+      const message = [
+        `Здравствуйте, BabyBee Шемонаиха! 🐝`,
+        `Хочу оформить заказ с доставкой за 40 минут:`,
+        ``,
+        ...orderLines,
+        ``,
+        `👶 Вес малыша в калькуляторе: ${state.weightKg} кг (рекомендован ${state.recommendation.label})`,
+        `💰 Итого к оплате: ${formatKzt(totalSum)}`,
+        `💳 Способ оплаты: ${paymentMethod}`,
+        `🤫 Режим доставки: ${silentDelivery ? "Тихая доставка (малыш спит — не звонить в домофон, написать в WhatsApp у двери)" : "Стандартная доставка"}`,
+        `📍 Адрес в Шемонаихе: ${address}`
+      ].join("\n");
+
+      const whatsappPhone = "77050000000"; // Заменить на рабочий WhatsApp-номер курьерской службы BabyBee
+      const url = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    // Initial Render
+    const initState = store.getState();
+    renderFinder(initState);
+    renderBundles(initState);
+    renderCatalog(initState);
+    renderCartUI(initState);
+  </script>
 </body>
 </html>
