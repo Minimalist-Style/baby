@@ -1275,6 +1275,87 @@
       font-size: 0.82rem;
       color: var(--graphite-muted);
     }
+
+    /* ==========================================================================
+       DEVELOPER SECRET HUD (7788) & NOTIFICATIONS
+       ========================================================================== */
+    .dev-mode-toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999999;
+      background: rgba(31, 41, 55, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #FFFFFF;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(245, 183, 56, 0.6);
+      font-size: 0.88rem;
+      max-width: 420px;
+      animation: devSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .dev-mode-toast.fade-out {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.96);
+    }
+    @keyframes devSlideIn {
+      from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .dev-toast-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .dev-toast-title {
+      color: var(--amber-honey);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dev-toast-body {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .dev-toast-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .dev-btn {
+      background: var(--amber-honey);
+      color: #1F2937;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .dev-btn:hover {
+      background: var(--amber-honey-hover);
+    }
+    .dev-btn-close {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFF;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
   </style>
 </head>
 <body>
@@ -1376,19 +1457,16 @@
               <input
                 type="range"
                 id="weightRangeInput"
-                min="5"
-                max="25"
-                step="0.5"
-                value="9.5"
+                min="3" max="22" step="0.5" value="9.5"
                 aria-label="Выберите вес малыша в килограммах"
               />
 
               <div class="scale-ticks" aria-hidden="true">
-                <span>5 кг</span>
+                <span>3 кг</span>
+                <span>6 кг</span>
                 <span>10 кг</span>
                 <span>15 кг</span>
-                <span>20 кг</span>
-                <span>25 кг</span>
+                <span>22 кг</span>
               </div>
 
               <label class="chubby-toggle" for="chubbyBuildCheckbox">
@@ -1444,10 +1522,11 @@
       <div class="container">
         <div class="catalog-controls" role="region" aria-label="Фильтры каталога">
           <div class="category-pills" id="categoryPills">
-            <button type="button" class="cat-pill" data-category="all" aria-pressed="true">Все товары (12)</button>
-            <button type="button" class="cat-pill" data-category="diapers" aria-pressed="false">Подгузники и трусики (4)</button>
-            <button type="button" class="cat-pill" data-category="care" aria-pressed="false">Эко-стирка и дом (6)</button>
-            <button type="button" class="cat-pill" data-category="wipes" aria-pressed="false">Влажные салфетки (2)</button>
+            <button type="button" class="cat-pill" data-category="all" aria-pressed="true">Все товары (56)</button>
+            <button type="button" class="cat-pill" data-category="pants" aria-pressed="false">Трусики (3)</button>
+            <button type="button" class="cat-pill" data-category="diapers" aria-pressed="false">Подгузники (3)</button>
+            <button type="button" class="cat-pill" data-category="wipes" aria-pressed="false">Влажные салфетки (4)</button>
+            <button type="button" class="cat-pill" data-category="care" aria-pressed="false">Эко-химия и дом (46)</button>
           </div>
 
           <div class="search-and-filter">
@@ -1496,6 +1575,15 @@
       <div class="dialog-body">
         <div class="cart-items-list" id="dialogCartItems"></div>
 
+          <div class="kaspi-payment-banner" style="display:flex; align-items:center; gap:0.75rem; background:rgba(245, 183, 56, 0.12); border:1px solid rgba(245, 183, 56, 0.4); border-radius:12px; padding:0.75rem 1rem; margin-bottom:1rem;">
+            <div style="font-size:1.75rem; line-height:1;">🟡</div>
+            <div style="font-size:0.84rem; line-height:1.4;">
+              <strong style="color:var(--graphite-deep); display:block;">Оплата через Kaspi QR при получении</strong>
+              <span style="color:var(--graphite-muted);">Курьер привезет заказ за 40 минут со счетом Kaspi Pay или QR-кодом для оплаты.</span>
+            </div>
+          </div>
+
+
         <form class="checkout-form" id="whatsappCheckoutForm">
           <div class="field-group">
             <label for="customerAddress">Адрес доставки в Шемонаихе (улица, дом, кв.):</label>
@@ -1542,192 +1630,840 @@
   <!-- ========================================================================
        VANILLA ES2024+ REACTIVE STORE & APPLICATION ENGINE
        ======================================================================== -->
-  <script type="module">
+    <script type="module">
     /**
-     * 1. REAL 12-PRODUCT CATALOG DATA
+     * 1. EMBEDDED REAL CATALOG FALLBACK & DYNAMIC JSON LOADER
      */
-    const PRODUCTS_CATALOG = [
+    const PRODUCTS_FALLBACK = [
+  {
+    "id": "mama_znaet_pants",
+    "name": "Мама знает — Трусики-подгузники",
+    "brand": "Мама знает",
+    "category": "pants",
+    "badge": "Хит продаж ⭐",
+    "description": "Японское качество по выгодной цене. Ультрамягкие дышащие трусики, анатомическая посадка, надежная защита от протеканий до 12 часов.",
+    "price": 6800,
+    "image": "images/products/mama_znaet_pants.webp",
+    "sizes": [
       {
-        id: "mama_znaet_pants",
-        name: "Мама знает — Трусики-подгузники",
-        category: "diapers",
-        badge: "Хит продаж ⭐",
-        price: 6800,
-        image: "images/products/mama_znaet_pants.webp",
-        sizes: [
-          { size: "M (3)", weight: "6–11 кг", code: "M" },
-          { size: "L (4)", weight: "9–14 кг", code: "L" },
-          { size: "XL (5)", weight: "12–18 кг", code: "XL" },
-          { size: "XXL (6)", weight: "15–22 кг", code: "XXL" },
-          { size: "XXXL (7)", weight: "20–30 кг", code: "XXXL" }
-        ]
+        "size": "M (3)",
+        "weight": "6–11 кг",
+        "code": "M",
+        "count": 52
       },
       {
-        id: "baybee_pants",
-        name: "Baybee — Премиальные трусики",
-        category: "diapers",
-        badge: "Премиум качество 👑",
-        price: 6600,
-        image: "images/products/baybee_pants.jpg",
-        sizes: [
-          { size: "M (3)", weight: "6–11 кг", code: "M" },
-          { size: "L (4)", weight: "9–14 кг", code: "L" },
-          { size: "XL (5)", weight: "12–18 кг", code: "XL" },
-          { size: "XXL (6)", weight: "15–20 кг", code: "XXL" },
-          { size: "XXXL (7)", weight: "20–25 кг", code: "XXXL" }
-        ]
+        "size": "L (4)",
+        "weight": "9–14 кг",
+        "code": "L",
+        "count": 48
       },
       {
-        id: "baby_shark_pants",
-        name: "Baby Shark — Трусики-подгузники",
-        category: "diapers",
-        badge: "Любимец малышей 🦈",
-        price: 6600,
-        image: "images/products/baby_shark.jpg",
-        sizes: [
-          { size: "M", weight: "6–11 кг", code: "M" },
-          { size: "L", weight: "9–14 кг", code: "L" },
-          { size: "XL", weight: "12–20 кг", code: "XL" },
-          { size: "XXL", weight: "от 15 кг", code: "XXL" },
-          { size: "XXXL", weight: "от 19 кг", code: "XXXL" }
-        ]
+        "size": "XL (5)",
+        "weight": "12–18 кг",
+        "code": "XL",
+        "count": 44
       },
       {
-        id: "softcare_diapers",
-        name: "Softcare — Подгузники на липучках",
-        category: "diapers",
-        badge: "Выгодная цена 💥",
-        price: 3800,
-        image: "images/products/softcare.jpg",
-        sizes: [
-          { size: "M (3)", weight: "6–11 кг", code: "M" },
-          { size: "L (4)", weight: "9–14 кг", code: "L" }
-        ]
+        "size": "XXL (6)",
+        "weight": "15–22 кг",
+        "code": "XXL",
+        "count": 42
       },
       {
-        id: "mama_znaet_eco_baby_gel",
-        name: "ЭКО-гель для стирки детского белья 0+",
-        category: "care",
-        badge: "С первых дней 0+ 🌿",
-        price: 5700,
-        volume: "2 литра",
-        image: "images/products/eco_baby_gel.webp"
-      },
-      {
-        id: "mama_znaet_laundry_gel",
-        name: "Гель для стирки «Горная свежесть»",
-        category: "care",
-        badge: "30 стирок 🏔️",
-        price: 2800,
-        volume: "2 литра",
-        image: "images/products/laundry_gel.webp"
-      },
-      {
-        id: "mama_znaet_laundry_sheets",
-        name: "Концентрированные салфетки для стирки",
-        category: "care",
-        badge: "Инновация ✨",
-        price: 2100,
-        count: "30 шт",
-        image: "images/products/laundry_sheets.webp"
-      },
-      {
-        id: "mama_znaet_cleaning_gel",
-        name: "ЭКО-гель для уборки детских комнат",
-        category: "care",
-        badge: "0+ Безопасно 🐢",
-        price: 2600,
-        volume: "1 литр",
-        image: "images/products/cleaning_gel.webp"
-      },
-      {
-        id: "mama_znaet_soap",
-        name: "Хозяйственное жидкое мыло",
-        category: "care",
-        badge: "Универсальное 🧼",
-        price: 1300,
-        volume: "1 литр",
-        image: "images/products/soap.webp"
-      },
-      {
-        id: "mama_znaet_antifat",
-        name: "Спрей «Антижир» для кухни",
-        category: "care",
-        badge: "Мощная чистота 🔥",
-        price: 1600,
-        volume: "750 мл",
-        image: "images/products/antifat.webp"
-      },
-      {
-        id: "mama_znaet_wipes_15",
-        name: "Детские влажные салфетки (мини)",
-        category: "wipes",
-        badge: "В сумочку 🐨",
-        price: 250,
-        count: "15 шт",
-        image: "images/products/wipes_15.webp"
-      },
-      {
-        id: "mama_znaet_kitchen_wipes",
-        name: "Влажные салфетки для кухни и дома",
-        category: "wipes",
-        badge: "Для кухни 🍽️",
-        price: 1450,
-        count: "80 шт",
-        image: "images/products/kitchen_wipes.webp"
+        "size": "XXXL (7)",
+        "weight": "20–30 кг",
+        "code": "XXXL",
+        "count": 40
       }
-    ];
+    ]
+  },
+  {
+    "id": "baybee_pants",
+    "name": "Baybee — Премиальные трусики",
+    "brand": "Baybee",
+    "category": "pants",
+    "badge": "Премиум мягкость 👑",
+    "description": "Премиальное качество: шелковистый внутренний слой, японский суперабсорбент, сухость до 12 часов и мягкий Q-поясок.",
+    "price": 6600,
+    "image": "images/products/baybee_pants.webp",
+    "sizes": [
+      {
+        "size": "M (3)",
+        "weight": "6–11 кг",
+        "code": "M",
+        "count": 52
+      },
+      {
+        "size": "L (4)",
+        "weight": "9–14 кг",
+        "code": "L",
+        "count": 48
+      },
+      {
+        "size": "XL (5)",
+        "weight": "12–18 кг",
+        "code": "XL",
+        "count": 42
+      },
+      {
+        "size": "XXL (6)",
+        "weight": "15–20 кг",
+        "code": "XXL",
+        "count": 40
+      },
+      {
+        "size": "XXXL (7)",
+        "weight": "20–25 кг",
+        "code": "XXXL",
+        "count": 38
+      }
+    ]
+  },
+  {
+    "id": "baby_shark_pants",
+    "name": "Baby Shark — Трусики-подгузники",
+    "brand": "Baby Shark",
+    "category": "pants",
+    "badge": "Любимец мам 🦈",
+    "description": "Японский нано-абсорбент, без отдушек и хлорина. Индикатор наполнения, надежная двойная защита от боковых протеканий.",
+    "price": 6600,
+    "image": "images/products/baby_shark_pants.webp",
+    "sizes": [
+      {
+        "size": "M",
+        "weight": "6–11 кг",
+        "code": "M",
+        "count": 54
+      },
+      {
+        "size": "L",
+        "weight": "9–14 кг",
+        "code": "L",
+        "count": 50
+      },
+      {
+        "size": "XL",
+        "weight": "12–20 кг",
+        "code": "XL",
+        "count": 46
+      },
+      {
+        "size": "XXL",
+        "weight": "15–22 кг",
+        "code": "XXL",
+        "count": 44
+      },
+      {
+        "size": "XXXL",
+        "weight": "19–30 кг",
+        "code": "XXXL",
+        "count": 42
+      }
+    ]
+  },
+  {
+    "id": "mama_znaet_diapers",
+    "name": "Мама знает — Классические подгузники",
+    "brand": "Мама знает",
+    "category": "diapers",
+    "badge": "С первых дней 0+ 🌿",
+    "description": "Нежнейшие классические подгузники на многоразовых эластичных липучках с анатомической посадкой для новорожденных.",
+    "price": 6800,
+    "image": "images/products/mama_znaet_diapers.webp",
+    "sizes": [
+      {
+        "size": "NB (1)",
+        "weight": "2–5 кг",
+        "code": "NB",
+        "count": 68
+      },
+      {
+        "size": "S (2)",
+        "weight": "4–8 кг",
+        "code": "S",
+        "count": 72
+      },
+      {
+        "size": "M (3)",
+        "weight": "6–11 кг",
+        "code": "M",
+        "count": 60
+      }
+    ]
+  },
+  {
+    "id": "baybee_diapers",
+    "name": "Baybee — Подгузники ультратонкие",
+    "brand": "Baybee",
+    "category": "diapers",
+    "badge": "Дышащие 0+ 🪶",
+    "description": "Ультратонкие дышащие подгузники с перфорированным внутренним слоем. Мгновенно впитывают и защищают от опрелостей.",
+    "price": 6600,
+    "image": "images/products/baybee_diapers.webp",
+    "sizes": [
+      {
+        "size": "NB (1)",
+        "weight": "2–5 кг",
+        "code": "NB",
+        "count": 68
+      },
+      {
+        "size": "S (2)",
+        "weight": "4–8 кг",
+        "code": "S",
+        "count": 72
+      },
+      {
+        "size": "M (3)",
+        "weight": "6–11 кг",
+        "code": "M",
+        "count": 52
+      }
+    ]
+  },
+  {
+    "id": "softcare_diapers",
+    "name": "Softcare (Софткеар) — Подгузники",
+    "brand": "Softcare",
+    "category": "diapers",
+    "badge": "Супер-цена 💥",
+    "description": "Экономичные и надежные классические подгузники на липучках на каждый день. Сухость до 12 часов, дышащая мембрана.",
+    "price": 3800,
+    "image": "images/products/softcare_diapers.webp",
+    "sizes": [
+      {
+        "size": "M (3)",
+        "weight": "6–11 кг",
+        "code": "M",
+        "count": 60
+      },
+      {
+        "size": "L (4)",
+        "weight": "9–14 кг",
+        "code": "L",
+        "count": 52
+      }
+    ]
+  },
+  {
+    "id": "softcare_wipes_80",
+    "name": "Softcare — Детские салфетки с клапаном 80 шт",
+    "brand": "Softcare",
+    "category": "wipes",
+    "badge": "0% спирта 💧",
+    "description": "Плотные гипоаллергенные детские влажные салфетки с герметичным клапаном. Безопасны с первых дней жизни.",
+    "price": 600,
+    "count": "80 шт",
+    "image": "images/products/softcare_wipes.webp"
+  },
+  {
+    "id": "luna_baby_wipes_120",
+    "name": "LUNA Baby — Влажные салфетки с клапаном 120 шт",
+    "brand": "LUNA Baby",
+    "category": "wipes",
+    "badge": "Большая пачка 🌙",
+    "description": "С экстрактом алоэ вера, витамином E и Д-пантенолом для чувствительной кожи малыша. Удобный клапан.",
+    "price": 850,
+    "count": "120 шт",
+    "image": "images/products/luna_baby_wipes.webp"
+  },
+  {
+    "id": "mama_znaet_wipes_15",
+    "name": "Мама знает — Детские салфетки мини",
+    "brand": "Мама знает",
+    "category": "wipes",
+    "badge": "В сумочку 🐨",
+    "description": "Компактная карманная пачка для прогулок и поликлиники. 99% чистая вода, без отдушек и липкости.",
+    "price": 250,
+    "count": "15 шт",
+    "image": "images/products/wipes_15.webp"
+  },
+  {
+    "id": "mama_znaet_kitchen_wipes",
+    "name": "Мама знает — Влажные салфетки для кухни и дома",
+    "brand": "Мама знает",
+    "category": "wipes",
+    "badge": "Для кухни 🍽️",
+    "description": "Большие рельефные салфетки с антижировым эффектом. Мгновенно очищают кухонные столешницы, плиту и фасады.",
+    "price": 1450,
+    "count": "80 шт",
+    "image": "images/products/kitchen_wipes.webp"
+  },
+  {
+    "id": "mama_znaet_eco_baby_gel",
+    "name": "Мама знает — ЭКО-гель для детского белья 0+",
+    "brand": "Мама знает",
+    "category": "care",
+    "badge": "С первых дней 0+ 🌿",
+    "description": "Гипоаллергенный гель премиум-качества на немецких компонентах. Полностью выполаскивается из волокон ткани.",
+    "price": 5700,
+    "volume": "2 литра",
+    "image": "images/products/eco_baby_gel.webp"
+  },
+  {
+    "id": "mama_znaet_laundry_gel",
+    "name": "Мама знает — Гель для стирки «Горная свежесть»",
+    "brand": "Мама знает",
+    "category": "care",
+    "badge": "30 стирок 🏔️",
+    "description": "Универсальный гель для автоматической и ручной стирки. Сохраняет яркость цветного и чистоту белого белья.",
+    "price": 2800,
+    "volume": "2 литра",
+    "image": "images/products/laundry_gel.webp"
+  },
+  {
+    "id": "mama_znaet_laundry_sheets",
+    "name": "Мама знает — Концентрированные салфетки для стирки",
+    "brand": "Мама знает",
+    "category": "care",
+    "badge": "Инновация ✨",
+    "description": "Водорастворимые концентрированные пластины. Заменяют 3 кг обычного порошка, без фосфатов и пыли.",
+    "price": 2100,
+    "count": "30 шт",
+    "image": "images/products/laundry_sheets.webp"
+  },
+  {
+    "id": "mama_znaet_cleaning_gel",
+    "name": "Мама знает — ЭКО-гель для детских комнат",
+    "brand": "Мама знает",
+    "category": "care",
+    "badge": "0+ Безопасно 🐢",
+    "description": "Для мытья полов, пластиковых игрушек, манежей и кроваток. Не требует смывания, без резкого запаха.",
+    "price": 2600,
+    "volume": "1 литр",
+    "image": "images/products/cleaning_gel.webp"
+  },
+  {
+    "id": "mama_znaet_soap",
+    "name": "Мама знает — Хозяйственное жидкое мыло",
+    "brand": "Мама знает",
+    "category": "care",
+    "badge": "Универсальное 🧼",
+    "description": "Традиционная формула чистоты в современном жидком формате. Прекрасно отстирывает трудные пятна.",
+    "price": 1300,
+    "volume": "1 литр",
+    "image": "images/products/soap.webp"
+  },
+  {
+    "id": "mama_znaet_antifat",
+    "name": "Мама знает — Спрей «Антижир» для кухни",
+    "brand": "Мама знает",
+    "category": "care",
+    "badge": "Мощная чистота 🔥",
+    "description": "Удаляет застарелый пригар и жир с плиты, духовки и вытяжки за 60 секунд. Активная густая пена.",
+    "price": 1600,
+    "volume": "750 мл",
+    "image": "images/products/antifat.webp"
+  },
+  {
+    "id": "grass_azelit_spray",
+    "name": "GRASS AZELIT — Анти-жир для плит и духовок",
+    "brand": "Grass",
+    "category": "care",
+    "badge": "Суперхит кухни ⚡",
+    "description": "Легендарный очиститель от нагара, жира и копоти. Мощная пена справляется со сложнейшими загрязнениями.",
+    "price": 1050,
+    "volume": "600 мл",
+    "image": "images/products/grass_azelit.webp"
+  },
+  {
+    "id": "grass_azelit_kazan",
+    "name": "GRASS AZELIT — Антижир для казана",
+    "brand": "Grass",
+    "category": "care",
+    "badge": "Для чугуна и гриля 🍲",
+    "description": "Специальная усиленная формула для казанов, коптилен, решеток гриль и тяжелой чугунной посуды.",
+    "price": 1100,
+    "volume": "600 мл",
+    "image": "images/products/grass_azelit_kazan.webp"
+  },
+  {
+    "id": "grass_azelit_stone",
+    "name": "GRASS AZELIT — Антижир для камня",
+    "brand": "Grass",
+    "category": "care",
+    "badge": "Для столешниц 🪨",
+    "description": "Бережная очистка жира и налета с искусственного и натурального камня без повреждения защитного слоя.",
+    "price": 1150,
+    "volume": "600 мл",
+    "image": "images/products/grass_azelit_stone.webp"
+  },
+  {
+    "id": "sanfor_universal_10in1",
+    "name": "Sanfor — Гель для уборки 10в1 «Зеленое яблоко»",
+    "brand": "Sanfor",
+    "category": "care",
+    "badge": "99.9% бактерий 🍏",
+    "description": "Густой универсальный гель с хлором и силой белизны. Убивает 99.9% микробов, очищает сантехнику и кафель.",
+    "price": 1250,
+    "volume": "750 мл",
+    "image": "images/products/sanfor_gel.webp"
+  },
+  {
+    "id": "fairy_dishwashing_lemon",
+    "name": "FAIRY — «Сочный Лимон»",
+    "brand": "Fairy",
+    "category": "care",
+    "badge": "До 2x больше посуды 🍋",
+    "description": "Густая концентрированная пена расщепляет жир даже в ледяной воде. Экономичный легендарный расход.",
+    "price": 820,
+    "volume": "450 мл",
+    "image": "images/products/fairy_lemon.webp"
+  },
+  {
+    "id": "era_dishwashing_cotton",
+    "name": "ERA — Средство для мытья посуды Хлопок Neutral",
+    "brand": "ERA",
+    "category": "care",
+    "badge": "Без красителей ☁️",
+    "description": "Густое эко-средство для посуды без лишних красителей и синтетических отдушек. Подходит для детской посуды.",
+    "price": 870,
+    "volume": "1000 г",
+    "image": "images/products/era_dishwashing.webp"
+  },
+  {
+    "id": "yunitto_dishwashing",
+    "name": "Yunitto — Гель для мытья посуды, овощей и игрушек",
+    "brand": "Yunitto",
+    "category": "care",
+    "badge": "Для овощей и игрушек 🍎",
+    "description": "Антибактериальное японское средство. Безопасно смывает воск с фруктов, загрязнения с детских бутылочек.",
+    "price": 1400,
+    "volume": "1000 мл",
+    "image": "images/products/yunitto_dishwashing.webp"
+  },
+  {
+    "id": "liby_dishwashing_lemon",
+    "name": "Liby — Концентрат для мытья посуды Fresh Lemon",
+    "brand": "Liby",
+    "category": "care",
+    "badge": "С витамином E 🍋",
+    "description": "Большой экономичный флакон 1.5 кг. Легко смывается водой, содержит витамин E для защиты нежной кожи рук.",
+    "price": 1100,
+    "volume": "1.5 кг",
+    "image": "images/products/liby_dishwashing.webp"
+  },
+  {
+    "id": "biolan_balzam_aloe",
+    "name": "Биолан — Бальзам для посуды «Алоэ Вера»",
+    "brand": "Биолан",
+    "category": "care",
+    "badge": "Выгодный выбор 🌿",
+    "description": "Густая гель-формула с бальзамом алоэ вера. Отлично отмывает жир и бережет руки при ежедневном мытье.",
+    "price": 480,
+    "volume": "450 мл",
+    "image": "images/products/biolan_balzam.webp"
+  },
+  {
+    "id": "sorti_balzam_aloe",
+    "name": "SORTi — Бальзам для посуды «Алоэ Вера»",
+    "brand": "Sorti",
+    "category": "care",
+    "badge": "Мягкая забота 💧",
+    "description": "Экономичное средство для мытья посуды с глицерином и экстрактом алоэ вера.",
+    "price": 520,
+    "volume": "400 мл",
+    "image": "images/products/sorti_balzam.webp"
+  },
+  {
+    "id": "kaplya_dishwashing_lemon",
+    "name": "Капля — Средство для посуды «Лимон»",
+    "brand": "Капля",
+    "category": "care",
+    "badge": "Классика чистоты 🍋",
+    "description": "Эффективная формула для мытья посуды, овощей и рук. Свежий цитрусовый аромат.",
+    "price": 420,
+    "volume": "500 г",
+    "image": "images/products/kaplya_dishwashing.webp"
+  },
+  {
+    "id": "clean_8x_capsules",
+    "name": "Clean 8X — Капсулы для стирки 4в1 (36 шт)",
+    "brand": "Clean 8X",
+    "category": "care",
+    "badge": "4 в 1 Мощность 🌀",
+    "description": "Концентрированные 4в1 капсулы: глубокое выведение пятен, кондиционирование, сохранение цвета и свежесть.",
+    "price": 1450,
+    "count": "36 капсул",
+    "image": "images/products/clean_8x_capsules.webp"
+  },
+  {
+    "id": "bafuri_capsules_tokyo",
+    "name": "BAFURI — Капсулы для стирки «Тайна Токио» 4в1",
+    "brand": "BAFURI",
+    "category": "care",
+    "badge": "Японский парфюм 🌸",
+    "description": "Парфюмированные капсулы для стирки. Устраняют въевшиеся запахи, придают белью изысканный восточный аромат.",
+    "price": 1450,
+    "count": "36 капсул",
+    "image": "images/products/bafuri_capsules.webp"
+  },
+  {
+    "id": "bafuri_laundry_gel_4l",
+    "name": "BAFURI — Гель для стирки «Лепестки Любви» 4 л",
+    "brand": "BAFURI",
+    "category": "care",
+    "badge": "Семейный объем 4 л 🌺",
+    "description": "Парфюмированный гель для белых и светлых тканей. Бережный уход за волокнами и сохранение белизны.",
+    "price": 2400,
+    "volume": "4 литра",
+    "image": "images/products/bafuri_laundry_gel.webp"
+  },
+  {
+    "id": "deluxe_laundry_gel_5l",
+    "name": "Deluxe Perfume — Жидкий концентрат для стирки 5 л",
+    "brand": "Deluxe",
+    "category": "care",
+    "badge": "100 стирок (5 л) 💎",
+    "description": "Универсальное жидкое средство 2в1 со встроенным кондиционером. Огромная канистра на 100 циклов стирки.",
+    "price": 2300,
+    "volume": "5 литров",
+    "image": "images/products/deluxe_laundry_gel.webp"
+  },
+  {
+    "id": "doffi_powder_color",
+    "name": "Doffi — Стиральный порошок Color 1.5 кг",
+    "brand": "Doffi",
+    "category": "care",
+    "badge": "Французский аромат 🇫🇷",
+    "description": "Швейцарские технологии аромата. 3X глубокое очищение волокон, сохранение сочности цветных тканей.",
+    "price": 1650,
+    "volume": "1.5 кг",
+    "image": "images/products/doffi_powder.webp"
+  },
+  {
+    "id": "turkom_powder_2_5kg",
+    "name": "Turkom Automat — Стиральный порошок Bright Colors",
+    "brand": "Turkom",
+    "category": "care",
+    "badge": "Мульти-энзимы 🇹🇷",
+    "description": "Турецкая формула с мульти-энзимами для автоматической стирки цветного белья. Без белых разводов.",
+    "price": 2280,
+    "volume": "2.5 кг",
+    "image": "images/products/turkom_powder.webp"
+  },
+  {
+    "id": "bimax_powder_100_paten",
+    "name": "BiMAX — Порошок «100 Пятен» Automat 1.5 кг",
+    "brand": "BiMAX",
+    "category": "care",
+    "badge": "Smart 7 компонентов 🎯",
+    "description": "Умная формула с 7 активными компонентами против сложных белковых, жировых и ягодных пятен.",
+    "price": 1785,
+    "volume": "1.5 кг",
+    "image": "images/products/bimax_powder.webp"
+  },
+  {
+    "id": "mif_powder_moroz",
+    "name": "МИФ Аква-пудра — «Морозная свежесть» 2 кг",
+    "brand": "Миф",
+    "category": "care",
+    "badge": "Без разводов ❄️",
+    "description": "Мгновенно растворяется в воде, дарит морозную свежесть и сияющую белизну без фосфатов.",
+    "price": 1740,
+    "volume": "2 кг",
+    "image": "images/products/mif_powder.webp"
+  },
+  {
+    "id": "tide_powder_color",
+    "name": "Tide Аква-пудра — Color для цветного 450 г",
+    "brand": "Tide",
+    "category": "care",
+    "badge": "Кристальная чистота 🌈",
+    "description": "Технология Аква-пудра для бережной стирки цветных вещей без хлорного отбеливателя.",
+    "price": 670,
+    "volume": "450 г",
+    "image": "images/products/tide_powder.webp"
+  },
+  {
+    "id": "ariel_powder_color",
+    "name": "Ariel Аква-пудра — Насыщенный цвет 450 г",
+    "brand": "Ariel",
+    "category": "care",
+    "badge": "Защита цвета 💎",
+    "description": "Глубокое очищение микроволокон и сохранение сочной яркости любимой одежды.",
+    "price": 750,
+    "volume": "450 г",
+    "image": "images/products/ariel_powder.webp"
+  },
+  {
+    "id": "flo_conditioner_nature",
+    "name": "Flo Pure Nature — Эко-кондиционер для белья 1 л",
+    "brand": "Flo",
+    "category": "care",
+    "badge": "99% Nature 🌿",
+    "description": "Европейское качество, 99% натуральных растительных компонентов, антистатический эффект и нежность.",
+    "price": 1220,
+    "volume": "1 литр",
+    "image": "images/products/flo_conditioner.webp"
+  },
+  {
+    "id": "ultra_softening_conditioner",
+    "name": "Ultra Softening Home — Кондиционер для белья Fresh 1.5 л",
+    "brand": "Home",
+    "category": "care",
+    "badge": "Супермягкость 🌸",
+    "description": "Интенсивный кондиционер-ополаскиватель с микрокапсулами свежести. Облегчает последующую глажку белья.",
+    "price": 1850,
+    "volume": "1.5 литра",
+    "image": "images/products/ultra_softening.webp"
+  },
+  {
+    "id": "itaza_color_catcher",
+    "name": "I.TAZA — Салфетки-ловушки цвета для стирки (40 шт)",
+    "brand": "I.TAZA",
+    "category": "care",
+    "badge": "Стирка без линьки 🛡️",
+    "description": "Позволяют стирать белое и цветное вместе. Притягивают и надежно связывают красители в воде.",
+    "price": 1250,
+    "count": "40 шт",
+    "image": "images/products/itaza_sheets.webp"
+  },
+  {
+    "id": "mr_proper_floor",
+    "name": "Mr. Proper — Моющая жидкость для полов и стен 1 л",
+    "brand": "Mr. Proper",
+    "category": "care",
+    "badge": "100% чистый пол 🧹",
+    "description": "Удаляет до 100% пыли, грязи и следов обуви с ламината и плитки без разводов и смывания.",
+    "price": 1350,
+    "volume": "1 литр",
+    "image": "images/products/mr_proper.webp"
+  },
+  {
+    "id": "mello_baby_shampoo",
+    "name": "Mello — Детский шампунь-пенка 0+ с первых дней",
+    "brand": "Mello",
+    "category": "care",
+    "badge": "Японское качество 0+ 🐧",
+    "description": "Мягкая воздушная пенка с маслом камелии. Формула «без слез», без парабенов, спирта и аллергенов.",
+    "price": 1650,
+    "volume": "300 мл",
+    "image": "images/products/mello_baby_shampoo.webp"
+  },
+  {
+    "id": "baby_shampoo_apple",
+    "name": "Детский шампунь + гель для купания «Алма-Яблоко» 0+",
+    "brand": "Детский",
+    "category": "care",
+    "badge": "3 в 1 Без слёз 🍏",
+    "description": "Шампунь, кондиционер и гель для купания малыша с сочным яблочным ароматом. Мягкая гипоаллергенная формула.",
+    "price": 1100,
+    "volume": "300 мл",
+    "image": "images/products/baby_shampoo_apple.webp"
+  },
+  {
+    "id": "perfumed_bath_soap",
+    "name": "Мыло банное Perfumed French Aroma",
+    "brand": "Perfumed",
+    "category": "care",
+    "badge": "Французский парфюм 💐",
+    "description": "Большой банный брусок 600 грамм с утонченным французским ароматом и обильной кремовой пеной.",
+    "price": 620,
+    "volume": "600 г (брусок)",
+    "image": "images/products/perfumed_soap.webp"
+  },
+  {
+    "id": "yunitto_fresh_breath",
+    "name": "YUNITTO — Отбеливающая зубная паста Fresh Breath",
+    "brand": "Yunitto",
+    "category": "care",
+    "badge": "Свежесть 12 часов 🪥",
+    "description": "BreathZap технология: мягкое расщепление налета, безопасное отбеливание и свежесть дыхания на весь день.",
+    "price": 695,
+    "volume": "100 мл",
+    "image": "images/products/yunitto_paste.webp"
+  },
+  {
+    "id": "splat_ultracomplex",
+    "name": "SPLAT Professional — Зубная паста «Ультракомплекс»",
+    "brand": "SPLAT",
+    "category": "care",
+    "badge": "Для чувствительных зубов 🦷",
+    "description": "Биоактивная паста с гидроксиапатитом и кальцием для укрепления эмали и здоровья десен.",
+    "price": 1190,
+    "volume": "100 мл",
+    "image": "images/products/splat_paste.webp"
+  },
+  {
+    "id": "lesnoy_balzam_gum",
+    "name": "Лесной Бальзам — Против кровоточивости дёсен",
+    "brand": "Лесной Бальзам",
+    "category": "care",
+    "badge": "Иммуноактив 🌲",
+    "description": "Формула на отваре 5 целебных трав с хвойным комплексом. Снижает кровоточивость дёсен с первого применения.",
+    "price": 695,
+    "volume": "130 мл",
+    "image": "images/products/lesnoy_balzam.webp"
+  },
+  {
+    "id": "pantene_pro_v_3in1",
+    "name": "Pantene Pro-V — Шампунь 3в1 «Питание и Блеск»",
+    "brand": "Pantene",
+    "category": "care",
+    "badge": "Шампунь + Бальзам ✨",
+    "description": "Шампунь, бальзам-ополаскиватель и интенсивный уход. Питает волосы по всей длине и придает зеркальный блеск.",
+    "price": 1805,
+    "volume": "400 мл",
+    "image": "images/products/pantene_shampoo.webp"
+  },
+  {
+    "id": "head_shoulders_classic",
+    "name": "Head & Shoulders — Шампунь «Основной уход»",
+    "brand": "Head & Shoulders",
+    "category": "care",
+    "badge": "До 100% без перхоти 🛡️",
+    "description": "Клинически доказанная 2X защита микробиома кожи головы от зуда, сухости и перхоти.",
+    "price": 2085,
+    "volume": "400 мл",
+    "image": "images/products/head_shoulders.webp"
+  },
+  {
+    "id": "clear_anti_dandruff",
+    "name": "CLEAR — Шампунь против перхоти «Восстановление»",
+    "brand": "Clear",
+    "category": "care",
+    "badge": "Комплекс Nutrium 10 💆",
+    "description": "Активирует естественный защитный слой кожи головы, восстанавливает поврежденные волосы.",
+    "price": 1670,
+    "volume": "380 мл",
+    "image": "images/products/clear_shampoo.webp"
+  },
+  {
+    "id": "chistaya_liniya_hair",
+    "name": "Чистая Линия — Шампунь «Длина и Густота»",
+    "brand": "Чистая Линия",
+    "category": "care",
+    "badge": "Конский каштан 🌰",
+    "description": "На 97% отвар трав с экстрактом конского каштана против ломкости и выпадения волос.",
+    "price": 920,
+    "volume": "400 мл",
+    "image": "images/products/chistaya_liniya.webp"
+  },
+  {
+    "id": "eva_pads_daily",
+    "name": "EVA — Женские гигиенические прокладки «Дневные»",
+    "brand": "EVA",
+    "category": "care",
+    "badge": "7 слоев защиты 🌸",
+    "description": "Анатомические ультратонкие «дышащие» прокладки с мягкими крылышками и максимальной впитываемостью.",
+    "price": 850,
+    "count": "12 шт",
+    "image": "images/products/eva_pads.webp"
+  },
+  {
+    "id": "jazz_toilet_paper",
+    "name": "JAZZ — 6-слойная туалетная бумага (10 рулонов)",
+    "brand": "JAZZ",
+    "category": "care",
+    "badge": "6 слоев экстра-мягкость 🧻",
+    "description": "Шестислойная премиальная мягкость из 100% первичной целлюлозы. Шелковистая прочность.",
+    "price": 1100,
+    "count": "10 рулонов",
+    "image": "images/products/jazz_paper.webp"
+  },
+  {
+    "id": "love_toilet_paper",
+    "name": "LOVE — Туалетная бумага (12 рулонов)",
+    "brand": "LOVE",
+    "category": "care",
+    "badge": "12 рулонов 💕",
+    "description": "Мягкая трехслойная бумага для всей семьи с перфорацией и нежным тиснением.",
+    "price": 1700,
+    "count": "12 рулонов",
+    "image": "images/products/love_paper.webp"
+  },
+  {
+    "id": "karina_toilet_paper",
+    "name": "Карина Народная — Туалетная бумага (24 шт)",
+    "brand": "Карина",
+    "category": "care",
+    "badge": "Супер-запас 24 шт 📦",
+    "description": "Плотная намотка 110 метров без втулки. Максимальная выгода для дома.",
+    "price": 2900,
+    "count": "24 шт",
+    "image": "images/products/karina_paper.webp"
+  },
+  {
+    "id": "pavlodar_toilet_paper",
+    "name": "Павлодарская — Туалетная бумага (10 шт)",
+    "brand": "Павлодарская",
+    "category": "care",
+    "badge": "СТ РК ГОСТ 🇰🇿",
+    "description": "Народная туалетная бумага отечественного производства из очищенной макулатуры.",
+    "price": 465,
+    "count": "10 шт",
+    "image": "images/products/pavlodar_paper.webp"
+  }
+];
+    let PRODUCTS_CATALOG = PRODUCTS_FALLBACK;
 
     /**
-     * 2. CURATED COMBO BUNDLES (Built from real catalog items)
+     * 2. CURATED COMBO BUNDLES (Built from real catalog items & prices)
      */
     const COMBO_BUNDLES = [
       {
         id: "bundle_calm_month",
         title: "Комбо «Спокойный месяц»",
         badge: "Выбор 7 из 10 мам Шемонаихи ⭐",
-        description: "Двойной запас трусиков «Мама знает» + 2 пачки детских салфеток в сумочку.",
-        items: ["2 × Мама знает — Трусики-подгузники", "2 × Детские влажные салфетки (15 шт)"],
-        oldPrice: 14100,
-        price: 12900,
+        description: "Двойной запас трусиков «Мама знает» + 2 пачки детских салфеток Softcare с клапаном.",
+        items: ["2 × Мама знает — Трусики-подгузники", "2 × Softcare — Детские салфетки (80 шт)"],
+        oldPrice: 14800,
+        price: 13400,
         usesDynamicSize: true
       },
       {
         id: "bundle_baby_eco_home",
-        title: "Комбо «Малыш 0+ и Эко-Стирка»",
+        title: "Комбо «Малыш 0+ и Эко-Дом»",
         badge: "Гипоаллергенно 0+ 🌿",
-        description: "Премиальные трусики Baybee + 2 л ЭКО-геля для детского белья 0+ + жидкое мыло 1 л.",
-        items: ["1 × Baybee — Премиальные трусики", "1 × ЭКО-гель для стирки 0+ (2 л)", "1 × Хозяйственное жидкое мыло (1 л)"],
-        oldPrice: 13600,
-        price: 12400,
+        description: "Премиальные трусики Baybee + 2 л ЭКО-геля для детского белья 0+ + детский шампунь-пенка Mello.",
+        items: ["1 × Baybee — Премиальные трусики", "1 × ЭКО-гель для детского белья 0+ (2 л)", "1 × Mello Детский шампунь-пенка (300 мл)"],
+        oldPrice: 13950,
+        price: 12500,
         usesDynamicSize: true
       },
       {
         id: "bundle_clean_house",
         title: "Комбо «Чистый дом без химии»",
-        badge: "Экономия 1 150 ₸ ✨",
-        description: "Полный набор «Мама знает» для детской комнаты и кухни.",
+        badge: "Экономия 970 ₸ ✨",
+        description: "Полный набор для детской комнаты и кухни: безопасность и сияющая чистота.",
         items: [
-          "1 × ЭКО-гель для детских комнат (1 л)",
-          "1 × Спрей «Антижир» (750 мл)",
-          "1 × Хозяйственное жидкое мыло (1 л)",
-          "1 × Салфетки для кухни (80 шт)"
+          "1 × ЭКО-гель для детских комнат 0+ (1 л)",
+          "1 × GRASS AZELIT — Анти-жир (600 мл)",
+          "1 × ERA — Средство для посуды Хлопок (1 л)",
+          "1 × Влажные салфетки для кухни (80 шт)"
         ],
-        oldPrice: 6950,
-        price: 5800,
+        oldPrice: 6370,
+        price: 5400,
+        usesDynamicSize: false
+      },
+      {
+        id: "bundle_family_laundry",
+        title: "Комбо «Семейная стирка (100 циклов)»",
+        badge: "Хит для всей семьи 💎",
+        description: "Огромная канистра концентрата Deluxe 5 л + эко-кондиционер Flo Pure Nature + салфетки-ловушки цвета.",
+        items: [
+          "1 × Deluxe Perfume — Жидкий концентрат (5 л)",
+          "1 × Flo Pure Nature — Эко-кондиционер (1 л)",
+          "1 × I.TAZA — Салфетки-ловушки цвета (40 шт)"
+        ],
+        oldPrice: 4770,
+        price: 3990,
         usesDynamicSize: false
       }
     ];
 
     /**
-     * 3. SMART WEIGHT CALCULATOR ENGINE (With Borderline Overlap Logic)
+     * 3. SMART WEIGHT CALCULATOR ENGINE (3–22 kg With Borderline Overlap)
      */
     const SIZE_MATRIX = [
-      { code: "M", label: "M (3)", min: 5.0, max: 11.0, borderStart: 9.2, nextCode: "L", nextLabel: "L (4)", pcsPerDay: 7 },
-      { code: "L", label: "L (4)", min: 9.0, max: 14.0, borderStart: 12.2, nextCode: "XL", nextLabel: "XL (5)", pcsPerDay: 6 },
-      { code: "XL", label: "XL (5)", min: 12.0, max: 18.0, borderStart: 15.8, nextCode: "XXL", nextLabel: "XXL (6)", pcsPerDay: 5 },
+      { code: "NB", label: "NB (1)", min: 2.0, max: 5.0, borderStart: 4.2, nextCode: "S", nextLabel: "S (2)", pcsPerDay: 8 },
+      { code: "S", label: "S (2)", min: 4.0, max: 8.0, borderStart: 7.0, nextCode: "M", nextLabel: "M (3)", pcsPerDay: 7 },
+      { code: "M", label: "M (3)", min: 6.0, max: 11.0, borderStart: 9.5, nextCode: "L", nextLabel: "L (4)", pcsPerDay: 6 },
+      { code: "L", label: "L (4)", min: 9.0, max: 14.0, borderStart: 12.2, nextCode: "XL", nextLabel: "XL (5)", pcsPerDay: 5 },
+      { code: "XL", label: "XL (5)", min: 12.0, max: 18.0, borderStart: 15.5, nextCode: "XXL", nextLabel: "XXL (6)", pcsPerDay: 4 },
       { code: "XXL", label: "XXL (6)", min: 15.0, max: 22.0, borderStart: 19.5, nextCode: "XXXL", nextLabel: "XXXL (7)", pcsPerDay: 4 },
-      { code: "XXXL", label: "XXXL (7)", min: 19.0, max: 30.0, borderStart: 28.0, nextCode: "XXXL", nextLabel: "XXXL (7)", pcsPerDay: 4 }
+      { code: "XXXL", label: "XXXL (7)", min: 20.0, max: 30.0, borderStart: 28.0, nextCode: "XXXL", nextLabel: "XXXL (7)", pcsPerDay: 3 }
     ];
 
     function evaluateBabySize(weightKg, isChubby) {
@@ -1739,8 +2475,8 @@
       const recommendedLabel = isBorderline ? tier.nextLabel : tier.label;
 
       const advice = isBorderline
-        ? `Вес ${weightKg} кг находится на границе размеров ${tier.label} и ${tier.nextLabel}. Рекомендуем взять ${tier.nextLabel} «на вырост», чтобы резиночки не давили. Закрытую пачку всегда обменяем бесплатно!`
-        : `Идеальная посадка для веса ${weightKg} кг${isChubby ? " (с учётом запаса на животик/ножки)" : ""}. Если закрытая пачка не подойдёт — бесплатно обменяем у двери.`;
+        ? `Вес ${weightKg} кг находится на границе размеров ${tier.label} и ${tier.nextLabel}. Рекомендуем взять ${tier.nextLabel} «на вырост», чтобы резиночки не натирали. Закрытую пачку всегда бесплатно обменяем у двери!`
+        : `Идеальная посадка для веса ${weightKg} кг${isChubby ? " (с учётом запаса на животик и ножки)" : ""}. Если закрытая пачка не подойдёт — бесплатно обменяем при доставке.`;
 
       return {
         code: recommendedCode,
@@ -1774,6 +2510,16 @@
 
     const initialRec = evaluateBabySize(9.5, false);
 
+    function buildInitialSelectedSizes(catalog, recCode) {
+      const sizesMap = {};
+      for (const product of catalog) {
+        if (!product.sizes) continue;
+        const matched = product.sizes.find(s => s.code === recCode) || product.sizes[0];
+        sizesMap[product.id] = matched.size;
+      }
+      return sizesMap;
+    }
+
     const store = createStore({
       weightKg: 9.5,
       isChubby: false,
@@ -1781,12 +2527,7 @@
       activeCategory: "all",
       searchQuery: "",
       onlyMatchingSize: false,
-      selectedSizesByProduct: {
-        mama_znaet_pants: "L (4)",
-        baybee_pants: "L (4)",
-        baby_shark_pants: "L",
-        softcare_diapers: "L (4)"
-      },
+      selectedSizesByProduct: buildInitialSelectedSizes(PRODUCTS_CATALOG, initialRec.code),
       cart: []
     });
 
@@ -1796,7 +2537,7 @@
     const formatKzt = (num) => `${Number(num).toLocaleString("ru-RU")} ₸`;
 
     function getFallbackSvgDataUri(title, category) {
-      const emoji = category === "diapers" ? "👶" : category === "care" ? "🌿" : "🧻";
+      const emoji = (category === "pants" || category === "diapers") ? "👶" : category === "care" ? "🌿" : "🧻";
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
         <rect width="100%" height="100%" fill="#FAF6EC"/>
         <circle cx="160" cy="100" r="46" fill="#F5B738" fill-opacity="0.22"/>
@@ -1916,7 +2657,7 @@
 
       const filtered = PRODUCTS_CATALOG.filter(product => {
         if (activeCategory !== "all" && product.category !== activeCategory) return false;
-        if (query && !product.name.toLowerCase().includes(query) && !product.badge.toLowerCase().includes(query)) return false;
+        if (query && !product.name.toLowerCase().includes(query) && !product.badge.toLowerCase().includes(query) && !product.brand.toLowerCase().includes(query)) return false;
         if (onlyMatchingSize && product.sizes) {
           return product.sizes.some(s => s.code === recommendation.code);
         }
@@ -2082,9 +2823,9 @@
     chubbyBuildCheckbox.addEventListener("change", handleWeightChange);
 
     applySizeFilterBtn.addEventListener("click", () => {
-      store.setState({ activeCategory: "diapers", onlyMatchingSize: true });
+      store.setState({ activeCategory: "all", onlyMatchingSize: true });
       for (const btn of categoryPills.querySelectorAll(".cat-pill")) {
-        btn.setAttribute("aria-pressed", String(btn.dataset.category === "diapers"));
+        btn.setAttribute("aria-pressed", String(btn.dataset.category === "all"));
       }
       document.getElementById("catalogSection").scrollIntoView({ behavior: "smooth" });
     });
@@ -2186,28 +2927,142 @@
 
       const message = [
         `Здравствуйте, BabyBee Шемонаиха! 🐝`,
-        `Хочу оформить заказ с доставкой за 40 минут:`,
+        `Хочу оформить заказ с быстрой доставкой:`,
         ``,
         ...orderLines,
         ``,
-        `👶 Вес малыша в калькуляторе: ${state.weightKg} кг (рекомендован ${state.recommendation.label})`,
+        `👶 Вес малыша в калькуляторе: ${state.weightKg} кг (размер ${state.recommendation.label})`,
         `💰 Итого к оплате: ${formatKzt(totalSum)}`,
         `💳 Способ оплаты: ${paymentMethod}`,
-        `🤫 Режим доставки: ${silentDelivery ? "Тихая доставка (малыш спит — не звонить в домофон, написать в WhatsApp у двери)" : "Стандартная доставка"}`,
+        `📲 Kaspi QR: Жду счет на оплату Kaspi / оплачу курьеру по QR`,
+        `🤫 Режим доставки: ${silentDelivery ? "Тихая доставка (малыш спит — в домофон не звонить, написать в WhatsApp у двери)" : "Стандартная доставка"}`,
         `📍 Адрес в Шемонаихе: ${address}`
       ].join("\n");
 
-      const whatsappPhone = "77050000000"; // Заменить на рабочий WhatsApp-номер курьерской службы BabyBee
+      const whatsappPhone = "77779805639"; // Реальный номер BabyBee Шемонаиха (+7 777 980-56-39)
       const url = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
       window.open(url, "_blank", "noopener,noreferrer");
     });
 
-    // Initial Render
-    const initState = store.getState();
-    renderFinder(initState);
-    renderBundles(initState);
-    renderCatalog(initState);
-    renderCartUI(initState);
+    /**
+     * 9. DEVELOPER SECRET KEY (7788) & QUICK TEST HUD
+     */
+    let secretKeyBuffer = "";
+    function triggerDevMode() {
+      const existingToast = document.getElementById("devToast");
+      if (existingToast) existingToast.remove();
+      
+      const toast = document.createElement("div");
+      toast.id = "devToast";
+      toast.className = "dev-mode-toast";
+      toast.innerHTML = `
+        <div class="dev-toast-inner">
+          <div class="dev-toast-title">
+            <span>🐝 <strong>Режим Разработчика [7788]</strong></span>
+            <button type="button" id="devCloseToastBtn" class="dev-btn-close">✕</button>
+          </div>
+          <div class="dev-toast-body">
+            Товаров в каталоге: <strong>${PRODUCTS_CATALOG.length}</strong> • 
+            Все WebP фото оптимизированы • 
+            Kaspi QR & WhatsApp шлюз активны (+7 777 980-56-39).
+          </div>
+          <div class="dev-toast-actions">
+            <button type="button" id="devQuickOrderBtn" class="dev-btn">⚡ Тестовый заказ в корзину</button>
+            <button type="button" id="devOpenCartBtn" class="dev-btn">🛒 Открыть корзину</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(toast);
+
+      document.getElementById("devQuickOrderBtn")?.addEventListener("click", () => {
+        addToCart({
+          key: "mama_znaet_pants__L (4)",
+          title: "Мама знает — Трусики-подгузники",
+          subtitle: "Размер: L (4)",
+          price: 6800
+        });
+        addToCart({
+          key: "softcare_wipes_80__std",
+          title: "Softcare — Детские салфетки с клапаном 80 шт",
+          subtitle: "80 шт",
+          price: 600
+        });
+        cartDialog.showModal();
+      });
+
+      document.getElementById("devOpenCartBtn")?.addEventListener("click", () => {
+        cartDialog.showModal();
+      });
+
+      document.getElementById("devCloseToastBtn")?.addEventListener("click", () => {
+        toast.remove();
+      });
+
+      setTimeout(() => {
+        if (document.body.contains(toast)) {
+          toast.classList.add("fade-out");
+          setTimeout(() => toast.remove(), 400);
+        }
+      }, 10000);
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") {
+        return;
+      }
+      secretKeyBuffer += e.key;
+      if (secretKeyBuffer.includes("7788")) {
+        secretKeyBuffer = "";
+        triggerDevMode();
+      }
+      if (secretKeyBuffer.length > 10) secretKeyBuffer = secretKeyBuffer.slice(-4);
+    });
+
+    // Touch support: triple tap on site title / logo
+    let logoTapCount = 0;
+    let lastTapTime = 0;
+    const logoEl = document.querySelector(".site-brand") || document.querySelector(".header-brand") || document.querySelector(".hero-badge");
+    if (logoEl) {
+      logoEl.addEventListener("click", () => {
+        const now = Date.now();
+        if (now - lastTapTime < 600) {
+          logoTapCount++;
+        } else {
+          logoTapCount = 1;
+        }
+        lastTapTime = now;
+        if (logoTapCount >= 3) {
+          logoTapCount = 0;
+          triggerDevMode();
+        }
+      });
+    }
+
+    /**
+     * 10. ASYNC REMOTE FETCH WITH EMBEDDED RESILIENCE
+     */
+    async function initCatalog() {
+      try {
+        const res = await fetch("data/products.json");
+        if (res.ok) {
+          const remoteProducts = await res.json();
+          if (Array.isArray(remoteProducts) && remoteProducts.length > 0) {
+            PRODUCTS_CATALOG = remoteProducts;
+          }
+        }
+      } catch (err) {
+        // Fallback already assigned
+      }
+
+      // Initial Render
+      const initState = store.getState();
+      renderFinder(initState);
+      renderBundles(initState);
+      renderCatalog(initState);
+      renderCartUI(initState);
+    }
+
+    initCatalog();
   </script>
 </body>
 </html>
