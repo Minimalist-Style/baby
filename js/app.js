@@ -270,99 +270,121 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('babybee_cart', JSON.stringify(state.cart));
   }
 
-  // 7. Update Cart UI & Drawers
+  // 7. Update Cart UI & Drawers (Enhanced with View Transitions API)
   function updateCartUI() {
-    const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
-    const totalPrice = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    const renderCart = () => {
+      const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = state.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-    // Badges & Labels
-    if (cartCountBadge) cartCountBadge.textContent = totalItems;
-    if (drawerItemsCount) drawerItemsCount.textContent = totalItems;
-    if (floatingBadge) floatingBadge.textContent = totalItems;
-    if (floatingTotal) floatingTotal.textContent = formatPrice(totalPrice);
-    if (cartTotalPrice) cartTotalPrice.textContent = formatPrice(totalPrice);
+      // Badges & Labels
+      if (cartCountBadge) cartCountBadge.textContent = totalItems;
+      if (drawerItemsCount) drawerItemsCount.textContent = totalItems;
+      if (floatingBadge) floatingBadge.textContent = totalItems;
+      if (floatingTotal) floatingTotal.textContent = formatPrice(totalPrice);
+      if (cartTotalPrice) cartTotalPrice.textContent = formatPrice(totalPrice);
 
-    // Sticky Floating Order Bar Sync
-    const stickyOrderBar = document.getElementById('stickyOrderBar');
-    const stickyBarCount = document.getElementById('stickyBarCount');
-    const stickyBarTotal = document.getElementById('stickyBarTotal');
-    if (stickyBarCount) {
-      stickyBarCount.textContent = `${totalItems} ${totalItems === 1 ? 'товар' : (totalItems < 5 ? 'товара' : 'товаров')}`;
-    }
-    if (stickyBarTotal) {
-      stickyBarTotal.textContent = formatPrice(totalPrice);
-    }
-    if (stickyOrderBar) {
-      if (totalItems > 0) {
-        stickyOrderBar.classList.add('visible');
-      } else {
-        stickyOrderBar.classList.remove('visible');
+      // Sticky Floating Order Bar Sync
+      const stickyOrderBar = document.getElementById('stickyOrderBar');
+      const stickyBarCount = document.getElementById('stickyBarCount');
+      const stickyBarTotal = document.getElementById('stickyBarTotal');
+      if (stickyBarCount) {
+        stickyBarCount.textContent = `${totalItems} ${totalItems === 1 ? 'товар' : (totalItems < 5 ? 'товара' : 'товаров')}`;
       }
-    }
-
-    // Render Items in Drawer
-    if (!cartItemsList) return;
-
-    if (state.cart.length === 0) {
-      cartItemsList.innerHTML = `
-        <div class="empty-cart-msg">
-          <div class="icon-empty">🛒</div>
-          <h4>Ваша корзина пуста</h4>
-          <p>Выберите подгузники или эко-товары из каталога</p>
-        </div>
-      `;
-      if (checkoutWhatsAppBtn) checkoutWhatsAppBtn.disabled = true;
-      return;
-    }
-
-    if (checkoutWhatsAppBtn) checkoutWhatsAppBtn.disabled = false;
-
-    cartItemsList.innerHTML = state.cart.map((item, idx) => `
-      <div class="cart-item">
-        <img src="${item.image}" alt="${item.name}" class="cart-item__img">
-        <div>
-          <div class="cart-item__name">${item.name}</div>
-          <div class="cart-item__spec">${item.spec}</div>
-          <div class="cart-item__price">${formatPrice(item.price)}</div>
-        </div>
-        <div class="cart-item__controls">
-          <button class="qty-btn" data-cart-action="dec" data-idx="${idx}">−</button>
-          <span class="qty-val">${item.qty}</span>
-          <button class="qty-btn" data-cart-action="inc" data-idx="${idx}">+</button>
-        </div>
-      </div>
-    `).join('');
-
-    // Cart control button listeners
-    cartItemsList.querySelectorAll('[data-cart-action]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const action = e.currentTarget.dataset.cartAction;
-        const idx = parseInt(e.currentTarget.dataset.idx, 10);
-        if (action === 'inc') {
-          state.cart[idx].qty += 1;
-        } else if (action === 'dec') {
-          state.cart[idx].qty -= 1;
-          if (state.cart[idx].qty <= 0) {
-            state.cart.splice(idx, 1);
-          }
+      if (stickyBarTotal) {
+        stickyBarTotal.textContent = formatPrice(totalPrice);
+      }
+      if (stickyOrderBar) {
+        if (totalItems > 0) {
+          stickyOrderBar.classList.add('visible');
+        } else {
+          stickyOrderBar.classList.remove('visible');
         }
-        saveCart();
-        updateCartUI();
+      }
+
+      // Render Items in Drawer
+      if (!cartItemsList) return;
+
+      if (state.cart.length === 0) {
+        cartItemsList.innerHTML = `
+          <div class="empty-cart-msg">
+            <div class="icon-empty">🛒</div>
+            <h4>Ваша корзина пуста</h4>
+            <p>Выберите подгузники или эко-товары из каталога</p>
+          </div>
+        `;
+        if (checkoutWhatsAppBtn) checkoutWhatsAppBtn.disabled = true;
+        return;
+      }
+
+      if (checkoutWhatsAppBtn) checkoutWhatsAppBtn.disabled = false;
+
+      cartItemsList.innerHTML = state.cart.map((item, idx) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" class="cart-item__img">
+          <div>
+            <div class="cart-item__name">${item.name}</div>
+            <div class="cart-item__spec">${item.spec}</div>
+            <div class="cart-item__price">${formatPrice(item.price)}</div>
+          </div>
+          <div class="cart-item__controls">
+            <button class="qty-btn" data-cart-action="dec" data-idx="${idx}">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" data-cart-action="inc" data-idx="${idx}">+</button>
+          </div>
+        </div>
+      `).join('');
+
+      // Cart control button listeners
+      cartItemsList.querySelectorAll('[data-cart-action]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const action = e.currentTarget.dataset.cartAction;
+          const idx = parseInt(e.currentTarget.dataset.idx, 10);
+          if (action === 'inc') {
+            state.cart[idx].qty += 1;
+          } else if (action === 'dec') {
+            state.cart[idx].qty -= 1;
+            if (state.cart[idx].qty <= 0) {
+              state.cart.splice(idx, 1);
+            }
+          }
+          saveCart();
+          updateCartUI();
+        });
       });
-    });
+    };
+
+    if (document.startViewTransition) {
+      document.startViewTransition(renderCart);
+    } else {
+      renderCart();
+    }
   }
 
-  // 8. Drawer Open / Close Logic
+  // 8. Drawer Open / Close Logic (with View Transitions)
   function openCart() {
-    cartDrawer.classList.add('open');
-    cartBackdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    const doOpen = () => {
+      cartDrawer.classList.add('open');
+      cartBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    if (document.startViewTransition) {
+      document.startViewTransition(doOpen);
+    } else {
+      doOpen();
+    }
   }
 
   function closeCart() {
-    cartDrawer.classList.remove('open');
-    cartBackdrop.classList.remove('open');
-    document.body.style.overflow = '';
+    const doClose = () => {
+      cartDrawer.classList.remove('open');
+      cartBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    if (document.startViewTransition) {
+      document.startViewTransition(doClose);
+    } else {
+      doClose();
+    }
   }
 
   if (cartBtn) cartBtn.addEventListener('click', openCart);

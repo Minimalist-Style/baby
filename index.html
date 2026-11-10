@@ -12,7 +12,7 @@
        1. NORDIC HONEYCOMB DESIGN TOKENS & SILICON VALLEY TIER SYSTEM
        ========================================================================== */
     :root {
-      /* Core Palette: Nordic Honeycomb */
+      /* Core Palette: Nordic Honeycomb (Legacy Fallback) */
       --bg-cream: #FDFBF7;
       --bg-surface: #FFFFFF;
       --bg-elevated: rgba(255, 255, 255, 0.78);
@@ -43,6 +43,53 @@
       --radius-xl: 32px;
       --radius-pill: 9999px;
       --container-max: 1200px;
+    }
+
+    /* ==========================================================================
+       Wide-Gamut Display P3 / OKLCH Engine & Dynamic color-mix()
+       ========================================================================== */
+    @supports (color: oklch(0.8 0.16 75)) {
+      :root {
+        --bg-cream: oklch(0.985 0.008 85);
+        --bg-surface: oklch(1 0 0);
+        --bg-elevated: color-mix(in oklch, oklch(1 0 0) 78%, transparent);
+        --bg-warm-tint: oklch(0.96 0.015 85);
+
+        /* Hyper-rich Honey Gold (Optically Balanced for OLED/Retina) */
+        --amber-honey: oklch(0.79 0.165 72);
+        --amber-honey-hover: color-mix(in oklch, var(--amber-honey) 85%, black);
+        --amber-honey-soft: color-mix(in oklch, var(--amber-honey) 16%, transparent);
+
+        /* Vibrant Eco Mint */
+        --emerald-mint: oklch(0.72 0.19 155);
+        --emerald-mint-dark: color-mix(in oklch, var(--emerald-mint) 85%, black);
+        --emerald-mint-soft: color-mix(in oklch, var(--emerald-mint) 14%, transparent);
+
+        --graphite-deep: oklch(0.25 0.02 260);
+        --border-hairline: color-mix(in oklch, var(--graphite-deep) 8%, transparent);
+        --border-amber: color-mix(in oklch, var(--amber-honey) 45%, transparent);
+      }
+    }
+
+    /* ==========================================================================
+       Modern View Transitions API: Morphing Badges & Smooth State
+       ========================================================================== */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.26s;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #headerCartCount,
+    .chip-count,
+    #floatingCartSummary {
+      view-transition-name: cart-badge-morph;
+    }
+
+    ::view-transition-old(cart-badge-morph),
+    ::view-transition-new(cart-badge-morph) {
+      animation-duration: 0.32s;
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     *, *::before, *::after {
@@ -2002,10 +2049,18 @@
      * 8. EVENT LISTENERS & REACTIVE SUBSCRIPTION
      */
     store.subscribe(state => {
-      renderFinder(state);
-      renderBundles(state);
-      renderCatalog(state);
-      renderCartUI(state);
+      const renderAll = () => {
+        renderFinder(state);
+        renderBundles(state);
+        renderCatalog(state);
+        renderCartUI(state);
+      };
+
+      if (document.startViewTransition) {
+        document.startViewTransition(renderAll);
+      } else {
+        renderAll();
+      }
     });
 
     // Weight Slider & Chubby Checkbox
